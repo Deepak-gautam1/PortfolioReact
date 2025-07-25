@@ -4,6 +4,7 @@ const path = require("path");
 
 // https://vitejs.dev/config/
 module.exports = defineConfig({
+  base: "/PortfolioReact/",
   plugins: [react()],
   resolve: {
     alias: {
