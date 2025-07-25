@@ -1,73 +1,74 @@
-# Welcome to your Lovable project
+# Personal Portfolio - Deepak Gautam
 
-## Project info
+This is the complete source code for my personal portfolio website, built with React, Vite, and Tailwind CSS. The site is designed to showcase my skills, projects, and professional experience as a Data Engineer and Full-Stack Developer.
 
-**URL**: https://lovable.dev/projects/d887ed50-d263-4495-9728-7e0610d37564
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://your-live-url.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/deepak-a77b93222/)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+![Portfolio Screenshot](./public/images/screenshot.png)
+_(**Note:** To make the screenshot appear, add an image named `screenshot.png` to your `public/images` folder)_
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d887ed50-d263-4495-9728-7e0610d37564) and start prompting.
+- **Modern & Responsive Design:** Fully responsive layout that looks great on desktops, tablets, and mobile devices.
+- **Interactive UI:** Smooth hover effects, modals for certificate viewing, and a clean, user-friendly interface.
+- **Dynamic Sections:** Includes sections for About Me, Professional Experience, Featured Projects, Skills, and a functional Contact Form.
+- **Themed with `shadcn/ui`:** Built with the popular and highly customizable `shadcn/ui` component library.
+- **Light & Dark Mode:** Theme support that adapts to user's system preference.
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Technologies Used
 
-**Use your preferred IDE**
+This project was built using a modern tech stack:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Frontend:** React, Vite, TypeScript
+- **Styling:** Tailwind CSS
+- **UI Components:** `shadcn/ui`
+- **Icons:** Lucide React
+- **Animations:** `tailwindcss-animate`
+- **Routing:** React Router DOM
+- **State Management:** TanStack Query (React Query)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🚀 Getting Started
 
-Follow these steps:
+To clone and run this project locally, you'll need [Node.js](https://nodejs.org/en/) (v18 or later) and [npm](https://www.npmjs.com/) installed on your computer.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1.  **Clone the repository:**
 
-# Step 3: Install the necessary dependencies.
-npm i
+    ```sh
+    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+2.  **Navigate to the project directory:**
 
-**Edit a file directly in GitHub**
+    ```sh
+    cd your-repo-name
+    ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3.  **Install the dependencies:**
 
-**Use GitHub Codespaces**
+    ```sh
+    npm install
+    ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+4.  **Run the development server:**
+    ```sh
+    npm run dev
+    ```
 
-## What technologies are used for this project?
+The application will be available at `http://localhost:5173`.
 
-This project is built with:
+## 🚢 Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This Vite project can be easily deployed to any modern static site hosting service. Here are a few popular options:
 
-## How can I deploy this project?
+- [Vercel](https://vercel.com/)
+- [Netlify](https://www.netlify.com/)
+- [GitHub Pages](https://pages.github.com/)
 
-Simply open [Lovable](https://lovable.dev/projects/d887ed50-d263-4495-9728-7e0610d37564) and click on Share -> Publish.
+## 📜 License
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License. See the `LICENSE` file for details.
