@@ -2,7 +2,7 @@
 
 This is the complete source code for my personal portfolio website, built with React, Vite, and Tailwind CSS. The site is designed to showcase my skills, projects, and professional experience as a Data Engineer and Full-Stack Developer.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://your-live-url.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://portfolio-react-nine-orpin.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/deepak-a77b93222/)
 
 ---
