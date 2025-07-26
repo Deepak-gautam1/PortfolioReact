@@ -1,20 +1,65 @@
-// import React from "react";
-import { Card } from "@/Components/ui/card";
+import React, { useState } from "react";
 import { Button } from "@/Components/ui/button";
+import { Card } from "@/Components/ui/card";
 import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
 import {
+  Send,
+  LinkedinIcon,
+  GithubIcon,
   Mail,
   Phone,
   MapPin,
-  Send,
-  GithubIcon,
-  LinkedinIcon,
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Contact = () => {
+  // State to manage form inputs
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  // State to manage loading status
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Handle input changes
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    toast.info("Sending your message...");
+
+    // Insert data into Supabase
+    const { error } = await supabase.from("messages").insert([formData]);
+
+    if (error) {
+      console.error("Supabase error:", error);
+      toast.error("Failed to send message. Please try again.");
+    } else {
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      // Clear the form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    }
+    setIsSubmitting(false);
+  };
+
   return (
-    <section className="py-20 px-4" id="contact">
+    <section className="py-20 px-4 bg-muted" id="contact">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -25,67 +70,32 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* LEFT COLUMN: Contact Info */}
+          <div className="lg:col-span-1 space-y-8">
+            <Card className="p-6 bg-background border shadow-sm">
+              <h3 className="text-xl font-semibold mb-4">
                 Contact Information
               </h3>
-              <div className="space-y-4">
-                <Card className="p-4 bg-gradient-card border-0 shadow-card">
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-primary" />
-                    <div>
-                      <p className="font-medium">Email</p>
-                      <a
-                        href="mailto:kd754052004@gmail.com"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        kd754052004@gmail.com
-                      </a>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-4 bg-gradient-card border-0 shadow-card">
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-accent" />
-                    <div>
-                      <p className="font-medium">Phone</p>
-                      <a
-                        href="tel:9599171623"
-                        className="text-muted-foreground hover:text-accent transition-colors"
-                      >
-                        +91 9599171623
-                      </a>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-4 bg-gradient-card border-0 shadow-card">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-primary" />
-                    <div>
-                      <p className="font-medium">Location</p>
-                      <p className="text-muted-foreground">
-                        West Delhi, New Delhi
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-primary" />
+                  <span>kd754052004@gmail.com</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-primary" />
+                  <span>+91 9599171623</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  <span>West Delhi, New Delhi</span>
+                </div>
               </div>
-            </div>
-
-            <div>
+            </Card>
+            <Card className="p-6 bg-background border shadow-sm">
               <h3 className="text-xl font-semibold mb-4">Connect With Me</h3>
               <div className="flex gap-4">
-                {/* GitHub Link */}
-                <Button
-                  asChild
-                  variant="outline"
-                  size="icon"
-                  className="hover:shadow-glow"
-                >
+                <Button asChild variant="outline" size="icon">
                   <a
                     href="https://github.com/Deepak-gautam1"
                     target="_blank"
@@ -94,86 +104,112 @@ const Contact = () => {
                     <GithubIcon className="w-5 h-5" />
                   </a>
                 </Button>
-
-                {/* LinkedIn Link */}
-                <Button
-                  asChild
-                  variant="outline"
-                  size="icon"
-                  className="hover:shadow-glow"
-                >
-                  <a
-                    href="https://www.linkedin.com/in/Deepak-gautam1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                <Button asChild variant="outline" size="icon">
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    {" "}
+                    {/* Add LinkedIn URL */}
                     <LinkedinIcon className="w-5 h-5" />
                   </a>
                 </Button>
-
-                {/* Mail Link */}
-                <Button
-                  asChild
-                  variant="outline"
-                  size="icon"
-                  className="hover:shadow-glow"
-                >
-                  <a href="mailto:kd7540520@gmail.com">
+                <Button asChild variant="outline" size="icon">
+                  <a href="mailto:kd754052004@gmail.com">
                     <Mail className="w-5 h-5" />
                   </a>
                 </Button>
               </div>
-            </div>
-
-            <div className="p-6 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg">
-              <h4 className="font-semibold mb-2">Looking For Opportunities</h4>
-              <p className="text-muted-foreground text-sm">
-                I'm actively seeking full-time opportunities in Data
-                Engineering, Machine Learning, and Full Stack Development. Open
-                to remote work and relocation for the right opportunity.
-              </p>
-            </div>
+            </Card>
           </div>
 
-          <Card className="p-8 bg-gradient-card border-0 shadow-card">
-            <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium mb-2 block">Name</label>
-                  <Input placeholder="Your name" />
+          {/* RIGHT COLUMN: Contact Form */}
+          <div className="lg:col-span-2">
+            <Card className="p-8 bg-background border shadow-sm">
+              <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      type="email"
+                      placeholder="your.email@example.com"
+                      required
+                    />
+                  </div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">
-                    Email
+                  <label
+                    htmlFor="subject"
+                    className="text-sm font-medium mb-2 block"
+                  >
+                    Subject
                   </label>
-                  <Input type="email" placeholder="your.email@example.com" />
+                  <Input
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Project collaboration, job opportunity, etc."
+                    required
+                  />
                 </div>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium mb-2 block">
-                  Subject
-                </label>
-                <Input placeholder="Project collaboration, job opportunity, etc." />
-              </div>
-
-              <div>
-                <label className="text-sm font-medium mb-2 block">
-                  Message
-                </label>
-                <Textarea
-                  placeholder="Tell me about your project or opportunity..."
-                  rows={6}
-                />
-              </div>
-
-              <Button className="w-full">
-                <Send className="w-4 h-4" />
-                Send Message
-              </Button>
-            </form>
-          </Card>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="text-sm font-medium mb-2 block"
+                  >
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell me about your project or opportunity..."
+                    rows={6}
+                    required
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      {" "}
+                      <Send className="w-4 h-4 mr-2" /> Send Message{" "}
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Card>
+          </div>
         </div>
       </div>
     </section>

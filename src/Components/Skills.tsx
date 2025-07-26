@@ -76,19 +76,16 @@ const Skills = () => {
 
   const achievements = [
     {
-      title: "Global Rank 31",
-      description: "201 on Codechef and Codeforces weekly contests",
+      title: "Global Ranking in Contest",
+      description: "31 on Codechef and 513 on Codeforces in weekly contests",
     },
     {
-      title: "4 Star at Codechef",
-      description: "MaxRating: 1806, Knight at LeetCode MaxRating: 1805",
+      title: "Global Rating",
+      description:
+        "4 Star on CodeChef (1806), Knight at LeetCode (1851), Pupil at Codeforces (1365)",
     },
     {
-      title: "Specialist at CodeForces",
-      description: "MaxRating: 1665",
-    },
-    {
-      title: "1500+ DSA Problems",
+      title: "2500+ DSA Problems",
       description: "Solved on various competitive programming platforms",
     },
     {
@@ -122,7 +119,7 @@ const Skills = () => {
           {skillCategories.map((category, index) => (
             <Card
               key={index}
-              className="p-6 bg-gradient-card border-0 shadow-card"
+              className="p-6 bg-background border shadow-lg mb-0.5"
             >
               <div className="flex items-center gap-3 mb-4">
                 <category.icon className="w-6 h-6 text-primary" />
@@ -138,7 +135,7 @@ const Skills = () => {
             </Card>
           ))}
         </div>
-        <Card className="p-6 bg-gradient-card border-0 shadow-card mb-12">
+        <Card className="p-6 bg-background border shadow-lg mb-12">
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
             <Brain className="w-6 h-6 text-accent" />
             Specialized Packages
@@ -153,7 +150,7 @@ const Skills = () => {
             {achievements.map((achievement, index) => (
               <Card
                 key={index}
-                className="p-4 bg-gradient-card border-0 shadow-card hover:shadow-glow transition-all duration-300"
+                className="p-4 bg-background border shadow-lg mb-0.5 hover:shadow-glow transition-all duration-300"
               >
                 <h4 className="font-semibold text-primary mb-2">
                   {achievement.title}

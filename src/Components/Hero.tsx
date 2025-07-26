@@ -8,11 +8,11 @@ const Hero = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-8">
           <div className="space-y-4">
-            <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-hero-title bg-clip-text text-transparent">
               DEEPAK GAUTAM
             </h1>
             <h2 className="text-2xl lg:text-3xl font-semibold text-foreground">
-              Software Developer Engineer
+              Software Engineer & AI Developer
             </h2>
             <p className="text-lg text-muted-foreground max-w-lg">
               A developer and AI enthusiast with a B.Tech in Computer

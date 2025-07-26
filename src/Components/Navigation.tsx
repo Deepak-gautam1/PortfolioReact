@@ -33,7 +33,11 @@ const Navigation = () => {
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <div
+            className={`text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent transition-opacity duration-300 ${
+              isScrolled ? "opacity-100" : "opacity-0"
+            }`}
+          >
             DEEPAK GAUTAM
           </div>
 

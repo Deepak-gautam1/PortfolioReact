@@ -60,9 +60,7 @@ const About = () => {
                 <MapPin className="w-8 h-8 text-accent mt-1" />
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Location</h3>
-                  <p className="text-muted-foreground">
-                    Kurukshetra, Haryana & West Delhi, Delhi
-                  </p>
+                  <p className="text-muted-foreground">West Delhi, New Delhi</p>
                 </div>
               </div>
             </Card>

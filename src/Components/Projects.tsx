@@ -2,7 +2,7 @@
 import { Card } from "@/Components/ui/card";
 import { Button } from "@/Components/ui/button";
 import { Badge } from "@/Components/ui/badge";
-import { ExternalLink, GithubIcon } from "lucide-react";
+import { ExternalLink, GithubIcon, ShieldCheck, Server } from "lucide-react";
 
 const Projects = () => {
   const projects = [
@@ -27,7 +27,7 @@ const Projects = () => {
         "Created user-friendly frontend with Streamlit",
       ],
       github: "https://github.com/Deepak-gautam1/Food-Point",
-      demo: "#",
+      demo: "https://diet-foodrecommendation.streamlit.app/",
     },
     {
       title: "Query PDF",
@@ -49,7 +49,7 @@ const Projects = () => {
         "Fine-tuned Hugging Face model with Langchain and FAISS for efficient retrieval",
       ],
       github: "https://github.com/Deepak-gautam1/QueryPDF",
-      demo: "#",
+      demo: "https://querypdf-12.streamlit.app/",
     },
     {
       title: "Stock Price Prediction",
@@ -70,7 +70,7 @@ const Projects = () => {
         "Visualized predicted vs. actual prices",
       ],
       github: "https://github.com/Deepak-gautam1/Stock_Price_Predication",
-      demo: "#",
+      demo: "https://stockpricepredication.streamlit.app/",
     },
     {
       title: "PUBG Winner Prediction",
@@ -83,7 +83,7 @@ const Projects = () => {
         "Trained an XGBoost model for high predictive accuracy",
       ],
       github: "https://github.com/Deepak-gautam1/PUBG-Predication",
-      demo: "#",
+      demo: "https://pubg-winner.streamlit.app/",
     },
     {
       title: "Handwritten Digit Recognition",
@@ -96,7 +96,7 @@ const Projects = () => {
         "Achieved high accuracy on the benchmark MNIST dataset",
       ],
       github: "https://github.com/Deepak-gautam1/Digit_Reconginzer",
-      demo: "#",
+      demo: "https://huggingface.co/spaces/AiLover26/digit-recognizer",
     },
     {
       title: "Real-time Face Recognition",
@@ -131,17 +131,27 @@ const Projects = () => {
       demo: "https://deepak-gautam1.github.io/Portfolio/",
     },
     {
-      title: "Shopper-ECommerce",
-      category: "Full Stack",
+      title: "Shopper E-Commerce",
+      category: "Full Stack (MERN)",
       description:
-        "A fully responsive shopping platform using the MERN stack, delivering seamless user experiences across desktop and mobile devices.",
-      technologies: ["HTML5+CSS3", "JavaScript", "React", "Node.js", "MongoDB"],
+        "A fully responsive shopping platform using the MERN stack, delivering seamless user experiences with separate interfaces for customers and administrators.",
+      technologies: [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "JWT",
+        "Tailwind CSS",
+      ],
       features: [
-        "Developed fully responsive shopping platform using MERN stack",
-        "Built product catalog management and shopping cart functionality",
+        "Complete customer-facing storefront with product catalog and cart functionality.",
+        "Separate, secure admin panel for managing products, orders, and users.",
+        "Robust backend API to handle all business logic and database interactions.",
       ],
       github: "https://github.com/Deepak-gautam1/Ecommerce_site",
-      demo: "#",
+      demo: "https://ecommerce-site-zndy.onrender.com/",
+      adminUrl: "https://ecommerce-site-admin.onrender.com/",
+      backendUrl: "https://ecommerce-site-backend-drv9.onrender.com/",
     },
   ];
 
@@ -158,13 +168,14 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {projects.map((project) => (
             <Card
-              key={index}
-              className="p-6 bg-background border shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group"
+              key={project.title}
+              className="p-6 bg-background border shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group flex flex-col"
             >
-              <div className="space-y-4">
+              {/* This part makes sure the card content takes up available space */}
+              <div className="flex-grow space-y-4">
                 <div>
                   <Badge variant="outline" className="mb-3">
                     {project.category}
@@ -204,34 +215,59 @@ const Projects = () => {
                     </Badge>
                   )}
                 </div>
+              </div>
 
-                <div className="flex gap-3 pt-2">
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="flex-1"
+              {/* THIS IS THE UPDATED BUTTON SECTION */}
+              <div className="flex flex-wrap gap-2 pt-4 mt-auto">
+                <Button asChild variant="outline" size="sm">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <GithubIcon className="w-4 h-4" />
-                      Code
-                    </a>
-                  </Button>
-                  <Button asChild size="sm" className="flex-1">
+                    <GithubIcon className="w-4 h-4 mr-2" />
+                    Code
+                  </a>
+                </Button>
+                {/* Main Demo Button */}
+                {project.demo && project.demo !== "#" && (
+                  <Button asChild size="sm">
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-4 h-4 mr-2" />
                       Demo
                     </a>
                   </Button>
-                </div>
+                )}
+                {/* Admin Panel Button (only shows if adminUrl exists) */}
+                {project.adminUrl && (
+                  <Button asChild variant="secondary" size="sm">
+                    <a
+                      href={project.adminUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ShieldCheck className="w-4 h-4 mr-2" />
+                      Admin
+                    </a>
+                  </Button>
+                )}
+                {/* Backend API Button (only shows if backendUrl exists) */}
+                {project.backendUrl && (
+                  <Button asChild variant="secondary" size="sm">
+                    <a
+                      href={project.backendUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Server className="w-4 h-4 mr-2" />
+                      API
+                    </a>
+                  </Button>
+                )}
               </div>
             </Card>
           ))}
