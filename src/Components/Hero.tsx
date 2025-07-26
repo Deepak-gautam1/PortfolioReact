@@ -25,7 +25,7 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-4">
             <Button asChild size="lg" className="group">
-              <a href="/Resume.pdf" download="Deepak-Resume.pdf">
+              <a href="/Deepak-Resume.pdf" download="Deepak-Resume.pdf">
                 <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Download Resume
               </a>
