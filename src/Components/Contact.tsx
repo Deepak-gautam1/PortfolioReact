@@ -80,7 +80,7 @@ const Contact = () => {
               <div className="space-y-4 text-muted-foreground">
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-primary" />
-                  <span>kd7540520@gmail.com</span>
+                  <span>deepakgautam2647@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-primary" />
@@ -112,7 +112,7 @@ const Contact = () => {
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="icon">
-                  <a href="mailto:kd754052004@gmail.com">
+                  <a href="mailto:deepakgautam2647@gmail.com">
                     <Mail className="w-5 h-5" />
                   </a>
                 </Button>
