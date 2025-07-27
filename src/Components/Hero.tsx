@@ -38,7 +38,7 @@ const Hero = () => {
 
           <div className="flex gap-6">
             <a
-              href="mailto:kd754052004@gmail.com"
+              href="mailto:kd7540520@gmail.com"
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               <Mail className="w-6 h-6" />

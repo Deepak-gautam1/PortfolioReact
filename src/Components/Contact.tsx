@@ -80,7 +80,7 @@ const Contact = () => {
               <div className="space-y-4 text-muted-foreground">
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-primary" />
-                  <span>kd754052004@gmail.com</span>
+                  <span>kd7540520@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-primary" />
