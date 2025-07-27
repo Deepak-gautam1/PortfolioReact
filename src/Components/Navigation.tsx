@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/Components/ui/button";
 import { Menu, X } from "lucide-react";
-import { ThemeToggle } from "@/Components/ThemeToggle"; // 👈 Import the toggle
+import { ThemeToggle } from "@/Components/ThemeToggle";
+// import React from "react";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -75,7 +76,7 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* THIS IS THE UPDATED MOBILE MENU 👇 */}
         {isOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border">
             <div className="px-4 py-6 space-y-4">
@@ -83,13 +84,18 @@ const Navigation = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block text-foreground hover:text-primary transition-colors font-medium"
+                  className="block text-foreground hover:text-primary transition-colors font-medium text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </a>
               ))}
-              <Button asChild className="w-full">
+              <div className="border-b border-border pt-4"></div>
+              <div className="flex items-center justify-between pt-4">
+                <span className="text-muted-foreground">Switch Theme</span>
+                <ThemeToggle />
+              </div>
+              <Button asChild className="w-full !mt-6">
                 <a href="#contact" onClick={() => setIsOpen(false)}>
                   Hire Me
                 </a>
