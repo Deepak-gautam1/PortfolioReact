@@ -7,6 +7,29 @@ import { ExternalLink, GithubIcon, ShieldCheck, Server } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
+      title: "WanderTribe - Travel Companion Platform",
+      category: "Full Stack (React + Supabase)",
+      description:
+        "A comprehensive travel platform using React + TypeScript + Supabase, featuring real-time trip discovery with interactive maps, clustering algorithms, and earth-tone responsive design across all devices.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "PostgreSQL",
+        "Leaflet Maps",
+        "Real-time",
+        "RLS",
+      ],
+      features: [
+        "Built comprehensive travel platform with interactive map-based trip discovery and real-time participant tracking",
+        "Implemented advanced join request approval system with creator notifications and AI-powered trip recommendations",
+        "Engineered secure user authentication with RLS policies, photo-rich review system, and smart bookmarking",
+      ],
+      github: "https://github.com/Deepak-gautam1/BunnyTraveler",
+      demo: "https://bunny-traveler.vercel.app/",
+    },
+    {
       title: "Food Point",
       category: "Machine Learning",
       description:
