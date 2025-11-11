@@ -7,7 +7,7 @@ import { ExternalLink, GithubIcon, ShieldCheck, Server } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
-      title: "WanderTribe - Travel Companion Platform",
+      title: "Safar Squad - Travel Companion Platform",
       category: "Full Stack (React + Supabase)",
       description:
         "A comprehensive travel platform using React + TypeScript + Supabase, featuring real-time trip discovery with interactive maps, clustering algorithms, and earth-tone responsive design across all devices.",
@@ -27,7 +27,7 @@ const Projects = () => {
         "Engineered secure user authentication with RLS policies, photo-rich review system, and smart bookmarking",
       ],
       github: "https://github.com/Deepak-gautam1/BunnyTraveler",
-      demo: "https://bunny-traveler.vercel.app/",
+      demo: "https://www.safarsquad.in/",
     },
     {
       title: "Food Point",
