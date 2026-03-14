@@ -1,27 +1,29 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import Navigation from "@/Components/Navigation";
 import Hero from "@/Components/Hero";
-import About from "@/Components/About";
-import Experience from "@/Components/Experience";
-import Projects from "@/Components/Projects";
-import Skills from "@/Components/Skills";
-import Contact from "@/Components/Contact";
-import Footer from "@/Components/Footer";
 import SectionWrapper from "@/Components/SectionWrapper";
 import ScrollProgress from "@/Components/ScrollProgress";
 import CustomCursor from "@/Components/CustomCursor";
 import IntroLoader from "@/Components/IntroLoader";
 import SmoothScroll from "@/Components/SmoothScroll";
-import TechMarquee from "@/Components/TechMarquee";
-import GitHubStats from "@/Components/GitHubStats";
 
-// Check sessionStorage once at module level — survives StrictMode double-render
+// Lazy load everything below the fold — reduces initial bundle parse time
+const About       = lazy(() => import("@/Components/About"));
+const Experience  = lazy(() => import("@/Components/Experience"));
+const TechMarquee = lazy(() => import("@/Components/TechMarquee"));
+const Projects    = lazy(() => import("@/Components/Projects"));
+const Skills      = lazy(() => import("@/Components/Skills"));
+const GitHubStats = lazy(() => import("@/Components/GitHubStats"));
+const Contact     = lazy(() => import("@/Components/Contact"));
+const Footer      = lazy(() => import("@/Components/Footer"));
+
+// Tiny placeholder while lazy chunks load
+const Blank = () => <div style={{ minHeight: "200px" }} />;
+
 const INTRO_KEY = "dg_intro_seen";
-const alreadySeen =
-  typeof window !== "undefined" && sessionStorage.getItem(INTRO_KEY) === "1";
+const alreadySeen = typeof window !== "undefined" && sessionStorage.getItem(INTRO_KEY) === "1";
 
 const Index = () => {
-  // If already seen this session, skip straight to content
   const [introComplete, setIntroComplete] = useState(alreadySeen);
 
   const handleIntroComplete = () => {
@@ -31,22 +33,13 @@ const Index = () => {
 
   return (
     <>
-      {/* Skip to main content — accessibility */}
       <a
         href="#main-content"
         style={{
-          position: "fixed",
-          top: "-100px",
-          left: "16px",
-          zIndex: 999999,
-          padding: "8px 16px",
-          background: "hsl(var(--primary))",
-          color: "hsl(var(--primary-foreground))",
-          borderRadius: "8px",
-          fontSize: "14px",
-          fontWeight: 600,
-          textDecoration: "none",
-          transition: "top 0.2s",
+          position: "fixed", top: "-100px", left: "16px", zIndex: 999999,
+          padding: "8px 16px", background: "hsl(var(--primary))",
+          color: "hsl(var(--primary-foreground))", borderRadius: "8px",
+          fontSize: "14px", fontWeight: 600, textDecoration: "none", transition: "top 0.2s",
         }}
         onFocus={(e) => (e.currentTarget.style.top = "16px")}
         onBlur={(e) => (e.currentTarget.style.top = "-100px")}
@@ -54,7 +47,6 @@ const Index = () => {
         Skip to main content
       </a>
 
-      {/* Only show intro if not seen yet this session */}
       {!alreadySeen && !introComplete && (
         <IntroLoader onComplete={handleIntroComplete} />
       )}
@@ -64,34 +56,45 @@ const Index = () => {
           <SmoothScroll />
           <ScrollProgress />
           <CustomCursor />
-
           <Navigation />
 
           <main id="main-content">
+            {/* Hero is above the fold — not lazy */}
             <Hero />
 
-            <SectionWrapper>
-              <About />
-            </SectionWrapper>
+            {/* Everything below fold — lazy loaded */}
+            <Suspense fallback={<Blank />}>
+              <SectionWrapper><About /></SectionWrapper>
+            </Suspense>
 
-            <SectionWrapper>
-              <Experience />
-            </SectionWrapper>
+            <Suspense fallback={<Blank />}>
+              <SectionWrapper><Experience /></SectionWrapper>
+            </Suspense>
 
-            <TechMarquee />
+            <Suspense fallback={<Blank />}>
+              <TechMarquee />
+            </Suspense>
 
-            <Projects />
-            <Skills />
+            <Suspense fallback={<Blank />}>
+              <Projects />
+            </Suspense>
 
-            {/* Uncomment when GitHub activity is active */}
-            <GitHubStats />
+            <Suspense fallback={<Blank />}>
+              <Skills />
+            </Suspense>
 
-            <SectionWrapper>
-              <Contact />
-            </SectionWrapper>
+            <Suspense fallback={<Blank />}>
+              <GitHubStats />
+            </Suspense>
+
+            <Suspense fallback={<Blank />}>
+              <SectionWrapper><Contact /></SectionWrapper>
+            </Suspense>
           </main>
 
-          <Footer />
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
         </div>
       )}
     </>

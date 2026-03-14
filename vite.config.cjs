@@ -10,29 +10,44 @@ module.exports = defineConfig({
     },
   },
   build: {
+    // Target modern browsers — smaller output, faster parse
+    target: "es2020",
     rollupOptions: {
       output: {
-        manualChunks: {
-          // React core — changes rarely, cache forever
-          "vendor-react": ["react", "react-dom"],
-          // Framer Motion — heaviest single lib
-          "vendor-framer": ["framer-motion"],
-          // Routing + Query
-          "vendor-router": ["react-router-dom", "@tanstack/react-query"],
-          // UI primitives
-          "vendor-ui": [
-            "@radix-ui/react-dialog",
-            "@radix-ui/react-tooltip",
-            "@radix-ui/react-slot",
-          ],
+        manualChunks(id) {
+          // React core — cached forever, changes never
+          if (id.includes("node_modules/react/") || id.includes("node_modules/react-dom/")) {
+            return "vendor-react";
+          }
+          // Framer Motion — heaviest lib, isolated chunk
+          if (id.includes("node_modules/framer-motion")) {
+            return "vendor-framer";
+          }
           // Supabase
-          "vendor-supabase": ["@supabase/supabase-js"],
-          // Lenis smooth scroll
-          "vendor-lenis": ["lenis"],
+          if (id.includes("node_modules/@supabase")) {
+            return "vendor-supabase";
+          }
+          // Radix UI primitives
+          if (id.includes("node_modules/@radix-ui")) {
+            return "vendor-radix";
+          }
+          // Router + Query
+          if (id.includes("node_modules/react-router") || id.includes("node_modules/@tanstack")) {
+            return "vendor-router";
+          }
+          // Lenis
+          if (id.includes("node_modules/lenis")) {
+            return "vendor-lenis";
+          }
+          // Lucide icons — large, rarely changes
+          if (id.includes("node_modules/lucide-react")) {
+            return "vendor-lucide";
+          }
         },
       },
     },
-    // Raise warning threshold — 780KB split into chunks is fine
     chunkSizeWarningLimit: 600,
+    // Minify with esbuild (default, fast)
+    minify: "esbuild",
   },
 });
