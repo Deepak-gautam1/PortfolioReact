@@ -1,83 +1,174 @@
-# Personal Portfolio - Deepak Gautam
+<div align="center">
 
-Welcome to the source code for my personal portfolio. This project was built from the ground up to showcase my skills in full-stack development, data engineering, and Generative AI. It's a fully responsive, interactive single-page application designed to highlight my professional experience and key projects.
+# Deepak Gautam — Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=vercel)](https://portfolio-react-nine-orpin.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/deepak-a77b93222/)
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github)](https://github.com/Deepak-gautam1)
+**Data Engineer · Loyalty Systems · RAG Pipelines · AI Developer**
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-portfolio--react--nine--orpin.vercel.app-6366f1?style=for-the-badge)](https://portfolio-react-nine-orpin.vercel.app/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Deepak_Gautam-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deepak-a77b93222/)
+[![GitHub](https://img.shields.io/badge/GitHub-Deepak--gautam1-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Deepak-gautam1)
+[![LeetCode](https://img.shields.io/badge/LeetCode-Knight_1805-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/u/Leevi_01/)
+[![CodeChef](https://img.shields.io/badge/CodeChef-4★_1806-5B4638?style=for-the-badge&logo=codechef&logoColor=white)](https://www.codechef.com/users/leevii)
+
+</div>
 
 ---
 
-### Themes Showcase
-
-The portfolio features a sleek, professional design with full support for both light and dark modes.
+## Theme Showcase
 
 <table>
   <tr>
-    <td align="center"><strong>Light Theme</strong></td>
-    <td align="center"><strong>Dark Theme</strong></td>
+    <td align="center"><b>Light Mode</b></td>
+    <td align="center"><b>Dark Mode</b></td>
   </tr>
   <tr>
-    <td><img src="./public/images/LightTheme.png" alt="Portfolio Light Theme Screenshot"></td>
-    <td><img src="./public/images/DarkTheme.png" alt="Portfolio Dark Theme Screenshot"></td>
+    <td><img src="./public/images/LightTheme.png" alt="Light Theme" /></td>
+    <td><img src="./public/images/DarkTheme.png" alt="Dark Theme" /></td>
   </tr>
 </table>
 
-- _**Note:** To make these screenshots appear, add your images named `lighttheme.png` and `darktheme.png` to a folder path like `public/images`._
+---
 
-## ✨ Core Features
+## What Makes This Portfolio Stand Out
 
-- **Modern & Responsive Design:** Fully responsive layout built with Tailwind CSS for a seamless experience on all devices.
-- **Interactive UI:** Built with `shadcn/ui` and includes smooth scroll animations, hover effects, and modal pop-ups for certificate viewing.
-- **Dynamic Sections:** Features comprehensive sections for About Me, Experience, Projects, Skills, and Achievements.
-- **Functional Contact Form:** Integrated with Supabase to capture and store messages directly from the site.
-- **Light & Dark Mode:** A theme toggle allows users to switch between light, dark, and system-default themes.
+This isn't a template. Every component is custom-built with production-level attention to detail:
 
-## 🛠️ Tech Stack
+- **DG Intro Loader** — animated monogram that plays once per session, then skips on reload via `sessionStorage`
+- **Lenis Smooth Scroll** — physics-based scrolling that makes the entire site feel like a premium product
+- **Custom Cursor** — spring-animated dot + ring that follows the mouse, expands on hover, disabled on touch devices
+- **Magnetic Buttons** — CTAs and social icons pull toward the cursor using Framer Motion springs
+- **Animated Mesh Blobs** — softly morphing gradient orbs behind the hero section
+- **Particle Network** — canvas-based floating particles with connection lines in the hero background
+- **3D Tilt Cards** — project cards tilt with mouse tracking and show a radial cursor glow
+- **Active Nav Highlight** — navigation underline slides between sections via IntersectionObserver + Framer Motion `layoutId`
+- **Back-to-Top Button** — appears after 400px scroll with spring animation
+- **Project Filter Tabs** — filter 9 projects by All / AI·ML / Full Stack / Data Engineering / Production with animated count badges
+- **CP Rating Rings** — animated SVG stroke rings for LeetCode, CodeChef, Codeforces with real profile links
+- **GitHub Heatmap** — live contribution grid fetched directly from GitHub API, no third-party image services
+- **Scroll Progress Bar** — gradient top bar that fills as you scroll
+- **Branded Tech Marquee** — two infinite-scroll rows with real SVG brand logos (React, TypeScript, Python, Azure, Docker, etc.)
+- **Animated Counters** — stats count up with ease-out cubic when scrolled into view
+- **Contact Success State** — animated green checkmark replaces form on send, backed by Supabase
+- **Dark / Light Mode** — full theme system with smooth transitions
+- **Accessible** — skip-to-content link, ARIA labels, keyboard navigation, focus rings
+- **SEO Ready** — OG tags, Twitter cards, sitemap.xml, robots.txt, canonical URL, DG favicon
 
-This project was built using a modern and powerful set of technologies:
+---
 
-- **Frontend:** React, Vite, TypeScript
-- **Styling:** Tailwind CSS
-- **UI Components:** `shadcn/ui`
-- **Animations:** Framer Motion, `tailwindcss-animate`
-- **Backend (Contact Form):** Supabase
-- **Icons:** Lucide React
-- **Routing:** React Router DOM
+## Tech Stack
 
-## 🚀 Getting Started
+| Layer | Technologies |
+|---|---|
+| **Framework** | React 19 + TypeScript + Vite |
+| **Styling** | Tailwind CSS + shadcn/ui |
+| **Animations** | Framer Motion + Lenis |
+| **Backend** | Supabase (contact form storage) |
+| **Data** | GitHub REST API (live stats) |
+| **Icons** | Lucide React + Simple Icons (SVG) |
+| **Routing** | React Router DOM |
+| **State** | React Query |
+| **Deployment** | Vercel (auto-deploy on push) |
 
-To clone and run this project locally, you'll need [Node.js](https://nodejs.org/en/) (v18 or later) and [npm](https://www.npmjs.com/) installed on your computer.
+---
 
-1.  **Clone the repository:**
+## Sections
 
-    ```sh
-    git clone [https://github.com/Deepak-gautam1/Portfolio.git](https://github.com/Deepak-gautam1/Portfolio.git)
-    ```
+| # | Section | Highlights |
+|---|---|---|
+| 1 | **Hero** | Typewriter titles · animated blobs · rotating glow ring · 4 stat cards |
+| 2 | **About** | Animated info cards · education · current role · CP achievements |
+| 3 | **Experience** | Americana Restaurants — Peet's Coffee Loyalty Platform · Sales Deep Analyzer RAG pipeline |
+| 4 | **Tech Stack** | Infinite marquee · dual rows · SVG brand logos · hover brand-color glow |
+| 5 | **Projects** | 9 projects · filter tabs · 3D tilt · featured ribbon · live demo + code links |
+| 6 | **Skills** | Skill cards · CP rating rings · animated counters · certification viewer |
+| 7 | **GitHub** | Live stats · language bars · top repos · contribution heatmap (873 contributions) |
+| 8 | **Contact** | Supabase-backed form · animated success state · availability badge |
 
-2.  **Navigate to the project directory:**
+---
 
-    ```sh
-    cd Portfolio
-    ```
+## Getting Started
 
-3.  **Install the dependencies:**
+```bash
+# Clone
+git clone https://github.com/Deepak-gautam1/PortfolioReact.git
+cd PortfolioReact
 
-    ```sh
-    npm install
-    ```
+# Install
+npm install
 
-4.  **Run the development server:**
-    ```sh
-    npm run dev
-    ```
+# Dev server
+npm run dev
+# → http://localhost:5173
+```
 
-The application will be available at `http://localhost:5173`.
+### Environment variables
 
-## 🚢 Deployment
+Create a `.env` file in the root with your Supabase credentials (for the contact form):
 
-This Vite project is deployed on [Vercel](https://vercel.com/). The site is automatically updated upon every push to the `main` branch.
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-## 📜 License
+---
 
-This project is licensed under the MIT License.
+## Build & Deploy
+
+```bash
+# Production build
+npm run build
+
+# Preview build locally
+npm run preview
+
+# Deploy to Vercel (auto-deploys on every push to main)
+vercel --prod
+```
+
+The `vite.config.cjs` uses `manualChunks` to split the bundle into vendor chunks (React, Framer Motion, Supabase, Lenis, Router) for optimal caching and load performance.
+
+---
+
+## Project Structure
+
+```
+src/
+├── Components/
+│   ├── Hero.tsx              # Typewriter + blobs + magnetic buttons
+│   ├── Navigation.tsx        # Active section tracking + back-to-top
+│   ├── IntroLoader.tsx       # DG monogram animation (session-aware)
+│   ├── SmoothScroll.tsx      # Lenis physics scroll
+│   ├── CustomCursor.tsx      # Spring-animated custom cursor
+│   ├── ScrollProgress.tsx    # Gradient scroll progress bar
+│   ├── ParticleBackground.tsx# Canvas particle network
+│   ├── MagneticButton.tsx    # Cursor-following button wrapper
+│   ├── TechMarquee.tsx       # Infinite scroll with SVG brand logos
+│   ├── Experience.tsx        # Work history with project banners
+│   ├── Projects.tsx          # Filter tabs + 3D tilt cards
+│   ├── Skills.tsx            # Skill cards + certifications
+│   ├── CPRatings.tsx         # Animated rating rings
+│   ├── GitHubStats.tsx       # Live GitHub API integration
+│   ├── Contact.tsx           # Supabase form + success state
+│   ├── About.tsx             # Animated info cards
+│   └── Footer.tsx            # 3-column footer with nav links
+├── pages/
+│   ├── Index.tsx             # Main page orchestrator
+│   └── NotFound.tsx          # Branded 404 page
+└── index.css                 # Tailwind + CSS variables (light/dark)
+```
+
+---
+
+## Performance
+
+- Bundle split into 6 vendor chunks for long-term browser caching
+- `loading="lazy"` on all images
+- `sessionStorage` prevents intro animation replaying on refresh
+- Lenis RAF loop tied to requestAnimationFrame, not setInterval
+- GitHub data fetched client-side — no server required
+
+---
+
+## License
+
+MIT © [Deepak Gautam](https://github.com/Deepak-gautam1)
