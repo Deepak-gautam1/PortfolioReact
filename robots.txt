@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://deepakgautam.dev/sitemap.xml
+Sitemap: https://portfolio-react-nine-orpin.vercel.app/sitemap.xml
