@@ -33,18 +33,22 @@
     <meta name="twitter:description" content="Building production systems at Americana Restaurants · Peet's Coffee Loyalty Platform · 50K+ DAU · RAG pipelines · LeetCode Knight." />
     <meta name="twitter:image" content="https://portfolio-react-nine-orpin.vercel.app/images/og-preview.png" />
 
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Preload critical above-fold image — tells browser to fetch ASAP before JS runs -->
+    <link rel="preload" href="/images/profile.jpg" as="image" fetchpriority="high" />
+
+    <!-- Preconnect for external APIs we fetch on load -->
     <link rel="preconnect" href="https://api.github.com" />
-    <script type="module" crossorigin src="/assets/index-CYb5u1rp.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/vendor-react-CWNXBGPT.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-radix-CXe9UXTf.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-router-CXByCcUd.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-supabase-B1y8oWgO.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-lucide-CeYPZMbx.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-framer-BVSP4ZbS.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-lenis-DboVp5n0.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-Du66dOn-.css">
+    <link rel="preconnect" href="https://github-contributions-api.jogruber.de" />
+    <script type="module" crossorigin src="/assets/index-CcoJlq5N.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-misc-DzJwlgPt.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-react-5G6NoguR.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-radix-TB8BuWIE.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-router-CFx5d1wM.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-icons-5TjuOGfw.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-framer-49o5fnEs.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-supabase-DWVUYyL2.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-lenis-CeYDorwZ.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-C0YABVGJ.css">
   </head>
   <body>
     <div id="root"></div>
