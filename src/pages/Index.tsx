@@ -13,10 +13,21 @@ import CustomCursor from "@/Components/CustomCursor";
 import IntroLoader from "@/Components/IntroLoader";
 import SmoothScroll from "@/Components/SmoothScroll";
 import TechMarquee from "@/Components/TechMarquee";
-// import GitHubStats from "@/Components/GitHubStats";
+import GitHubStats from "@/Components/GitHubStats";
+
+// Check sessionStorage once at module level — survives StrictMode double-render
+const INTRO_KEY = "dg_intro_seen";
+const alreadySeen =
+  typeof window !== "undefined" && sessionStorage.getItem(INTRO_KEY) === "1";
 
 const Index = () => {
-  const [introComplete, setIntroComplete] = useState(false);
+  // If already seen this session, skip straight to content
+  const [introComplete, setIntroComplete] = useState(alreadySeen);
+
+  const handleIntroComplete = () => {
+    sessionStorage.setItem(INTRO_KEY, "1");
+    setIntroComplete(true);
+  };
 
   return (
     <>
@@ -43,7 +54,10 @@ const Index = () => {
         Skip to main content
       </a>
 
-      <IntroLoader onComplete={() => setIntroComplete(true)} />
+      {/* Only show intro if not seen yet this session */}
+      {!alreadySeen && !introComplete && (
+        <IntroLoader onComplete={handleIntroComplete} />
+      )}
 
       {introComplete && (
         <div className="min-h-screen">
@@ -69,7 +83,8 @@ const Index = () => {
             <Projects />
             <Skills />
 
-            {/* <GitHubStats /> */}
+            {/* Uncomment when GitHub activity is active */}
+            <GitHubStats />
 
             <SectionWrapper>
               <Contact />
