@@ -60,7 +60,7 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isNavItemActive = (item: typeof navItems[0]) => {
+  const isNavItemActive = (item: (typeof navItems)[0]) => {
     if (item.id === "" && activeSection === "") return true;
     return item.id === activeSection;
   };
@@ -95,8 +95,18 @@ const Navigation = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    style={{ position: "relative", padding: "6px 12px", borderRadius: "8px", fontSize: "14px", fontWeight: 500, transition: "color 0.2s", color: active ? "hsl(var(--primary))" : undefined }}
-                    className={active ? "" : "text-foreground hover:text-primary"}
+                    style={{
+                      position: "relative",
+                      padding: "6px 12px",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      fontWeight: 500,
+                      transition: "color 0.2s",
+                      color: active ? "hsl(var(--primary))" : undefined,
+                    }}
+                    className={
+                      active ? "" : "text-foreground hover:text-primary"
+                    }
                   >
                     {item.name}
                     {active && (
@@ -109,9 +119,14 @@ const Navigation = () => {
                           right: "12px",
                           height: "2px",
                           borderRadius: "2px",
-                          background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))",
+                          background:
+                            "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))",
                         }}
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30,
+                        }}
                       />
                     )}
                   </a>
@@ -127,8 +142,16 @@ const Navigation = () => {
 
             {/* Mobile toggle */}
             <div className="md:hidden">
-              <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </Button>
             </div>
           </div>
@@ -158,10 +181,14 @@ const Navigation = () => {
                           fontWeight: 500,
                           fontSize: "16px",
                           color: active ? "hsl(var(--primary))" : undefined,
-                          background: active ? "hsl(var(--primary) / 0.08)" : undefined,
+                          background: active
+                            ? "hsl(var(--primary) / 0.08)"
+                            : undefined,
                           transition: "all 0.2s",
                         }}
-                        className={active ? "" : "text-foreground hover:text-primary"}
+                        className={
+                          active ? "" : "text-foreground hover:text-primary"
+                        }
                       >
                         {item.name}
                       </a>
@@ -169,11 +196,15 @@ const Navigation = () => {
                   })}
                   <div className="border-b border-border pt-3" />
                   <div className="flex items-center justify-between pt-3">
-                    <span className="text-muted-foreground text-sm">Switch Theme</span>
+                    <span className="text-muted-foreground text-sm">
+                      Switch Theme
+                    </span>
                     <ThemeToggle />
                   </div>
                   <Button asChild className="w-full mt-4">
-                    <a href="#contact" onClick={() => setIsOpen(false)}>Hire Me</a>
+                    <a href="#contact" onClick={() => setIsOpen(false)}>
+                      Hire Me
+                    </a>
                   </Button>
                 </div>
               </motion.div>
@@ -208,7 +239,10 @@ const Navigation = () => {
               justifyContent: "center",
               boxShadow: "0 4px 20px hsl(var(--primary) / 0.4)",
             }}
-            whileHover={{ scale: 1.1, boxShadow: "0 6px 24px hsl(var(--primary) / 0.55)" }}
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0 6px 24px rgba(59, 130, 246, 0.55)",
+            }}
             whileTap={{ scale: 0.95 }}
             aria-label="Back to top"
           >

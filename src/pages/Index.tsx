@@ -1,28 +1,19 @@
-import { lazy, Suspense, useState } from "react";
-
-// ── Eager (above-fold — must load instantly) ──────────────────
+import { useState } from "react";
 import Navigation from "@/Components/Navigation";
 import Hero from "@/Components/Hero";
-import SmoothScroll from "@/Components/SmoothScroll";
+import About from "@/Components/About";
+import Experience from "@/Components/Experience";
+import Projects from "@/Components/Projects";
+import Skills from "@/Components/Skills";
+import Contact from "@/Components/Contact";
+import Footer from "@/Components/Footer";
+import SectionWrapper from "@/Components/SectionWrapper";
 import ScrollProgress from "@/Components/ScrollProgress";
 import CustomCursor from "@/Components/CustomCursor";
 import IntroLoader from "@/Components/IntroLoader";
-import SectionWrapper from "@/Components/SectionWrapper";
-
-// ── Lazy (below-fold — load only when needed) ─────────────────
-// Splits the JS bundle so browser only parses Hero JS on initial load.
-// Each lazy import becomes its own chunk, reducing TBT by ~60%.
-const About       = lazy(() => import("@/Components/About"));
-const Experience  = lazy(() => import("@/Components/Experience"));
-const TechMarquee = lazy(() => import("@/Components/TechMarquee"));
-const Projects    = lazy(() => import("@/Components/Projects"));
-const Skills      = lazy(() => import("@/Components/Skills"));
-const GitHubStats = lazy(() => import("@/Components/GitHubStats"));
-const Contact     = lazy(() => import("@/Components/Contact"));
-const Footer      = lazy(() => import("@/Components/Footer"));
-
-// Minimal fallback — invisible placeholder so layout doesn't jump
-const Placeholder = () => <div style={{ minHeight: "400px" }} aria-hidden="true" />;
+import SmoothScroll from "@/Components/SmoothScroll";
+import TechMarquee from "@/Components/TechMarquee";
+import GitHubStats from "@/Components/GitHubStats";
 
 const INTRO_KEY = "dg_intro_seen";
 const alreadySeen =
@@ -38,7 +29,6 @@ const Index = () => {
 
   return (
     <>
-      {/* Skip to main content — accessibility */}
       <a
         href="#main-content"
         style={{
@@ -53,16 +43,10 @@ const Index = () => {
         Skip to main content
       </a>
 
-      {/* Intro loader — sits on top as overlay, content always in DOM for SEO + LCP */}
       {!alreadySeen && !introComplete && (
         <IntroLoader onComplete={handleIntroComplete} />
       )}
 
-      {/* 
-        Content is always rendered — no visibility:hidden (was hurting SEO score).
-        The IntroLoader overlays with position:fixed + zIndex:99999 so user sees
-        the animation while Lighthouse can measure LCP from the actual DOM.
-      */}
       <div className="min-h-screen">
         <SmoothScroll />
         <ScrollProgress />
@@ -70,42 +54,17 @@ const Index = () => {
         <Navigation />
 
         <main id="main-content">
-          {/* Hero loads eagerly — it's the LCP element */}
           <Hero />
-
-          {/* Everything below the fold loads lazily */}
-          <Suspense fallback={<Placeholder />}>
-            <SectionWrapper><About /></SectionWrapper>
-          </Suspense>
-
-          <Suspense fallback={<Placeholder />}>
-            <SectionWrapper><Experience /></SectionWrapper>
-          </Suspense>
-
-          <Suspense fallback={<Placeholder />}>
-            <TechMarquee />
-          </Suspense>
-
-          <Suspense fallback={<Placeholder />}>
-            <Projects />
-          </Suspense>
-
-          <Suspense fallback={<Placeholder />}>
-            <Skills />
-          </Suspense>
-
-          <Suspense fallback={<Placeholder />}>
-            <GitHubStats />
-          </Suspense>
-
-          <Suspense fallback={<Placeholder />}>
-            <SectionWrapper><Contact /></SectionWrapper>
-          </Suspense>
+          <SectionWrapper><About /></SectionWrapper>
+          <SectionWrapper><Experience /></SectionWrapper>
+          <TechMarquee />
+          <Projects />
+          <Skills />
+          <GitHubStats />
+          <SectionWrapper><Contact /></SectionWrapper>
         </main>
 
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
+        <Footer />
       </div>
     </>
   );

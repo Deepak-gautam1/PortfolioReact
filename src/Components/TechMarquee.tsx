@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { siNextdotjs } from "simple-icons";
 
 // ── Inline SVG paths from simple-icons.org — no install needed ──
 const ICONS: Record<string, { path: string; color: string }> = {
@@ -55,9 +56,10 @@ const ICONS: Record<string, { path: string; color: string }> = {
     path: "M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z",
   },
   "Next.js": {
-    color: "#000000",
-    path: "M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.astro 0C5.495.04 1.043 4.219.08 9.767c-.093.52-.11 2.578 0 3.007.555 2.853 2.058 5.353 4.33 7.103 2.04 1.565 4.402 2.366 6.921 2.366.914 0 1.797-.097 2.66-.286.74-.163 1.56-.453 2.286-.793l.02-.01a11.917 11.917 0 0 0 2.07-1.36l.016-.013a11.97 11.97 0 0 0 4.614-9.57c0-6.627-5.373-12-12-12zm-.374 4.5l6.375 9.5H5.624l5.574-9.5z",
+    color: "#F05032",
+    path: "M11.5216 0C5.1554 0 0 5.1554 0 11.5216C0 17.8878 5.1554 23.0432 11.5216 23.0432C17.8878 23.0432 23.0432 17.8878 23.0432 11.5216C23.0432 5.1554 17.8878 0 11.5216 0ZM19.0569 19.6918L9.2569 6.4863H6.4863V16.549H8.4118V8.9137L17.459 21.1255C16.1569 22.0039 14.6314 22.6 12.9961 22.7882V15.0078H10.9804V22.8314C10.6588 22.8706 10.3373 22.8902 10.0157 22.8902C9.6941 22.8902 9.3725 22.8706 9.0510 22.8314V15.0078H7.0353V22.7882C3.1216 22.2118 0.0392 18.8392 0.0392 14.7765C0.0392 10.3177 3.6784 6.6784 8.1373 6.6784H9.2569V4.6627H6.4863V3.7451H16.549V4.6627H13.7784V6.4863H15.7843C17.7216 6.4863 19.4157 7.3647 20.5353 8.7451L19.0569 19.6918Z",
   },
+
   PostgreSQL: {
     color: "#4169E1",
     path: "M17.128 0a10.134 10.134 0 0 0-2.755.403l-.063.02A10.922 10.922 0 0 0 12.6.258C11.422.238 10.41.524 9.594 1 8.79.721 7.122.24 5.364.336 4.14.403 2.804.775 1.791 1.613.88 2.37.271 3.575.09 5.178-.099 6.836.231 8.91 1.42 11.28c.705 1.395 1.591 2.338 2.373 2.988a5.48 5.48 0 0 0 1.112.702c.307.14.618.248.94.334.45.12.99.19 1.552.152.327 1.206.825 2.228 1.39 3.074a8.344 8.344 0 0 0 1.814 1.987 5.658 5.658 0 0 0 2.293 1.08 6.12 6.12 0 0 0 2.633.003 5.525 5.525 0 0 0 2.03-.838 6.306 6.306 0 0 0 1.697-1.818c.567-.939.98-2.066 1.069-3.449.013-.212.048-.57.017-.824a2.1 2.1 0 0 0-.162-.683 1.903 1.903 0 0 0-.625-.834 3.344 3.344 0 0 0-1.193-.534c.11-.148.209-.301.3-.459.24-.418.384-.88.43-1.39.075-.834-.142-1.842-1.025-2.51a4.11 4.11 0 0 0-.457-.286c.006-.082.004-.163.004-.242 0-1.27-.574-2.545-1.513-3.337C19.664.455 18.455.017 17.128 0z",
@@ -79,9 +81,23 @@ interface Tech {
 }
 
 const TECH_STACK: Tech[] = [
-  "React", "TypeScript", "Python", "C#", "Azure", "Node.js",
-  "SQL Server", "Docker", "TensorFlow", "Supabase", "FastAPI",
-  "MongoDB", "Git", "Tailwind", "Next.js", "PostgreSQL", "LangChain",
+  "React",
+  "TypeScript",
+  "Python",
+  "C#",
+  "Azure",
+  "Node.js",
+  "SQL Server",
+  "Docker",
+  "TensorFlow",
+  "Supabase",
+  "FastAPI",
+  "MongoDB",
+  "Git",
+  "Tailwind",
+  "Next.js",
+  "PostgreSQL",
+  "LangChain",
 ].map((name) => ({
   name,
   color: ICONS[name]?.color ?? "#888",
@@ -126,7 +142,13 @@ const TechItem = ({ tech }: { tech: Tech }) => (
     >
       <path d={tech.path} />
     </svg>
-    <span style={{ fontSize: "13px", fontWeight: 500, color: "hsl(var(--foreground))" }}>
+    <span
+      style={{
+        fontSize: "13px",
+        fontWeight: 500,
+        color: "hsl(var(--foreground))",
+      }}
+    >
       {tech.name}
     </span>
   </div>
@@ -134,7 +156,10 @@ const TechItem = ({ tech }: { tech: Tech }) => (
 
 const FADE_STYLE = (dir: "left" | "right") => ({
   position: "absolute" as const,
-  [dir]: 0, top: 0, bottom: 0, width: "100px",
+  [dir]: 0,
+  top: 0,
+  bottom: 0,
+  width: "100px",
   background: `linear-gradient(to ${dir === "left" ? "right" : "left"}, hsl(var(--background)), transparent)`,
   zIndex: 1,
   pointerEvents: "none" as const,
@@ -165,7 +190,13 @@ const TechMarquee = () => {
       </div>
 
       {/* Row 1 — left */}
-      <div style={{ position: "relative", overflow: "hidden", marginBottom: "12px" }}>
+      <div
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          marginBottom: "12px",
+        }}
+      >
         <div style={FADE_STYLE("left")} />
         <div style={FADE_STYLE("right")} />
         <motion.div
@@ -173,7 +204,9 @@ const TechMarquee = () => {
           transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
           style={{ display: "inline-flex", gap: "10px", width: "max-content" }}
         >
-          {DOUBLED.map((tech, i) => <TechItem key={`r1-${i}`} tech={tech} />)}
+          {DOUBLED.map((tech, i) => (
+            <TechItem key={`r1-${i}`} tech={tech} />
+          ))}
         </motion.div>
       </div>
 
@@ -186,7 +219,9 @@ const TechMarquee = () => {
           transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
           style={{ display: "inline-flex", gap: "10px", width: "max-content" }}
         >
-          {[...DOUBLED].reverse().map((tech, i) => <TechItem key={`r2-${i}`} tech={tech} />)}
+          {[...DOUBLED].reverse().map((tech, i) => (
+            <TechItem key={`r2-${i}`} tech={tech} />
+          ))}
         </motion.div>
       </div>
     </section>
