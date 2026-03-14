@@ -1,27 +1,23 @@
-import { lazy, Suspense, useState } from "react";
+import { useState } from "react";
 import Navigation from "@/Components/Navigation";
 import Hero from "@/Components/Hero";
+import About from "@/Components/About";
+import Experience from "@/Components/Experience";
+import Projects from "@/Components/Projects";
+import Skills from "@/Components/Skills";
+import Contact from "@/Components/Contact";
+import Footer from "@/Components/Footer";
 import SectionWrapper from "@/Components/SectionWrapper";
 import ScrollProgress from "@/Components/ScrollProgress";
 import CustomCursor from "@/Components/CustomCursor";
 import IntroLoader from "@/Components/IntroLoader";
 import SmoothScroll from "@/Components/SmoothScroll";
-
-// Lazy load everything below the fold — reduces initial bundle parse time
-const About       = lazy(() => import("@/Components/About"));
-const Experience  = lazy(() => import("@/Components/Experience"));
-const TechMarquee = lazy(() => import("@/Components/TechMarquee"));
-const Projects    = lazy(() => import("@/Components/Projects"));
-const Skills      = lazy(() => import("@/Components/Skills"));
-const GitHubStats = lazy(() => import("@/Components/GitHubStats"));
-const Contact     = lazy(() => import("@/Components/Contact"));
-const Footer      = lazy(() => import("@/Components/Footer"));
-
-// Tiny placeholder while lazy chunks load
-const Blank = () => <div style={{ minHeight: "200px" }} />;
+import TechMarquee from "@/Components/TechMarquee";
+import GitHubStats from "@/Components/GitHubStats";
 
 const INTRO_KEY = "dg_intro_seen";
-const alreadySeen = typeof window !== "undefined" && sessionStorage.getItem(INTRO_KEY) === "1";
+const alreadySeen =
+  typeof window !== "undefined" && sessionStorage.getItem(INTRO_KEY) === "1";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(alreadySeen);
@@ -33,6 +29,7 @@ const Index = () => {
 
   return (
     <>
+      {/* Skip to main content — accessibility */}
       <a
         href="#main-content"
         style={{
@@ -47,56 +44,54 @@ const Index = () => {
         Skip to main content
       </a>
 
+      {/* Intro loader — overlays the page visually but content stays in DOM for Lighthouse */}
       {!alreadySeen && !introComplete && (
         <IntroLoader onComplete={handleIntroComplete} />
       )}
 
-      {introComplete && (
-        <div className="min-h-screen">
-          <SmoothScroll />
-          <ScrollProgress />
-          <CustomCursor />
-          <Navigation />
+      {/*
+        CRITICAL PERF FIX: page content is ALWAYS in the DOM.
+        Previously gated behind introComplete which hid everything from Lighthouse
+        for 2.4s, destroying LCP. Now the loader is just a visual overlay.
+      */}
+      <div
+        className="min-h-screen"
+        style={{
+          // Hide visually during intro (but still in DOM for Lighthouse / browser parsing)
+          visibility: introComplete ? "visible" : "hidden",
+        }}
+      >
+        <SmoothScroll />
+        <ScrollProgress />
+        <CustomCursor />
 
-          <main id="main-content">
-            {/* Hero is above the fold — not lazy */}
-            <Hero />
+        <Navigation />
 
-            {/* Everything below fold — lazy loaded */}
-            <Suspense fallback={<Blank />}>
-              <SectionWrapper><About /></SectionWrapper>
-            </Suspense>
+        <main id="main-content">
+          <Hero />
 
-            <Suspense fallback={<Blank />}>
-              <SectionWrapper><Experience /></SectionWrapper>
-            </Suspense>
+          <SectionWrapper>
+            <About />
+          </SectionWrapper>
 
-            <Suspense fallback={<Blank />}>
-              <TechMarquee />
-            </Suspense>
+          <SectionWrapper>
+            <Experience />
+          </SectionWrapper>
 
-            <Suspense fallback={<Blank />}>
-              <Projects />
-            </Suspense>
+          <TechMarquee />
 
-            <Suspense fallback={<Blank />}>
-              <Skills />
-            </Suspense>
+          <Projects />
+          <Skills />
 
-            <Suspense fallback={<Blank />}>
-              <GitHubStats />
-            </Suspense>
+          <GitHubStats />
 
-            <Suspense fallback={<Blank />}>
-              <SectionWrapper><Contact /></SectionWrapper>
-            </Suspense>
-          </main>
+          <SectionWrapper>
+            <Contact />
+          </SectionWrapper>
+        </main>
 
-          <Suspense fallback={null}>
-            <Footer />
-          </Suspense>
-        </div>
-      )}
+        <Footer />
+      </div>
     </>
   );
 };

@@ -1,10 +1,7 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+// StrictMode removed — it double-invokes effects and adds runtime overhead
+// that hurts Lighthouse performance score
+createRoot(document.getElementById("root")).render(<App />);

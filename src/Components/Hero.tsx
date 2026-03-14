@@ -28,19 +28,12 @@ const TypewriterText = () => {
   useEffect(() => {
     const current = TITLES[titleIndex];
     let timeout: ReturnType<typeof setTimeout>;
-
     if (!isDeleting && displayed.length < current.length) {
-      timeout = setTimeout(
-        () => setDisplayed(current.slice(0, displayed.length + 1)),
-        55,
-      );
+      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 55);
     } else if (!isDeleting && displayed.length === current.length) {
       timeout = setTimeout(() => setIsDeleting(true), 2200);
     } else if (isDeleting && displayed.length > 0) {
-      timeout = setTimeout(
-        () => setDisplayed(current.slice(0, displayed.length - 1)),
-        30,
-      );
+      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 30);
     } else {
       setIsDeleting(false);
       setTitleIndex((prev) => (prev + 1) % TITLES.length);
@@ -50,8 +43,7 @@ const TypewriterText = () => {
 
   return (
     <h2 className="text-2xl lg:text-3xl font-semibold text-foreground min-h-[2.5rem]">
-      {displayed}
-      <span className="animate-pulse text-primary">|</span>
+      {displayed}<span className="animate-pulse text-primary">|</span>
     </h2>
   );
 };
@@ -59,25 +51,20 @@ const TypewriterText = () => {
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
+    opacity: 1, y: 0,
     transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" },
   }),
 };
 
-const Blob = ({ style }: { style: React.CSSProperties }) => (
-  <motion.div
-    animate={{
-      scale: [1, 1.15, 1.05, 1.2, 1],
-      x: [0, 30, -20, 10, 0],
-      y: [0, -20, 30, -10, 0],
-    }}
-    transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+// No filter:blur — replaced with radial-gradient background shapes
+// blur(60px) is the single most expensive CSS property on mobile Lighthouse
+const BlobCSS = ({ style }: { style: React.CSSProperties }) => (
+  <div
     style={{
       position: "absolute",
       borderRadius: "50%",
-      filter: "blur(60px)",
       pointerEvents: "none",
+      willChange: "auto", // don't promote to GPU layer unnecessarily
       ...style,
     }}
   />
@@ -87,15 +74,12 @@ const Hero = () => {
   return (
     <section
       className="min-h-screen flex items-center justify-center px-4"
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        background: "hsl(var(--background))",
-      }}
+      style={{ position: "relative", overflow: "hidden", background: "hsl(var(--background))" }}
     >
-      <Blob style={{ width: 500, height: 500, background: "hsl(var(--primary) / 0.12)", top: "-10%", left: "-10%" }} />
-      <Blob style={{ width: 400, height: 400, background: "hsl(var(--accent) / 0.1)", bottom: "0%", right: "-5%", animationDelay: "-8s" }} />
-      <Blob style={{ width: 300, height: 300, background: "hsl(var(--primary) / 0.07)", top: "40%", left: "30%", animationDelay: "-4s" }} />
+      {/* Static blobs — no animation, no blur. Performance-safe. */}
+      <BlobCSS style={{ width: 600, height: 600, background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)", top: "-15%", left: "-15%" }} />
+      <BlobCSS style={{ width: 500, height: 500, background: "radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)", bottom: "-10%", right: "-10%" }} />
+      <BlobCSS style={{ width: 350, height: 350, background: "radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)", top: "35%", left: "25%" }} />
 
       <ParticleBackground />
 
@@ -106,10 +90,7 @@ const Hero = () => {
         <div className="space-y-8">
           <div className="space-y-4">
             <motion.h1
-              custom={0}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
+              custom={0} variants={fadeUp} initial="hidden" animate="visible"
               className="text-5xl lg:text-7xl font-bold bg-gradient-hero-title bg-clip-text text-transparent"
             >
               DEEPAK GAUTAM
@@ -120,10 +101,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.p
-              custom={2}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
+              custom={2} variants={fadeUp} initial="hidden" animate="visible"
               className="text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
               B.Tech from{" "}
@@ -188,39 +166,39 @@ const Hero = () => {
           </motion.div>
         </div>
 
+        {/* Avatar — remove blur from glow ring too */}
         <motion.div
           className="relative flex justify-center"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
         >
+          {/* Rotating glow ring — no blur, use opacity instead */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             style={{
-              position: "absolute",
-              inset: "-12px",
-              borderRadius: "50%",
-              background: "conic-gradient(from 0deg, hsl(var(--primary) / 0.5), hsl(var(--accent) / 0.5), transparent, hsl(var(--primary) / 0.5))",
-              filter: "blur(10px)",
+              position: "absolute", inset: "-8px", borderRadius: "50%",
+              background: "conic-gradient(from 0deg, hsl(var(--primary) / 0.45), hsl(var(--accent) / 0.45), transparent, hsl(var(--primary) / 0.45))",
               zIndex: 0,
             }}
           />
           <div
-            className="w-80 h-80 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20"
+            className="w-80 h-80 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center border border-white/20"
             style={{ position: "relative", zIndex: 1 }}
           >
             <div className="w-72 h-72 rounded-full bg-gradient-to-br from-primary to-accent p-1">
               <img
                 src="/images/profile.jpg"
                 alt="Deepak Gautam — Data Engineer"
-                loading="lazy"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full rounded-full object-cover object-top"
               />
             </div>
           </div>
-          <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full animate-pulse" style={{ zIndex: 0 }} />
-          <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-primary/20 rounded-full animate-pulse delay-1000" style={{ zIndex: 0 }} />
+          <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/15 rounded-full" style={{ zIndex: 0 }} />
+          <div className="absolute -bottom-6 -left-6 w-28 h-28 bg-primary/15 rounded-full" style={{ zIndex: 0 }} />
         </motion.div>
       </div>
     </section>

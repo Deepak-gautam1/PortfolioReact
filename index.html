@@ -33,9 +33,12 @@
     <meta name="twitter:description" content="Building production systems at Americana Restaurants · Peet's Coffee Loyalty Platform · 50K+ DAU · RAG pipelines · LeetCode Knight." />
     <meta name="twitter:image" content="https://portfolio-react-nine-orpin.vercel.app/images/og-preview.png" />
 
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Preload critical above-fold image — tells browser to fetch ASAP before JS runs -->
+    <link rel="preload" href="/images/profile.jpg" as="image" fetchpriority="high" />
+
+    <!-- Preconnect for external APIs we fetch on load -->
     <link rel="preconnect" href="https://api.github.com" />
+    <link rel="preconnect" href="https://github-contributions-api.jogruber.de" />
   </head>
   <body>
     <div id="root"></div>
