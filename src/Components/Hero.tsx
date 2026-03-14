@@ -56,30 +56,15 @@ const fadeUp = {
   }),
 };
 
-// No filter:blur — replaced with radial-gradient background shapes
-// blur(60px) is the single most expensive CSS property on mobile Lighthouse
-const BlobCSS = ({ style }: { style: React.CSSProperties }) => (
-  <div
-    style={{
-      position: "absolute",
-      borderRadius: "50%",
-      pointerEvents: "none",
-      willChange: "auto", // don't promote to GPU layer unnecessarily
-      ...style,
-    }}
-  />
-);
-
 const Hero = () => {
   return (
     <section
       className="min-h-screen flex items-center justify-center px-4"
       style={{ position: "relative", overflow: "hidden", background: "hsl(var(--background))" }}
     >
-      {/* Static blobs — no animation, no blur. Performance-safe. */}
-      <BlobCSS style={{ width: 600, height: 600, background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)", top: "-15%", left: "-15%" }} />
-      <BlobCSS style={{ width: 500, height: 500, background: "radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)", bottom: "-10%", right: "-10%" }} />
-      <BlobCSS style={{ width: 350, height: 350, background: "radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)", top: "35%", left: "25%" }} />
+      {/* Static radial blobs — no filter:blur, no animation = zero perf cost */}
+      <div style={{ position: "absolute", width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)", top: "-15%", left: "-15%", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)", bottom: "-10%", right: "-10%", pointerEvents: "none" }} />
 
       <ParticleBackground />
 
@@ -166,14 +151,13 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Avatar — remove blur from glow ring too */}
+        {/* Avatar */}
         <motion.div
           className="relative flex justify-center"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
         >
-          {/* Rotating glow ring — no blur, use opacity instead */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -188,13 +172,19 @@ const Hero = () => {
             style={{ position: "relative", zIndex: 1 }}
           >
             <div className="w-72 h-72 rounded-full bg-gradient-to-br from-primary to-accent p-1">
-              <img
-                src="/images/profile.jpg"
-                alt="Deepak Gautam — Data Engineer"
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-full rounded-full object-cover object-top"
-              />
+              {/* WebP with JPG fallback — ~60% smaller file, faster LCP */}
+              <picture>
+                <source srcSet="/images/profile.webp" type="image/webp" />
+                <img
+                  src="/images/profile.jpg"
+                  alt="Deepak Gautam — Data Engineer"
+                  fetchPriority="high"
+                  decoding="async"
+                  width="288"
+                  height="288"
+                  className="w-full h-full rounded-full object-cover object-top"
+                />
+              </picture>
             </div>
           </div>
           <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/15 rounded-full" style={{ zIndex: 0 }} />
