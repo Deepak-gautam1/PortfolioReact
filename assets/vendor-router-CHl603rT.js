@@ -1,4 +1,4 @@
-import{r as u}from"./vendor-framer-B98chLM7.js";import{a as Se,g as Le}from"./vendor-react-vtvkNrF5.js";var ke=Se();const Zt=Le(ke);/**
+import{r as u}from"./vendor-framer-DX1qLven.js";import{a as Se,g as Le}from"./vendor-react-vtvkNrF5.js";var ke=Se();const Zt=Le(ke);/**
  * react-router v7.7.1
  *
  * Copyright (c) Remix Software Inc.
