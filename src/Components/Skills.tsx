@@ -12,32 +12,62 @@ const certifications = [
   { name: "Advanced Machine Learning", link: "/certs/AdvMachineLearning.pdf" },
   { name: "Deep Learning", link: "/certs/DeepLearning.pdf" },
   { name: "TensorFlow", link: "/certs/Tensorflow.pdf" },
+  { name: "RAG Certification", link: "/certs/RagCertification.pdf" },
 ];
 
 // ── Animated Counter ──────────────────────────────────────────
-const AnimatedCounter = ({ target, suffix = "", duration = 1800 }: { target: number; suffix?: string; duration?: number }) => {
+const AnimatedCounter = ({
+  target,
+  suffix = "",
+  duration = 1800,
+}: {
+  target: number | string;
+  suffix?: string;
+  duration?: number;
+}) => {
+  if (typeof target === "string") {
+    return <span>{target}</span>;
+  }
+
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
 
   useEffect(() => {
     if (!inView) return;
+
     let start: number | null = null;
+
     const step = (ts: number) => {
       if (!start) start = ts;
+
       const p = Math.min((ts - start) / duration, 1);
+
       setValue(Math.floor((1 - Math.pow(1 - p, 3)) * target));
+
       if (p < 1) requestAnimationFrame(step);
       else setValue(target);
     };
+
     requestAnimationFrame(step);
   }, [inView, target, duration]);
 
-  return <span ref={ref}>{value.toLocaleString()}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {value.toLocaleString()}
+      {suffix}
+    </span>
+  );
 };
 
 // ── Skill Card ────────────────────────────────────────────────
-const SkillCard = ({ category, index }: { category: { title: string; icon: React.ElementType; skills: string[] }; index: number }) => {
+const SkillCard = ({
+  category,
+  index,
+}: {
+  category: { title: string; icon: React.ElementType; skills: string[] };
+  index: number;
+}) => {
   const [hovered, setHovered] = useState(false);
   return (
     <motion.div
@@ -51,10 +81,18 @@ const SkillCard = ({ category, index }: { category: { title: string; icon: React
     >
       <Card
         className="p-6 bg-background border shadow-lg h-full"
-        style={{ transition: "box-shadow 0.3s", boxShadow: hovered ? "0 12px 32px -8px hsl(var(--primary) / 0.2)" : undefined }}
+        style={{
+          transition: "box-shadow 0.3s",
+          boxShadow: hovered
+            ? "0 12px 32px -8px hsl(var(--primary) / 0.2)"
+            : undefined,
+        }}
       >
         <div className="flex items-center gap-3 mb-4">
-          <motion.div animate={{ rotate: hovered ? 15 : 0, scale: hovered ? 1.15 : 1 }} transition={{ duration: 0.25 }}>
+          <motion.div
+            animate={{ rotate: hovered ? 15 : 0, scale: hovered ? 1.15 : 1 }}
+            transition={{ duration: 0.25 }}
+          >
             <category.icon className="w-6 h-6 text-primary" />
           </motion.div>
           <h3 className="text-lg font-semibold">{category.title}</h3>
@@ -68,7 +106,9 @@ const SkillCard = ({ category, index }: { category: { title: string; icon: React
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 + idx * 0.04, duration: 0.3 }}
             >
-              <Badge variant="secondary" className="text-sm">{skill}</Badge>
+              <Badge variant="secondary" className="text-sm">
+                {skill}
+              </Badge>
             </motion.div>
           ))}
         </div>
@@ -80,10 +120,53 @@ const SkillCard = ({ category, index }: { category: { title: string; icon: React
 // ── Main ──────────────────────────────────────────────────────
 const Skills = () => {
   const skillCategories = [
-    { title: "Languages", icon: Code, skills: ["C/C++", "Python", "C#", "JavaScript", "TypeScript", "SQL"] },
-    { title: "Developer Tools", icon: Database, skills: ["VS Code", "Git/GitHub", "Azure", "Docker", "Supabase", "Jupyter"] },
-    { title: "Frameworks", icon: Brain, skills: ["React", "Next.js", "Node.js", "FastAPI", "LangChain", "TensorFlow"] },
-    { title: "Concepts", icon: Trophy, skills: ["RAG Pipelines", "System Design", "REST APIs", "OOP", "Deep Learning", "Prompt Engineering"] },
+    {
+      title: "Languages",
+      icon: Code,
+      skills: ["C/C++", "Python", "C#", "JavaScript", "TypeScript", "SQL"],
+    },
+    {
+      title: "Cloud & Data",
+      icon: Database,
+      skills: [
+        "Azure",
+        "Azure OpenAI",
+        "Azure Functions",
+        "SQL Server",
+        "Azure SQL",
+        "Convex",
+        "Supabase",
+        "Docker",
+      ],
+    },
+    {
+      title: "Frameworks & AI",
+      icon: Brain,
+      skills: [
+        "React",
+        "Next.js",
+        "Node.js",
+        "FastAPI",
+        "LangChain",
+        "TensorFlow",
+        "Plotly",
+        "Microsoft Graph",
+      ],
+    },
+    {
+      title: "Concepts",
+      icon: Trophy,
+      skills: [
+        "Agentic AI",
+        "RAG Pipelines",
+        "NLP-to-SQL",
+        "SSE Streaming",
+        "SQL Guardrails",
+        "System Design",
+        "REST APIs",
+        "Prompt Engineering",
+      ],
+    },
   ];
 
   const headingRef = useRef(null);
@@ -92,7 +175,6 @@ const Skills = () => {
   return (
     <section className="py-20 px-4 bg-muted/50" id="skills">
       <div className="max-w-6xl mx-auto">
-
         {/* ── Heading ── */}
         <div className="text-center mb-16" ref={headingRef}>
           <motion.h2
@@ -115,7 +197,9 @@ const Skills = () => {
 
         {/* ── Skill Cards ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-          {skillCategories.map((cat, i) => <SkillCard key={i} category={cat} index={i} />)}
+          {skillCategories.map((cat, i) => (
+            <SkillCard key={i} category={cat} index={i} />
+          ))}
         </div>
 
         {/* ── Packages ── */}
@@ -132,7 +216,8 @@ const Skills = () => {
               Specialized Python Packages
             </h3>
             <p className="text-muted-foreground text-sm">
-              Pandas · NumPy · Scikit-learn · Seaborn · TensorFlow · Keras · FAISS · Hugging Face Transformers · Streamlit · LangChain
+              Pandas, NumPy, Scikit-learn, Seaborn, TensorFlow, Keras, FAISS,
+              Hugging Face Transformers, Streamlit, LangChain, Plotly, sqlparse
             </p>
           </Card>
         </motion.div>
@@ -148,7 +233,11 @@ const Skills = () => {
             { label: "DSA Problems", value: 2500, suffix: "+" },
             { label: "Contest Rank (CodeChef)", value: 31, suffix: "" },
             { label: "Amazon ML — Top", value: 5000, suffix: " selected" },
-            { label: "Lighthouse Score", value: 95, suffix: "+" },
+            {
+              label: "AI-Powered",
+              value: "Travel Platform",
+              suffix: "",
+            },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -162,7 +251,9 @@ const Skills = () => {
                 <div className="text-2xl font-bold text-primary mb-1">
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-xs text-muted-foreground">{stat.label}</div>
+                <div className="text-xs text-muted-foreground">
+                  {stat.label}
+                </div>
               </Card>
             </motion.div>
           ))}
@@ -190,20 +281,26 @@ const Skills = () => {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.07 }}
                     >
-                      <Badge variant="outline" className="cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors py-1.5 px-3">
+                      <Badge
+                        variant="outline"
+                        className="cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors py-1.5 px-3"
+                      >
                         {cert.name}
                       </Badge>
                     </motion.div>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[80vw] h-[90vh] p-2">
-                    <iframe src={cert.link} className="w-full h-full rounded-md border" title={`${cert.name} Certificate`} />
+                    <iframe
+                      src={cert.link}
+                      className="w-full h-full rounded-md border"
+                      title={`${cert.name} Certificate`}
+                    />
                   </DialogContent>
                 </Dialog>
               ))}
             </div>
           </Card>
         </motion.div>
-
       </div>
     </section>
   );

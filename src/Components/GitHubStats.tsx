@@ -48,7 +48,7 @@ const useContributions = (year: number) => {
     setError(false);
 
     // read:user scope only — safe to use client-side for public portfolios
-    const token = import.meta.env.VITE_GITHUB_TOKEN;
+    const token = (import.meta as any).env.VITE_GITHUB_TOKEN;
 
     const from = `${year}-01-01T00:00:00Z`;
     const to = `${year}-12-31T23:59:59Z`;

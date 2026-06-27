@@ -14,9 +14,9 @@ const TITLES = [
 ];
 
 const STATS = [
-  { value: "50K+", label: "Daily Active Users" },
-  { value: "99%", label: "Duplicate Reduction" },
-  { value: "80%", label: "Reporting Saved" },
+  { value: "3", label: "Company AI & Data Projects" },
+  { value: "50K+", label: "Users Served by Systems" },
+  { value: "NLP", label: "to SQL Analytics" },
   { value: "2500+", label: "DSA Problems" },
 ];
 
@@ -93,11 +93,13 @@ const Hero = () => {
               <span className="text-primary font-medium">NIT Kurukshetra</span>.
               Currently at{" "}
               <span className="text-primary font-medium">Americana Restaurants</span>{" "}
-              engineering production services for the{" "}
-              <span className="text-accent font-medium">Peet's Coffee Loyalty Platform</span>
-              — serving{" "}
-              <span className="font-semibold text-foreground">50,000+ daily active users</span>.
-              I build RAG pipelines, loyalty systems, and AI-powered tools that ship at scale.
+              building loyalty platforms and Generative AI systems across{" "}
+              <span className="text-accent font-medium">Peet's Coffee Loyalty</span>,{" "}
+              <span className="text-accent font-medium">Sales Analyst</span>, and{" "}
+              <span className="text-accent font-medium">Mail Assistant</span>.
+              My work spans production services for{" "}
+              <span className="font-semibold text-foreground">50,000+ daily active users</span>,
+              agentic analytics, RAG pipelines, and AI-powered automation that ships at scale.
             </motion.p>
           </div>
 

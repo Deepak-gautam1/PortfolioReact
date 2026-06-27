@@ -42,11 +42,11 @@ This isn't a template. Every component is custom-built with production-level att
 - **3D Tilt Cards** — project cards tilt with mouse tracking and show a radial cursor glow
 - **Active Nav Highlight** — navigation underline slides between sections via IntersectionObserver + Framer Motion `layoutId`
 - **Back-to-Top Button** — appears after 400px scroll with spring animation
-- **Project Filter Tabs** — filter 9 projects by All / AI·ML / Full Stack / Data Engineering / Production with animated count badges
+- **Project Filter Tabs** — filter 11 projects by All / Company Projects / AI·ML / Full Stack / Data Engineering with animated count badges
 - **CP Rating Rings** — animated SVG stroke rings for LeetCode, CodeChef, Codeforces with real profile links
 - **GitHub Heatmap** — live contribution grid fetched directly from GitHub API, no third-party image services
 - **Scroll Progress Bar** — gradient top bar that fills as you scroll
-- **Branded Tech Marquee** — two infinite-scroll rows with real SVG brand logos (React, TypeScript, Python, Azure, Docker, etc.)
+- **Branded Tech Marquee** — two infinite-scroll rows with SVG brand logos for frontend, AI, cloud, data, and automation tools
 - **Animated Counters** — stats count up with ease-out cubic when scrolled into view
 - **Contact Success State** — animated green checkmark replaces form on send, backed by Supabase
 - **Dark / Light Mode** — full theme system with smooth transitions
@@ -77,9 +77,9 @@ This isn't a template. Every component is custom-built with production-level att
 |---|---|---|
 | 1 | **Hero** | Typewriter titles · animated blobs · rotating glow ring · 4 stat cards |
 | 2 | **About** | Animated info cards · education · current role · CP achievements |
-| 3 | **Experience** | Americana Restaurants — Peet's Coffee Loyalty Platform · Sales Deep Analyzer RAG pipeline |
+| 3 | **Experience** | Americana Restaurants — Peet's Coffee Loyalty Platform · Sales Analyst agentic AI platform |
 | 4 | **Tech Stack** | Infinite marquee · dual rows · SVG brand logos · hover brand-color glow |
-| 5 | **Projects** | 9 projects · filter tabs · 3D tilt · featured ribbon · live demo + code links |
+| 5 | **Projects** | 11 projects · filter tabs · 3D tilt · featured ribbon · live demo + code links |
 | 6 | **Skills** | Skill cards · CP rating rings · animated counters · certification viewer |
 | 7 | **GitHub** | Live stats · language bars · top repos · contribution heatmap (873 contributions) |
 | 8 | **Contact** | Supabase-backed form · animated success state · availability badge |

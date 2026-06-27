@@ -41,7 +41,7 @@ const About = () => {
           <p className="font-semibold text-foreground">Data Engineer</p>
           <p className="text-muted-foreground text-sm">Americana Restaurants — July 2025–Present</p>
           <p className="text-sm text-muted-foreground mt-2">
-            Loyalty & Digital Systems · KFC · Pizza Hut · Hardee's · Krispy Kreme — MENA region
+            Loyalty Platforms & Generative AI Systems - KFC, Pizza Hut, Hardee's, Krispy Kreme - MENA region
           </p>
           <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block" />
@@ -93,10 +93,10 @@ const About = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Computer Engineering graduate from <span className="text-primary font-medium">NIT Kurukshetra</span>,
-            now building production-grade loyalty systems and AI pipelines as a{" "}
+            now building production-grade loyalty platforms, agentic analytics, and AI automation as a{" "}
             <span className="text-primary font-medium">Data Engineer</span> at{" "}
             <span className="text-primary font-medium">Americana Restaurants</span>.
-            I thrive at the intersection of data engineering, AI, and competitive problem-solving.
+            I work across Peet's Coffee Loyalty, Sales Analyst, and Mail Assistant, combining data engineering, GenAI, and competitive problem-solving.
           </p>
         </motion.div>
 

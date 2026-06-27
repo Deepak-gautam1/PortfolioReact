@@ -12,7 +12,7 @@ interface Project {
   description: string;
   technologies: string[];
   features: string[];
-  github: string;
+  github?: string;
   demo?: string;
   adminUrl?: string;
   backendUrl?: string;
@@ -23,7 +23,7 @@ const projects: Project[] = [
   {
     title: "Peet's Coffee Loyalty Platform",
     category: "Production · Americana Restaurants",
-    tags: ["Data Engineering", "Production"],
+    tags: ["Company Projects", "Data Engineering"],
     description:
       "Production backend for the Peet's Coffee loyalty membership system serving 50,000+ daily active users across Middle East & North Africa — built with C#, Azure Functions, and Zoho Creator.",
     technologies: ["C#", "Azure Functions", "Zoho Creator", "REST APIs", "SQL Server", "Idempotency"],
@@ -31,7 +31,32 @@ const projects: Project[] = [
       "Engineered tier upgrade workflows, rule enforcement, and earn–burn engine with idempotent processing and automated expiry — zero downtime at production scale.",
       "Built cross-platform validation pipeline spanning Azure services and mobile apps, reducing duplicate transaction incidents by 99%.",
     ],
-    github: "https://github.com/Deepak-gautam1",
+    featured: true,
+  },
+  {
+    title: "Sales Analyst",
+    category: "Agentic AI - Americana Restaurants",
+    tags: ["Company Projects", "AI / ML", "Data Engineering"],
+    description:
+      "Enterprise agentic AI analytics platform that lets business users ask sales questions in plain English and receive SQL-backed answers, charts, pivot tables, and AI-generated insights.",
+    technologies: ["Next.js", "FastAPI", "GPT-4o", "Azure OpenAI", "Azure SQL", "Convex", "Plotly", "Pandas"],
+    features: [
+      "Built a natural-language-to-SQL pipeline with Schema RAG, prompt assembly, SQL validation, safe Azure SQL execution, and self-correction retry logic.",
+      "Implemented streaming analytics responses with SSE, rendering AI narration, SQL blocks, data tables, Plotly charts, and Convex-backed conversation history.",
+    ],
+    featured: true,
+  },
+  {
+    title: "Mail Assistant",
+    category: "AI Automation · Americana Restaurants",
+    tags: ["Company Projects", "AI / ML"],
+    description:
+      "Internal Americana Restaurants mail assistant built to streamline repetitive mailbox workflows with AI-assisted email understanding, context extraction, and response preparation.",
+    technologies: ["Python", "Azure OpenAI", "Microsoft Graph API", "Outlook", "FastAPI", "Prompt Engineering"],
+    features: [
+      "Designed automated email triage flows that classify requests, summarize context, and prepare concise response drafts for faster follow-up.",
+      "Kept the workflow human-in-the-loop for enterprise usage, with controlled prompts and review before any customer or stakeholder communication.",
+    ],
     featured: true,
   },
   {
@@ -145,7 +170,7 @@ const projects: Project[] = [
   },
 ];
 
-const FILTERS = ["All", "AI / ML", "Full Stack", "Data Engineering", "Production"] as const;
+const FILTERS = ["All", "Company Projects", "AI / ML", "Full Stack", "Data Engineering"] as const;
 type Filter = typeof FILTERS[number];
 
 const TiltCard = ({ project, index }: { project: Project; index: number }) => {
@@ -248,11 +273,13 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
         </div>
 
         <div className="flex flex-wrap gap-2 pt-4 mt-auto" style={{ position: "relative", zIndex: 1 }}>
-          <Button asChild variant="outline" size="sm">
-            <a href={project.github} target="_blank" rel="noopener noreferrer">
-              <GithubIcon className="w-4 h-4 mr-1.5" />Code
-            </a>
-          </Button>
+          {project.github && (
+            <Button asChild variant="outline" size="sm">
+              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                <GithubIcon className="w-4 h-4 mr-1.5" />Code
+              </a>
+            </Button>
+          )}
           {project.demo && (
             <Button asChild size="sm">
               <a href={project.demo} target="_blank" rel="noopener noreferrer">
@@ -309,7 +336,7 @@ const Projects = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-muted-foreground"
           >
-            Production systems, AI pipelines, and full-stack applications
+            Company projects, AI pipelines, and full-stack applications
           </motion.p>
         </div>
 

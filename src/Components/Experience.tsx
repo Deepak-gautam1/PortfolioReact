@@ -35,7 +35,7 @@ const Experience = () => {
                   <h4 className="text-xl font-semibold text-primary">
                     Data Engineer (Full-Time)
                   </h4>
-                  <p className="text-sm text-muted-foreground font-medium">Loyalty & Digital Systems</p>
+                  <p className="text-sm text-muted-foreground font-medium">Loyalty Platforms & Generative AI Systems</p>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mt-1 sm:mt-0">
                   <Calendar className="w-4 h-4" />
@@ -45,6 +45,35 @@ const Experience = () => {
               <div className="flex items-center gap-2 text-muted-foreground text-sm mb-4">
                 <MapPin className="w-4 h-4" />
                 <span>Mohali, Punjab</span>
+              </div>
+
+              <div className="bg-accent/5 border border-accent/15 rounded-lg px-4 py-3 mb-4 flex items-center gap-3">
+                <Zap className="w-5 h-5 text-accent flex-shrink-0" />
+                <div>
+                  <span className="font-semibold text-sm text-foreground">Mail Assistant</span>
+                  <span className="text-xs text-muted-foreground ml-2">AI Automation · Outlook · Azure OpenAI</span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                <Badge variant="secondary">Python</Badge>
+                <Badge variant="secondary">Azure OpenAI</Badge>
+                <Badge variant="secondary">Microsoft Graph API</Badge>
+                <Badge variant="secondary">Outlook</Badge>
+                <Badge variant="secondary">FastAPI</Badge>
+              </div>
+
+              <div className="space-y-3 mb-6">
+                <div className="border-l-2 border-primary pl-4">
+                  <p className="text-muted-foreground text-sm">
+                    <strong>AI Mail Workflow:</strong> Built an internal mail assistant to classify incoming requests, summarize context, and prepare response drafts for repetitive operational communication.
+                  </p>
+                </div>
+                <div className="border-l-2 border-accent pl-4">
+                  <p className="text-muted-foreground text-sm">
+                    <strong>Human-in-the-Loop Review:</strong> Designed the assistant around controlled prompts and review-first workflows, keeping final communication approval with the business user.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-primary/5 border border-primary/15 rounded-lg px-4 py-3 mb-4 flex items-center gap-3">
@@ -113,35 +142,35 @@ const Experience = () => {
               <div className="bg-accent/5 border border-accent/15 rounded-lg px-4 py-3 mb-4 flex items-center gap-3">
                 <Zap className="w-5 h-5 text-accent flex-shrink-0" />
                 <div>
-                  <span className="font-semibold text-sm text-foreground">Sales Deep Analyzer</span>
-                  <span className="text-xs text-muted-foreground ml-2">RAG Pipeline · GPT-4o · Azure AI Search</span>
+                  <span className="font-semibold text-sm text-foreground">Sales Analyst</span>
+                  <span className="text-xs text-muted-foreground ml-2">Agentic AI - GPT-4o - Azure SQL</span>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-2 mb-4">
+                <Badge variant="secondary">Next.js</Badge>
+                <Badge variant="secondary">FastAPI</Badge>
                 <Badge variant="secondary">GPT-4o</Badge>
-                <Badge variant="secondary">Azure AI Search</Badge>
-                <Badge variant="secondary">LangChain</Badge>
                 <Badge variant="secondary">Python</Badge>
-                <Badge variant="secondary">SQL Server</Badge>
-                <Badge variant="secondary">JavaScript</Badge>
-                <Badge variant="secondary">MongoDB</Badge>
+                <Badge variant="secondary">Azure SQL</Badge>
+                <Badge variant="secondary">Convex</Badge>
+                <Badge variant="secondary">Plotly</Badge>
               </div>
 
               <div className="space-y-3">
                 <div className="border-l-2 border-primary pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>RAG Analytics Assistant:</strong> Architected a Retrieval-Augmented Generation pipeline that converts natural language into optimised dynamic SQL queries, removing SQL/Excel dependency for sales users.
+                    <strong>Agentic Analytics Platform:</strong> Architected Sales Analyst to convert natural language business questions into validated SQL queries, removing SQL/Excel dependency for sales users.
                   </p>
                 </div>
                 <div className="border-l-2 border-accent pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>End-to-End AI Pipeline:</strong> Integrated GPT-4o, Azure AI Search, and live SQL Server data to auto-generate real-time pivot tables and interactive dashboards for stakeholder reporting.
+                    <strong>End-to-End AI Pipeline:</strong> Integrated Schema RAG, GPT-4o, FastAPI, and Azure SQL to retrieve relevant tables, validate generated queries, execute safely, and stream results to the frontend.
                   </p>
                 </div>
                 <div className="border-l-2 border-primary pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Self-Service Features:</strong> Shipped Excel-to-Insight AI, voice input, and automated CSV exports — reducing manual reporting turnaround time by <span className="text-foreground font-medium">80%</span>.
+                    <strong>Self-Service Features:</strong> Shipped interactive pivot tables, Plotly charts, AI-generated insights, and conversation memory through Convex-backed chat sessions.
                   </p>
                 </div>
                 <div>
