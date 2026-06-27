@@ -6,9 +6,9 @@ import ParticleBackground from "@/Components/ParticleBackground";
 import MagneticButton from "@/Components/MagneticButton";
 
 const TITLES = [
-  "Data Engineer @ Americana",
-  "Loyalty & Digital Systems Builder",
-  "RAG & AI Pipeline Architect",
+  "AI & Data Engineer @ Americana",
+  "Production AI Systems Builder",
+  "RAG & Agentic AI Engineer",
   "Full Stack Developer",
   "Competitive Programmer",
 ];
@@ -16,7 +16,7 @@ const TITLES = [
 const STATS = [
   { value: "3", label: "Company AI & Data Projects" },
   { value: "50K+", label: "Users Served by Systems" },
-  { value: "NLP", label: "to SQL Analytics" },
+  { value: "4", label: "Production AI Systems" },
   { value: "2500+", label: "DSA Problems" },
 ];
 
@@ -29,11 +29,17 @@ const TypewriterText = () => {
     const current = TITLES[titleIndex];
     let timeout: ReturnType<typeof setTimeout>;
     if (!isDeleting && displayed.length < current.length) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 55);
+      timeout = setTimeout(
+        () => setDisplayed(current.slice(0, displayed.length + 1)),
+        55,
+      );
     } else if (!isDeleting && displayed.length === current.length) {
       timeout = setTimeout(() => setIsDeleting(true), 2200);
     } else if (isDeleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 30);
+      timeout = setTimeout(
+        () => setDisplayed(current.slice(0, displayed.length - 1)),
+        30,
+      );
     } else {
       setIsDeleting(false);
       setTitleIndex((prev) => (prev + 1) % TITLES.length);
@@ -43,7 +49,8 @@ const TypewriterText = () => {
 
   return (
     <h2 className="text-2xl lg:text-3xl font-semibold text-foreground min-h-[2.5rem]">
-      {displayed}<span className="animate-pulse text-primary">|</span>
+      {displayed}
+      <span className="animate-pulse text-primary">|</span>
     </h2>
   );
 };
@@ -51,8 +58,9 @@ const TypewriterText = () => {
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" },
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" as const },
   }),
 };
 
@@ -60,11 +68,39 @@ const Hero = () => {
   return (
     <section
       className="min-h-screen flex items-center justify-center px-4"
-      style={{ position: "relative", overflow: "hidden", background: "hsl(var(--background))" }}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "hsl(var(--background))",
+      }}
     >
       {/* Static radial blobs — no filter:blur, no animation = zero perf cost */}
-      <div style={{ position: "absolute", width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)", top: "-15%", left: "-15%", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)", bottom: "-10%", right: "-10%", pointerEvents: "none" }} />
+      <div
+        style={{
+          position: "absolute",
+          width: 600,
+          height: 600,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
+          top: "-15%",
+          left: "-15%",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)",
+          bottom: "-10%",
+          right: "-10%",
+          pointerEvents: "none",
+        }}
+      />
 
       <ParticleBackground />
 
@@ -75,35 +111,74 @@ const Hero = () => {
         <div className="space-y-8">
           <div className="space-y-4">
             <motion.h1
-              custom={0} variants={fadeUp} initial="hidden" animate="visible"
+              custom={0}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
               className="text-5xl lg:text-7xl font-bold bg-gradient-hero-title bg-clip-text text-transparent"
             >
               DEEPAK GAUTAM
             </motion.h1>
-
-            <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible">
+            <motion.div
+              custom={1}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+            >
               <TypewriterText />
             </motion.div>
 
             <motion.p
-              custom={2} variants={fadeUp} initial="hidden" animate="visible"
+              custom={2}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
               className="text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              B.Tech from{" "}
+              Building{" "}
+              <span className="font-semibold text-foreground">
+                production-grade AI systems
+              </span>
+              ,
+              <span className="font-semibold text-foreground">
+                {" "}
+                scalable loyalty platforms
+              </span>
+              , and{" "}
+              <span className="font-semibold text-foreground">
+                RAG-powered analytics{" "}
+              </span>
+              serving{" "}
+              <span className="text-primary font-medium">
+                50,000+ daily active users
+              </span>
+              across the Middle East & North Africa.
+              <br />
+              <br />
+              B.Tech in Computer Engineering from{" "}
               <span className="text-primary font-medium">NIT Kurukshetra</span>.
-              Currently at{" "}
-              <span className="text-primary font-medium">Americana Restaurants</span>{" "}
-              building loyalty platforms and Generative AI systems across{" "}
-              <span className="text-accent font-medium">Peet's Coffee Loyalty</span>,{" "}
-              <span className="text-accent font-medium">Sales Analyst</span>, and{" "}
-              <span className="text-accent font-medium">Mail Assistant</span>.
-              My work spans production services for{" "}
-              <span className="font-semibold text-foreground">50,000+ daily active users</span>,
-              agentic analytics, RAG pipelines, and AI-powered automation that ships at scale.
+              Currently working at{" "}
+              <span className="text-primary font-medium">
+                Americana Restaurants
+              </span>
+              , where I build enterprise solutions including{" "}
+              <span className="text-accent font-medium">
+                Peet's Coffee Loyalty
+              </span>
+              , <span className="text-accent font-medium">Sales Analyst</span>,
+              and{" "}
+              <span className="text-accent font-medium">Mail Assistant</span>{" "}
+              using Generative AI, Azure, and modern cloud technologies.
             </motion.p>
           </div>
 
-          <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap gap-4">
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-wrap gap-4"
+          >
             <MagneticButton>
               <Button asChild size="lg" className="group">
                 <a href="/Deepak_Resume.pdf" download="Deepak-Resume.pdf">
@@ -122,27 +197,64 @@ const Hero = () => {
             </MagneticButton>
           </motion.div>
 
-          <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible" className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3"
+          >
             {STATS.map((stat) => (
-              <div key={stat.label} className="bg-primary/5 border border-primary/10 rounded-lg px-3 py-2 text-center">
-                <div className="text-lg font-bold text-primary">{stat.value}</div>
-                <div className="text-xs text-muted-foreground leading-tight">{stat.label}</div>
+              <div
+                key={stat.label}
+                className="bg-primary/5 border border-primary/10 rounded-lg px-3 py-2 text-center"
+              >
+                <div className="text-lg font-bold text-primary">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-muted-foreground leading-tight">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </motion.div>
 
-          <motion.div custom={5} variants={fadeUp} initial="hidden" animate="visible" className="flex gap-5">
+          <motion.div
+            custom={5}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="flex gap-5"
+          >
             {[
-              { href: "mailto:deepakgautam2647@gmail.com", icon: <Mail className="w-5 h-5" />, label: "Email" },
-              { href: "tel:9599171623", icon: <Phone className="w-5 h-5" />, label: "Phone" },
-              { href: "https://www.linkedin.com/in/deepak-a77b93222/", icon: <LinkedinIcon className="w-5 h-5" />, label: "LinkedIn" },
-              { href: "https://github.com/Deepak-gautam1", icon: <GithubIcon className="w-5 h-5" />, label: "GitHub" },
+              {
+                href: "mailto:deepakgautam2647@gmail.com",
+                icon: <Mail className="w-5 h-5" />,
+                label: "Email",
+              },
+              {
+                href: "tel:9599171623",
+                icon: <Phone className="w-5 h-5" />,
+                label: "Phone",
+              },
+              {
+                href: "https://www.linkedin.com/in/deepak-a77b93222/",
+                icon: <LinkedinIcon className="w-5 h-5" />,
+                label: "LinkedIn",
+              },
+              {
+                href: "https://github.com/Deepak-gautam1",
+                icon: <GithubIcon className="w-5 h-5" />,
+                label: "GitHub",
+              },
             ].map(({ href, icon, label }) => (
               <MagneticButton key={label} strength={0.5}>
                 <a
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  rel={
+                    href.startsWith("http") ? "noopener noreferrer" : undefined
+                  }
                   aria-label={label}
                   className="text-muted-foreground hover:text-primary transition-colors block p-1"
                 >
@@ -164,8 +276,11 @@ const Hero = () => {
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             style={{
-              position: "absolute", inset: "-8px", borderRadius: "50%",
-              background: "conic-gradient(from 0deg, hsl(var(--primary) / 0.45), hsl(var(--accent) / 0.45), transparent, hsl(var(--primary) / 0.45))",
+              position: "absolute",
+              inset: "-8px",
+              borderRadius: "50%",
+              background:
+                "conic-gradient(from 0deg, hsl(var(--primary) / 0.45), hsl(var(--accent) / 0.45), transparent, hsl(var(--primary) / 0.45))",
               zIndex: 0,
             }}
           />
@@ -189,8 +304,14 @@ const Hero = () => {
               </picture>
             </div>
           </div>
-          <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/15 rounded-full" style={{ zIndex: 0 }} />
-          <div className="absolute -bottom-6 -left-6 w-28 h-28 bg-primary/15 rounded-full" style={{ zIndex: 0 }} />
+          <div
+            className="absolute -top-4 -right-4 w-20 h-20 bg-accent/15 rounded-full"
+            style={{ zIndex: 0 }}
+          />
+          <div
+            className="absolute -bottom-6 -left-6 w-28 h-28 bg-primary/15 rounded-full"
+            style={{ zIndex: 0 }}
+          />
         </motion.div>
       </div>
     </section>
