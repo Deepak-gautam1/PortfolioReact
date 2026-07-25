@@ -21,12 +21,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    /* Path Aliases - THIS IS THE FIX */
+    /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "Portfolio/src/Components/card.jsx"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"]
 }

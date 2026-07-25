@@ -58,9 +58,14 @@ const IntroLoader = ({ onComplete }: { onComplete: () => void }) => {
                 scale: { duration: 0.5, ease: "easeIn" },
               }}
               style={{
-                fontSize: "64px", fontWeight: 700, lineHeight: 1, display: "block",
+                fontSize: "64px",
+                fontWeight: 700,
+                lineHeight: 1,
+                display: "block",
                 background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
               D
@@ -75,9 +80,14 @@ const IntroLoader = ({ onComplete }: { onComplete: () => void }) => {
                 scale: { duration: 0.5, ease: "easeIn" },
               }}
               style={{
-                fontSize: "64px", fontWeight: 700, lineHeight: 1, display: "block",
+                fontSize: "64px",
+                fontWeight: 700,
+                lineHeight: 1,
+                display: "block",
                 background: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))",
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
               G
@@ -86,7 +96,10 @@ const IntroLoader = ({ onComplete }: { onComplete: () => void }) => {
 
           <motion.div
             initial={{ width: 0, opacity: 0 }}
-            animate={{ width: phase === "expand" ? 0 : "80px", opacity: phase === "expand" ? 0 : 1 }}
+            animate={{
+              width: phase === "expand" ? 0 : "80px",
+              opacity: phase === "expand" ? 0 : 1,
+            }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             style={{
               height: "2px",
@@ -100,8 +113,10 @@ const IntroLoader = ({ onComplete }: { onComplete: () => void }) => {
             animate={{ opacity: phase === "expand" ? 0 : 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
             style={{
-              fontSize: "13px", letterSpacing: "0.15em",
-              color: "hsl(var(--muted-foreground))", textTransform: "uppercase",
+              fontSize: "13px",
+              letterSpacing: "0.15em",
+              color: "hsl(var(--muted-foreground))",
+              textTransform: "uppercase",
             }}
           >
             Deepak Gautam

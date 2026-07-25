@@ -44,7 +44,7 @@ This isn't a template. Every component is custom-built with production-level att
 - **Back-to-Top Button** — appears after 400px scroll with spring animation
 - **Project Filter Tabs** — filter 11 projects by All / Company Projects / AI·ML / Full Stack / Data Engineering with animated count badges
 - **CP Rating Rings** — animated SVG stroke rings for LeetCode, CodeChef, Codeforces with real profile links
-- **GitHub Heatmap** — live contribution grid fetched directly from GitHub API, no third-party image services
+- **GitHub Heatmap** — live contribution grid fetched from GitHub's GraphQL API via a Vercel serverless function, so the API token never reaches the browser
 - **Scroll Progress Bar** — gradient top bar that fills as you scroll
 - **Branded Tech Marquee** — two infinite-scroll rows with SVG brand logos for frontend, AI, cloud, data, and automation tools
 - **Animated Counters** — stats count up with ease-out cubic when scrolled into view
@@ -57,32 +57,34 @@ This isn't a template. Every component is custom-built with production-level att
 
 ## Tech Stack
 
-| Layer | Technologies |
-|---|---|
-| **Framework** | React 19 + TypeScript + Vite |
-| **Styling** | Tailwind CSS + shadcn/ui |
-| **Animations** | Framer Motion + Lenis |
-| **Backend** | Supabase (contact form storage) |
-| **Data** | GitHub REST API (live stats) |
-| **Icons** | Lucide React + Simple Icons (SVG) |
-| **Routing** | React Router DOM |
-| **State** | React Query |
-| **Deployment** | Vercel (auto-deploy on push) |
+| Layer          | Technologies                                                           |
+| -------------- | ---------------------------------------------------------------------- |
+| **Framework**  | React 19 + TypeScript + Vite                                           |
+| **Styling**    | Tailwind CSS + shadcn/ui                                               |
+| **Animations** | Framer Motion + Lenis                                                  |
+| **Backend**    | Supabase (contact form storage)                                        |
+| **Data**       | GitHub REST API (live stats)                                           |
+| **Icons**      | Lucide React + Simple Icons (SVG)                                      |
+| **Routing**    | React Router DOM                                                       |
+| **State**      | React Query                                                            |
+| **Testing**    | Vitest + React Testing Library                                         |
+| **Quality**    | ESLint (JS + TS) · Prettier · `tsc --noEmit`                           |
+| **Deployment** | Vercel (auto-deploy on push, incl. a serverless function under `/api`) |
 
 ---
 
 ## Sections
 
-| # | Section | Highlights |
-|---|---|---|
-| 1 | **Hero** | Typewriter titles · animated blobs · rotating glow ring · 4 stat cards |
-| 2 | **About** | Animated info cards · education · current role · CP achievements |
-| 3 | **Experience** | Americana Restaurants — Peet's Coffee Loyalty Platform · Sales Analyst agentic AI platform |
-| 4 | **Tech Stack** | Infinite marquee · dual rows · SVG brand logos · hover brand-color glow |
-| 5 | **Projects** | 11 projects · filter tabs · 3D tilt · featured ribbon · live demo + code links |
-| 6 | **Skills** | Skill cards · CP rating rings · animated counters · certification viewer |
-| 7 | **GitHub** | Live stats · language bars · top repos · contribution heatmap (873 contributions) |
-| 8 | **Contact** | Supabase-backed form · animated success state · availability badge |
+| #   | Section        | Highlights                                                                                 |
+| --- | -------------- | ------------------------------------------------------------------------------------------ |
+| 1   | **Hero**       | Typewriter titles · animated blobs · rotating glow ring · 4 stat cards                     |
+| 2   | **About**      | Animated info cards · education · current role · CP achievements                           |
+| 3   | **Experience** | Americana Restaurants — Peet's Coffee Loyalty Platform · Sales Analyst agentic AI platform |
+| 4   | **Tech Stack** | Infinite marquee · dual rows · SVG brand logos · hover brand-color glow                    |
+| 5   | **Projects**   | 11 projects · filter tabs · 3D tilt · featured ribbon · live demo + code links             |
+| 6   | **Skills**     | Skill cards · CP rating rings · animated counters · certification viewer                   |
+| 7   | **GitHub**     | Live stats · language bars · top repos · contribution heatmap (873 contributions)          |
+| 8   | **Contact**    | Supabase-backed form · animated success state · availability badge                         |
 
 ---
 
@@ -103,12 +105,25 @@ npm run dev
 
 ### Environment variables
 
-Create a `.env` file in the root with your Supabase credentials (for the contact form):
+Copy `.env.example` to `.env` and fill in:
 
 ```env
+# Server-side only (read by api/github-contributions.js). Never prefix with
+# VITE_ — that would inline it into the client bundle. Needs no scopes
+# beyond public read access. Without it the heatmap shows an error state.
+GITHUB_TOKEN=your_github_personal_access_token
+
+# Optional — override the defaults baked into src/integrations/supabase/client.ts
+# to point the contact form at your own Supabase project.
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
+
+In production, `/api/github-contributions` runs as a Vercel serverless function
+(`api/github-contributions.js`). In local dev, a Vite plugin (`vite.config.cjs`)
+emulates the same route by calling the shared `api/_lib/fetchContributions.cjs`
+helper directly, so `npm run dev` exercises the real GitHub call without needing
+the Vercel CLI — just set `GITHUB_TOKEN` in your local `.env`.
 
 ---
 
@@ -129,9 +144,25 @@ The `vite.config.cjs` uses `manualChunks` to split the bundle into vendor chunks
 
 ---
 
+## Testing & Quality
+
+```bash
+npm run typecheck    # tsc --noEmit — also runs automatically before `npm run build`
+npm run lint          # ESLint, covers both .js/.jsx and .ts/.tsx
+npm run format        # Prettier — write mode
+npm run format:check  # Prettier — CI-friendly check mode
+npm run test          # Vitest, single run
+npm run test:watch    # Vitest, watch mode
+```
+
+---
+
 ## Project Structure
 
 ```
+api/
+└── github-contributions.js   # Vercel serverless function — proxies GitHub's
+                               # GraphQL API so GITHUB_TOKEN stays server-side
 src/
 ├── Components/
 │   ├── Hero.tsx              # Typewriter + blobs + magnetic buttons
@@ -142,6 +173,7 @@ src/
 │   ├── ScrollProgress.tsx    # Gradient scroll progress bar
 │   ├── ParticleBackground.tsx# Canvas particle network
 │   ├── MagneticButton.tsx    # Cursor-following button wrapper
+│   ├── FilterPill.tsx        # Shared pill/toggle button (filters, year switcher)
 │   ├── TechMarquee.tsx       # Infinite scroll with SVG brand logos
 │   ├── Experience.tsx        # Work history with project banners
 │   ├── Projects.tsx          # Filter tabs + 3D tilt cards
@@ -151,8 +183,10 @@ src/
 │   ├── Contact.tsx           # Supabase form + success state
 │   ├── About.tsx             # Animated info cards
 │   └── Footer.tsx            # 3-column footer with nav links
+├── lib/
+│   └── githubContributions.ts# Pure GraphQL → heatmap data mapping (unit tested)
 ├── pages/
-│   ├── Index.tsx             # Main page orchestrator
+│   ├── Index.tsx             # Main page orchestrator, lazy-loads below-fold sections
 │   └── NotFound.tsx          # Branded 404 page
 └── index.css                 # Tailwind + CSS variables (light/dark)
 ```
@@ -161,11 +195,12 @@ src/
 
 ## Performance
 
+- Below-the-fold sections (About, Experience, Projects, Skills, GitHub, Contact, Footer) are `React.lazy`-loaded behind a single `Suspense` boundary — only Hero + Navigation ship in the initial bundle
 - Bundle split into 6 vendor chunks for long-term browser caching
 - `loading="lazy"` on all images
 - `sessionStorage` prevents intro animation replaying on refresh
 - Lenis RAF loop tied to requestAnimationFrame, not setInterval
-- GitHub data fetched client-side — no server required
+- GitHub contribution data is cached client-side via React Query (1 hour stale time) and server-side via the serverless function's `Cache-Control` header
 
 ---
 

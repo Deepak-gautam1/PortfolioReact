@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  GithubIcon,
-  Star,
-  GitFork,
-  Code2,
-  TrendingUp,
-  BookOpen,
-} from "lucide-react";
+import { GithubIcon, Star, GitFork, Code2, TrendingUp, BookOpen } from "lucide-react";
+import FilterPill from "@/Components/FilterPill";
+import { mapCalendarToWeeks, type ContributionCalendar } from "@/lib/githubContributions";
 
 const USERNAME = "Deepak-gautam1";
 const GITHUB_API = "https://api.github.com";
@@ -29,119 +25,52 @@ interface GHRepo {
   fork: boolean;
 }
 
-interface ContribDay {
-  date: string;
-  count: number;
-  level: 0 | 1 | 2 | 3 | 4;
-}
-
-// ── GitHub GraphQL Contribution Hook ──────────────────────────
+// ── GitHub contribution calendar ──────────────────────────────
+// Proxied through /api/github-contributions (a Vercel serverless function)
+// so the GitHub token stays server-side and never reaches the client bundle.
 const useContributions = (year: number) => {
-  const [weeks, setWeeks] = useState<ContribDay[][]>([]);
-  const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["github-contributions", year],
+    queryFn: async () => {
+      const res = await fetch(`/api/github-contributions?year=${year}`);
+      if (!res.ok) throw new Error(`Contributions API error: ${res.status}`);
+      const calendar: ContributionCalendar = await res.json();
+      return {
+        weeks: mapCalendarToWeeks(calendar),
+        total: calendar.totalContributions,
+      };
+    },
+    staleTime: 60 * 60 * 1000,
+  });
 
-  useEffect(() => {
-    setLoading(true);
-    setWeeks([]);
-    setError(false);
-
-    // read:user scope only — safe to use client-side for public portfolios
-    const token = (import.meta as any).env.VITE_GITHUB_TOKEN;
-
-    const from = `${year}-01-01T00:00:00Z`;
-    const to = `${year}-12-31T23:59:59Z`;
-
-    const query = `
-      query($userName: String!, $from: DateTime!, $to: DateTime!) {
-        user(login: $userName) {
-          contributionsCollection(from: $from, to: $to) {
-            contributionCalendar {
-              totalContributions
-              weeks {
-                contributionDays {
-                  contributionCount
-                  date
-                  contributionLevel
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
-
-    fetch("https://api.github.com/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        query,
-        variables: { userName: USERNAME, from, to },
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`GraphQL Error: ${res.status}`);
-        return res.json();
-      })
-      .then((res) => {
-        if (res.errors) throw new Error(res.errors[0]?.message);
-        const calendar =
-          res.data.user.contributionsCollection.contributionCalendar;
-        setTotal(calendar.totalContributions);
-        const levelMap: Record<string, 0 | 1 | 2 | 3 | 4> = {
-          NONE: 0,
-          FIRST_QUARTILE: 1,
-          SECOND_QUARTILE: 2,
-          THIRD_QUARTILE: 3,
-          FOURTH_QUARTILE: 4,
-        };
-        setWeeks(
-          calendar.weeks.map((week: any) =>
-            week.contributionDays.map((day: any) => ({
-              date: day.date,
-              count: day.contributionCount,
-              level: levelMap[day.contributionLevel],
-            })),
-          ),
-        );
-      })
-      .catch((err) => {
-        console.error("Failed to fetch contributions:", err);
-        setError(true);
-      })
-      .finally(() => setLoading(false));
-  }, [year]);
-
-  return { weeks, total, loading, error };
+  return {
+    weeks: data?.weeks ?? [],
+    total: data?.total ?? 0,
+    loading: isLoading,
+    error: isError,
+  };
 };
 
 // ── GitHub REST data ───────────────────────────────────────────
 const useGitHubData = () => {
-  const [user, setUser] = useState<GHUser | null>(null);
-  const [repos, setRepos] = useState<GHRepo[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data, isLoading } = useQuery({
+    queryKey: ["github-user-repos", USERNAME],
+    queryFn: async () => {
+      const [user, repos] = await Promise.all([
+        fetch(`${GITHUB_API}/users/${USERNAME}`).then((r) => r.json()),
+        fetch(`${GITHUB_API}/users/${USERNAME}/repos?per_page=100&sort=updated`).then((r) =>
+          r.json(),
+        ),
+      ]);
+      return {
+        user: user as GHUser,
+        repos: Array.isArray(repos) ? (repos as GHRepo[]).filter((repo) => !repo.fork) : [],
+      };
+    },
+    staleTime: 60 * 60 * 1000,
+  });
 
-  useEffect(() => {
-    Promise.all([
-      fetch(`${GITHUB_API}/users/${USERNAME}`).then((r) => r.json()),
-      fetch(
-        `${GITHUB_API}/users/${USERNAME}/repos?per_page=100&sort=updated`,
-      ).then((r) => r.json()),
-    ])
-      .then(([u, r]) => {
-        setUser(u);
-        setRepos(
-          Array.isArray(r) ? r.filter((repo: GHRepo) => !repo.fork) : [],
-        );
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
-
+  const repos = data?.repos ?? [];
   const totalStars = repos.reduce((s, r) => s + r.stargazers_count, 0);
   const topLanguages = Object.entries(
     repos.reduce((acc: Record<string, number>, r) => {
@@ -152,31 +81,18 @@ const useGitHubData = () => {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
 
-  return { user, repos, totalStars, topLanguages, loading };
+  return {
+    user: data?.user ?? null,
+    repos,
+    totalStars,
+    topLanguages,
+    loading: isLoading,
+  };
 };
 
-const LEVEL_COLORS = [
-  "hsl(var(--muted))",
-  "#0e4429",
-  "#006d32",
-  "#26a641",
-  "#39d353",
-];
+const LEVEL_COLORS = ["hsl(var(--muted))", "#0e4429", "#006d32", "#26a641", "#39d353"];
 
-const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 // ── Heatmap ────────────────────────────────────────────────────
 const ContribHeatmap = () => {
@@ -191,8 +107,7 @@ const ContribHeatmap = () => {
   weeks.forEach((week, i) => {
     if (week[0]) {
       const d = new Date(week[0].date);
-      const prevMonth =
-        i > 0 ? new Date(weeks[i - 1]?.[0]?.date ?? "").getMonth() : -1;
+      const prevMonth = i > 0 ? new Date(weeks[i - 1]?.[0]?.date ?? "").getMonth() : -1;
       if (d.getMonth() !== prevMonth) {
         monthLabels.push({ label: MONTHS[d.getMonth()], weekIdx: i });
       }
@@ -212,27 +127,9 @@ const ContribHeatmap = () => {
         </span>
         <div className="flex items-center gap-1">
           {years.map((y) => (
-            <button
-              key={y}
-              onClick={() => setSelectedYear(y)}
-              style={{
-                padding: "3px 10px",
-                borderRadius: "999px",
-                fontSize: "12px",
-                fontWeight: selectedYear === y ? 600 : 400,
-                border: `1px solid ${selectedYear === y ? "hsl(var(--primary))" : "hsl(var(--border))"}`,
-                background:
-                  selectedYear === y ? "hsl(var(--primary))" : "transparent",
-                color:
-                  selectedYear === y
-                    ? "hsl(var(--primary-foreground))"
-                    : "hsl(var(--muted-foreground))",
-                cursor: "pointer",
-                transition: "all 0.2s",
-              }}
-            >
+            <FilterPill key={y} active={selectedYear === y} onClick={() => setSelectedYear(y)}>
               {y}
-            </button>
+            </FilterPill>
           ))}
         </div>
       </div>
@@ -258,7 +155,7 @@ const ContribHeatmap = () => {
       {/* Error state */}
       {error ? (
         <div className="text-center text-sm text-muted-foreground py-8">
-          Failed to load contributions. Check your token.
+          Failed to load contributions. Please try again later.
         </div>
       ) : loading ? (
         <div
@@ -303,12 +200,13 @@ const ContribHeatmap = () => {
               })}
             </div>
             {/* Grid */}
-            <div style={{ display: "flex", gap: 3 }}>
+            <div
+              style={{ display: "flex", gap: 3 }}
+              role="img"
+              aria-label={`GitHub contribution heatmap for ${selectedYear}`}
+            >
               {weeks.map((week, wi) => (
-                <div
-                  key={wi}
-                  style={{ display: "flex", flexDirection: "column", gap: 3 }}
-                >
+                <div key={wi} style={{ display: "flex", flexDirection: "column", gap: 3 }}>
                   {Array.from({ length: 7 }).map((_, di) => {
                     const day = week[di];
                     return (
@@ -324,19 +222,15 @@ const ContribHeatmap = () => {
                           height: 12,
                           borderRadius: 2,
                           flexShrink: 0,
-                          background: day
-                            ? LEVEL_COLORS[day.level]
-                            : LEVEL_COLORS[0],
+                          background: day ? LEVEL_COLORS[day.level] : LEVEL_COLORS[0],
                           transition: "transform 0.1s",
                           cursor: day?.count ? "pointer" : "default",
                         }}
                         onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLElement).style.transform =
-                            "scale(1.5)";
+                          (e.currentTarget as HTMLElement).style.transform = "scale(1.5)";
                         }}
                         onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLElement).style.transform =
-                            "scale(1)";
+                          (e.currentTarget as HTMLElement).style.transform = "scale(1)";
                         }}
                       />
                     );
@@ -350,6 +244,35 @@ const ContribHeatmap = () => {
     </div>
   );
 };
+
+// Pinned manually — mixes public API data with repos that don't carry
+// meaningful star counts yet, so a plain "top starred" sort isn't useful.
+const PINNED_REPOS = [
+  {
+    name: "JobPilot",
+    description: "Automated job hunting application from MCP servers",
+    html_url: "https://github.com/Deepak-gautam1/JobPilot",
+    language: "Python",
+  },
+  {
+    name: "PortfolioReact",
+    description: "Personal portfolio built with React & TypeScript",
+    html_url: "https://github.com/Deepak-gautam1/PortfolioReact",
+    language: "TypeScript",
+  },
+  {
+    name: "BunnyTraveler",
+    description: "Travel companion platform — find & match travel partners",
+    html_url: "https://github.com/Deepak-gautam1/BunnyTraveler",
+    language: "TypeScript",
+  },
+  {
+    name: "Food_Recommendation",
+    description: "ML model for food recommendation using KNN",
+    html_url: "https://github.com/Deepak-gautam1/Food_Recommendation",
+    language: "Jupyter Notebook",
+  },
+] as const;
 
 // ── Main Component ─────────────────────────────────────────────
 const GitHubStats = () => {
@@ -395,6 +318,15 @@ const GitHubStats = () => {
     },
   ];
 
+  const pinnedRepos = PINNED_REPOS.map((pinned) => {
+    const live = repos.find((r) => r.name === pinned.name);
+    return {
+      ...pinned,
+      description: live?.description ?? pinned.description,
+      stargazers_count: live?.stargazers_count ?? 0,
+    };
+  });
+
   return (
     <section className="py-16 px-4" id="github">
       <div className="max-w-6xl mx-auto">
@@ -429,9 +361,7 @@ const GitHubStats = () => {
                 <s.icon className={`w-4 h-4 ${s.color}`} />
               </div>
               <div>
-                <div className="text-xl font-bold text-foreground">
-                  {loading ? "..." : s.value}
-                </div>
+                <div className="text-xl font-bold text-foreground">{loading ? "..." : s.value}</div>
                 <div className="text-xs text-muted-foreground">{s.label}</div>
               </div>
             </motion.div>
@@ -470,9 +400,7 @@ const GitHubStats = () => {
                               display: "inline-block",
                             }}
                           />
-                          <span className="text-foreground font-medium">
-                            {lang}
-                          </span>
+                          <span className="text-foreground font-medium">{lang}</span>
                         </span>
                         <span className="text-muted-foreground">{pct}%</span>
                       </div>
@@ -491,8 +419,7 @@ const GitHubStats = () => {
                           transition={{ duration: 1, delay: 0.2 }}
                           style={{
                             height: "100%",
-                            background:
-                              LANG_COLORS[lang] || "hsl(var(--primary))",
+                            background: LANG_COLORS[lang] || "hsl(var(--primary))",
                             borderRadius: 3,
                           }}
                         />
@@ -519,51 +446,7 @@ const GitHubStats = () => {
               <div className="text-sm text-muted-foreground">Loading...</div>
             ) : (
               <div className="space-y-3">
-                {[
-                  // Pinned manually — mix of public (from API) + private (hardcoded)
-                  {
-                    name: "JobPilot",
-                    description:
-                      "Automated job hunting application from MCP servers",
-                    html_url: "https://github.com/Deepak-gautam1/JobPilot",
-                    language: "Python",
-                    stargazers_count: 0,
-                  },
-                  {
-                    name: "PortfolioReact",
-                    description:
-                      repos.find((r) => r.name === "PortfolioReact")
-                        ?.description ??
-                      "Personal portfolio built with React & TypeScript",
-                    html_url:
-                      "https://github.com/Deepak-gautam1/PortfolioReact",
-                    language: "TypeScript",
-                    stargazers_count:
-                      repos.find((r) => r.name === "PortfolioReact")
-                        ?.stargazers_count ?? 0,
-                  },
-                  {
-                    name: "BunnyTraveler",
-                    description:
-                      "Travel companion platform — find & match travel partners",
-                    html_url: "https://github.com/Deepak-gautam1/BunnyTraveler",
-                    language: "TypeScript",
-                    stargazers_count: 0,
-                  },
-                  {
-                    name: "Food_Recommendation",
-                    description:
-                      repos.find((r) => r.name === "Food_Recommendation")
-                        ?.description ??
-                      "ML model for food recommendation using KNN",
-                    html_url:
-                      "https://github.com/Deepak-gautam1/Food_Recommendation",
-                    language: "Jupyter Notebook",
-                    stargazers_count:
-                      repos.find((r) => r.name === "Food_Recommendation")
-                        ?.stargazers_count ?? 0,
-                  },
-                ].map((repo) => (
+                {pinnedRepos.map((repo) => (
                   <a
                     key={repo.name}
                     href={repo.html_url}
@@ -606,70 +489,6 @@ const GitHubStats = () => {
               </div>
             )}
           </motion.div>
-          {/*  THIS CODE FOR MOST STARS REPO I HAVE 0 ON ALL SO HARDCODED BEST OF
-          ME */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-background border border-border rounded-2xl p-5"
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <Star className="w-4 h-4 text-yellow-500" />
-              <span className="text-sm font-semibold">Top Repositories</span>
-            </div>
-            {loading ? (
-              <div className="text-sm text-muted-foreground">Loading...</div>
-            ) : (
-              <div className="space-y-3">
-                {[...repos]
-                  .sort((a, b) => b.stargazers_count - a.stargazers_count)
-                  .slice(0, 4)
-                  .map((repo) => (
-                    <a
-                      key={repo.name}
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between group hover:text-primary transition-colors"
-                    >
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium truncate group-hover:text-primary transition-colors">
-                          {repo.name}
-                        </div>
-                        {repo.description && (
-                          <div className="text-xs text-muted-foreground truncate">
-                            {repo.description}
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-3 flex-shrink-0 ml-3 text-xs text-muted-foreground">
-                        {repo.language && (
-                          <span className="flex items-center gap-1">
-                            <span
-                              style={{
-                                width: 7,
-                                height: 7,
-                                borderRadius: "50%",
-                                background:
-                                  LANG_COLORS[repo.language] || "#888",
-                                display: "inline-block",
-                              }}
-                            />
-                            {repo.language}
-                          </span>
-                        )}
-                        <span className="flex items-center gap-1">
-                          <Star className="w-3 h-3" />
-                          {repo.stargazers_count}
-                        </span>
-                      </div>
-                    </a>
-                  ))}
-              </div>
-            )}
-          </motion.div> */}
         </div>
 
         {/* Heatmap */}
@@ -682,9 +501,7 @@ const GitHubStats = () => {
         >
           <ContribHeatmap />
           <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-            <span className="text-xs text-muted-foreground">
-              Data fetched live from GitHub API
-            </span>
+            <span className="text-xs text-muted-foreground">Data fetched live from GitHub API</span>
             <a
               href={`https://github.com/${USERNAME}`}
               target="_blank"

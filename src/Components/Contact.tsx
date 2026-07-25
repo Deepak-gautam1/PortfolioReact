@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/Components/ui/button";
 import { Card } from "@/Components/ui/card";
 import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
-import { Send, LinkedinIcon, GithubIcon, Mail, Phone, MapPin, CheckCircle2, Loader2 } from "lucide-react";
+import {
+  Send,
+  LinkedinIcon,
+  GithubIcon,
+  Mail,
+  Phone,
+  MapPin,
+  CheckCircle2,
+  Loader2,
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import MagneticButton from "@/Components/MagneticButton";
 
+type ContactFormData = { name: string; email: string; subject: string; message: string };
+
 const CONTACT_INFO = [
-  { icon: Mail, label: "Email", value: "deepakgautam2647@gmail.com", href: "mailto:deepakgautam2647@gmail.com" },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "deepakgautam2647@gmail.com",
+    href: "mailto:deepakgautam2647@gmail.com",
+  },
   { icon: Phone, label: "Phone", value: "+91 9599171623", href: "tel:+919599171623" },
   { icon: MapPin, label: "Location", value: "New Delhi · Open to remote", href: null },
 ];
@@ -22,35 +39,42 @@ const SOCIALS = [
 ];
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
   const [sent, setSent] = useState(false);
+
+  const submitMessage = useMutation({
+    mutationFn: async (data: ContactFormData) => {
+      const { error } = await supabase.from("messages").insert([data]);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      setSent(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    },
+    onError: (error) => {
+      console.error("Supabase error:", error);
+      toast.error("Something went wrong. Please email me directly.");
+    },
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    const { error } = await supabase.from("messages").insert([formData]);
-
-    if (error) {
-      console.error("Supabase error:", error);
-      toast.error("Something went wrong. Please email me directly.");
-    } else {
-      setSent(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }
-    setIsSubmitting(false);
+    submitMessage.mutate(formData);
   };
 
   return (
     <section className="py-20 px-4 bg-muted/50" id="contact">
       <div className="max-w-6xl mx-auto">
-
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,7 +92,6 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-
           {/* LEFT — contact info + socials */}
           <div className="space-y-6">
             <motion.div
@@ -88,7 +111,10 @@ const Contact = () => {
                       <div>
                         <p className="text-xs text-muted-foreground mb-0.5">{label}</p>
                         {href ? (
-                          <a href={href} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                          <a
+                            href={href}
+                            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                          >
                             {value}
                           </a>
                         ) : (
@@ -131,7 +157,9 @@ const Contact = () => {
                 <div className="mt-5 pt-4 border-t border-border">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
                     <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                    <span className="text-xs font-medium text-accent">Available for opportunities</span>
+                    <span className="text-xs font-medium text-accent">
+                      Available for opportunities
+                    </span>
                   </div>
                 </div>
               </Card>
@@ -177,31 +205,79 @@ const Contact = () => {
                   </motion.div>
                 ) : (
                   /* ── Form ── */
-                  <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
                     <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label htmlFor="name" className="text-sm font-medium mb-1.5 block">Your Name</label>
-                          <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Deepak Gautam" required />
+                          <label htmlFor="name" className="text-sm font-medium mb-1.5 block">
+                            Your Name
+                          </label>
+                          <Input
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Deepak Gautam"
+                            required
+                          />
                         </div>
                         <div>
-                          <label htmlFor="email" className="text-sm font-medium mb-1.5 block">Email Address</label>
-                          <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="you@example.com" required />
+                          <label htmlFor="email" className="text-sm font-medium mb-1.5 block">
+                            Email Address
+                          </label>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="you@example.com"
+                            required
+                          />
                         </div>
                       </div>
                       <div>
-                        <label htmlFor="subject" className="text-sm font-medium mb-1.5 block">Subject</label>
-                        <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="Job opportunity, project collab, etc." required />
+                        <label htmlFor="subject" className="text-sm font-medium mb-1.5 block">
+                          Subject
+                        </label>
+                        <Input
+                          id="subject"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          placeholder="Job opportunity, project collab, etc."
+                          required
+                        />
                       </div>
                       <div>
-                        <label htmlFor="message" className="text-sm font-medium mb-1.5 block">Message</label>
-                        <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell me about the opportunity or project..." rows={6} required />
+                        <label htmlFor="message" className="text-sm font-medium mb-1.5 block">
+                          Message
+                        </label>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Tell me about the opportunity or project..."
+                          rows={6}
+                          required
+                        />
                       </div>
 
                       <MagneticButton style={{ width: "100%" }}>
-                        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-                          {isSubmitting ? (
+                        <Button
+                          type="submit"
+                          className="w-full"
+                          size="lg"
+                          disabled={submitMessage.isPending}
+                        >
+                          {submitMessage.isPending ? (
                             <>
                               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                               Sending...

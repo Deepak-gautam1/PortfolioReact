@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const CustomCursor = () => {
@@ -29,7 +29,7 @@ const CustomCursor = () => {
           el.tagName === "BUTTON" ||
           el.tagName === "A" ||
           el.closest("button") !== null ||
-          el.closest("a") !== null
+          el.closest("a") !== null,
       );
     };
 

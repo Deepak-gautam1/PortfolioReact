@@ -2,21 +2,23 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
-const SUPABASE_URL = "https://skadvjxqxkcdyeccywsz.supabase.co";
+// The anon/publishable key is safe to ship client-side by design — access
+// control is enforced by Supabase Row Level Security policies, not by
+// keeping this key secret. Defaults point at the project's own instance;
+// override via .env to point the contact form at a different Supabase project.
+const SUPABASE_URL =
+  import.meta.env.VITE_SUPABASE_URL ?? "https://skadvjxqxkcdyeccywsz.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ??
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrYWR2anhxeGtjZHllY2N5d3N6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNTE2MjUsImV4cCI6MjA2ODgyNzYyNX0.61OVQ_V0DPWIil1M51DAxktIPz2tS2RFbhaaQ9cDMWc";
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY,
-  {
-    auth: {
-      storage: localStorage,
-      persistSession: true,
-      autoRefreshToken: true,
-    },
-  }
-);
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth: {
+    storage: localStorage,
+    persistSession: true,
+    autoRefreshToken: true,
+  },
+});

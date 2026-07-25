@@ -69,9 +69,7 @@ const Navigation = () => {
     <>
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-background/80 backdrop-blur-md border-b border-border"
-            : "bg-transparent"
+          isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent"
         }`}
       >
         <div className="max-w-6xl mx-auto px-4">
@@ -104,9 +102,7 @@ const Navigation = () => {
                       transition: "color 0.2s",
                       color: active ? "hsl(var(--primary))" : undefined,
                     }}
-                    className={
-                      active ? "" : "text-foreground hover:text-primary"
-                    }
+                    className={active ? "" : "text-foreground hover:text-primary"}
                   >
                     {item.name}
                     {active && (
@@ -142,16 +138,8 @@ const Navigation = () => {
 
             {/* Mobile toggle */}
             <div className="md:hidden">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {isOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
+              <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </Button>
             </div>
           </div>
@@ -181,14 +169,10 @@ const Navigation = () => {
                           fontWeight: 500,
                           fontSize: "16px",
                           color: active ? "hsl(var(--primary))" : undefined,
-                          background: active
-                            ? "hsl(var(--primary) / 0.08)"
-                            : undefined,
+                          background: active ? "hsl(var(--primary) / 0.08)" : undefined,
                           transition: "all 0.2s",
                         }}
-                        className={
-                          active ? "" : "text-foreground hover:text-primary"
-                        }
+                        className={active ? "" : "text-foreground hover:text-primary"}
                       >
                         {item.name}
                       </a>
@@ -196,9 +180,7 @@ const Navigation = () => {
                   })}
                   <div className="border-b border-border pt-3" />
                   <div className="flex items-center justify-between pt-3">
-                    <span className="text-muted-foreground text-sm">
-                      Switch Theme
-                    </span>
+                    <span className="text-muted-foreground text-sm">Switch Theme</span>
                     <ThemeToggle />
                   </div>
                   <Button asChild className="w-full mt-4">

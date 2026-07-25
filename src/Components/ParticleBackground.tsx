@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
 interface Particle {
-  x: number; y: number; vx: number; vy: number; radius: number; alpha: number; color: string;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  alpha: number;
+  color: string;
 }
 
 const ParticleBackground = () => {
@@ -28,9 +34,7 @@ const ParticleBackground = () => {
     const PARTICLE_COUNT = 35; // was 65 — reduces O(n²) from 4225 → 595 checks/frame
 
     const isDark = document.documentElement.classList.contains("dark");
-    const colors = isDark
-      ? ["#3b82f6", "#22c55e", "#60a5fa"]
-      : ["#2563eb", "#16a34a", "#3b82f6"];
+    const colors = isDark ? ["#3b82f6", "#22c55e", "#60a5fa"] : ["#2563eb", "#16a34a", "#3b82f6"];
 
     const resize = () => {
       canvas.width = canvas.offsetWidth;
@@ -77,7 +81,11 @@ const ParticleBackground = () => {
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color + Math.round(p.alpha * 255).toString(16).padStart(2, "0");
+        ctx.fillStyle =
+          p.color +
+          Math.round(p.alpha * 255)
+            .toString(16)
+            .padStart(2, "0");
         ctx.fill();
         p.x += p.vx;
         p.y += p.vy;
@@ -105,8 +113,12 @@ const ParticleBackground = () => {
       ref={canvasRef}
       aria-hidden="true"
       style={{
-        position: "absolute", inset: 0, width: "100%", height: "100%",
-        pointerEvents: "none", opacity: 0.6,
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+        opacity: 0.6,
       }}
     />
   );

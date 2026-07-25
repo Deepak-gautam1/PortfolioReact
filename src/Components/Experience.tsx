@@ -1,5 +1,3 @@
-// import React from "react";
-import { motion } from "framer-motion";
 import { Card } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
 import { Calendar, MapPin, Building, TrendingUp, Zap } from "lucide-react";
@@ -23,7 +21,9 @@ const Experience = () => {
             <Building className="w-8 h-8 text-primary" />
             <div>
               <h3 className="text-2xl font-semibold">Americana Restaurants</h3>
-              <p className="text-sm text-muted-foreground">KFC · Pizza Hut · Hardee's · TGI Fridays · Krispy Kreme — Middle East & North Africa</p>
+              <p className="text-sm text-muted-foreground">
+                KFC · Pizza Hut · Hardee's · TGI Fridays · Krispy Kreme — Middle East & North Africa
+              </p>
             </div>
           </div>
 
@@ -32,10 +32,10 @@ const Experience = () => {
             <div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
                 <div>
-                  <h4 className="text-xl font-semibold text-primary">
-                    Data Engineer (Full-Time)
-                  </h4>
-                  <p className="text-sm text-muted-foreground font-medium">Loyalty Platforms & Generative AI Systems</p>
+                  <h4 className="text-xl font-semibold text-primary">Data Engineer (Full-Time)</h4>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Loyalty Platforms & Generative AI Systems
+                  </p>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mt-1 sm:mt-0">
                   <Calendar className="w-4 h-4" />
@@ -51,7 +51,9 @@ const Experience = () => {
                 <Zap className="w-5 h-5 text-accent flex-shrink-0" />
                 <div>
                   <span className="font-semibold text-sm text-foreground">Mail Assistant</span>
-                  <span className="text-xs text-muted-foreground ml-2">AI Automation · Outlook · Azure OpenAI</span>
+                  <span className="text-xs text-muted-foreground ml-2">
+                    AI Automation · Outlook · Azure OpenAI
+                  </span>
                 </div>
               </div>
 
@@ -66,12 +68,16 @@ const Experience = () => {
               <div className="space-y-3 mb-6">
                 <div className="border-l-2 border-primary pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>AI Mail Workflow:</strong> Built an internal mail assistant to classify incoming requests, summarize context, and prepare response drafts for repetitive operational communication.
+                    <strong>AI Mail Workflow:</strong> Built an internal mail assistant to classify
+                    incoming requests, summarize context, and prepare response drafts for repetitive
+                    operational communication.
                   </p>
                 </div>
                 <div className="border-l-2 border-accent pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Human-in-the-Loop Review:</strong> Designed the assistant around controlled prompts and review-first workflows, keeping final communication approval with the business user.
+                    <strong>Human-in-the-Loop Review:</strong> Designed the assistant around
+                    controlled prompts and review-first workflows, keeping final communication
+                    approval with the business user.
                   </p>
                 </div>
               </div>
@@ -79,8 +85,12 @@ const Experience = () => {
               <div className="bg-primary/5 border border-primary/15 rounded-lg px-4 py-3 mb-4 flex items-center gap-3">
                 <Zap className="w-5 h-5 text-primary flex-shrink-0" />
                 <div>
-                  <span className="font-semibold text-sm text-foreground">Peet's Coffee Loyalty Platform</span>
-                  <span className="text-xs text-muted-foreground ml-2">Production system · 50,000+ daily active users</span>
+                  <span className="font-semibold text-sm text-foreground">
+                    Peet's Coffee Loyalty Platform
+                  </span>
+                  <span className="text-xs text-muted-foreground ml-2">
+                    Production system · 50,000+ daily active users
+                  </span>
                 </div>
               </div>
 
@@ -95,23 +105,32 @@ const Experience = () => {
               <div className="space-y-3">
                 <div className="border-l-2 border-primary pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Membership Workflows:</strong> Collaborated with cross-functional teams to engineer production backend services implementing tier upgrades and rule enforcement for <span className="text-foreground font-medium">50,000+ daily active users</span>.
+                    <strong>Membership Workflows:</strong> Collaborated with cross-functional teams
+                    to engineer production backend services implementing tier upgrades and rule
+                    enforcement for{" "}
+                    <span className="text-foreground font-medium">50,000+ daily active users</span>.
                   </p>
                 </div>
                 <div className="border-l-2 border-accent pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Earn–Burn Engine:</strong> Refactored the core engine with idempotent processing, tier multipliers, and automated expiry policies — processing high-volume transactions with <span className="text-foreground font-medium">zero downtime</span>.
+                    <strong>Earn–Burn Engine:</strong> Refactored the core engine with idempotent
+                    processing, tier multipliers, and automated expiry policies — processing
+                    high-volume transactions with{" "}
+                    <span className="text-foreground font-medium">zero downtime</span>.
                   </p>
                 </div>
                 <div className="border-l-2 border-primary pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Database Architecture:</strong> Designed normalised schemas tracking earn, burn, and gain states, enabling automated reconciliation across distributed systems.
+                    <strong>Database Architecture:</strong> Designed normalised schemas tracking
+                    earn, burn, and gain states, enabling automated reconciliation across
+                    distributed systems.
                   </p>
                 </div>
                 <div className="border-l-2 border-accent pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Validation Pipeline:</strong> Built a cross-platform validation pipeline spanning Azure services and mobile applications, reducing duplicate transaction incidents by{" "}
-                    <span className="text-foreground font-medium">99%</span>.
+                    <strong>Validation Pipeline:</strong> Built a cross-platform validation pipeline
+                    spanning Azure services and mobile applications, reducing duplicate transaction
+                    incidents by <span className="text-foreground font-medium">99%</span>.
                   </p>
                 </div>
               </div>
@@ -124,9 +143,7 @@ const Experience = () => {
             <div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
                 <div>
-                  <h4 className="text-xl font-semibold text-primary">
-                    Data Engineer (Intern)
-                  </h4>
+                  <h4 className="text-xl font-semibold text-primary">Data Engineer (Intern)</h4>
                   <p className="text-sm text-muted-foreground font-medium">Generative AI</p>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mt-1 sm:mt-0">
@@ -143,7 +160,9 @@ const Experience = () => {
                 <Zap className="w-5 h-5 text-accent flex-shrink-0" />
                 <div>
                   <span className="font-semibold text-sm text-foreground">Sales Analyst</span>
-                  <span className="text-xs text-muted-foreground ml-2">Agentic AI - GPT-4o - Azure SQL</span>
+                  <span className="text-xs text-muted-foreground ml-2">
+                    Agentic AI - GPT-4o - Azure SQL
+                  </span>
                 </div>
               </div>
 
@@ -160,24 +179,31 @@ const Experience = () => {
               <div className="space-y-3">
                 <div className="border-l-2 border-primary pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Agentic Analytics Platform:</strong> Architected Sales Analyst to convert natural language business questions into validated SQL queries, removing SQL/Excel dependency for sales users.
+                    <strong>Agentic Analytics Platform:</strong> Architected Sales Analyst to
+                    convert natural language business questions into validated SQL queries, removing
+                    SQL/Excel dependency for sales users.
                   </p>
                 </div>
                 <div className="border-l-2 border-accent pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>End-to-End AI Pipeline:</strong> Integrated Schema RAG, GPT-4o, FastAPI, and Azure SQL to retrieve relevant tables, validate generated queries, execute safely, and stream results to the frontend.
+                    <strong>End-to-End AI Pipeline:</strong> Integrated Schema RAG, GPT-4o, FastAPI,
+                    and Azure SQL to retrieve relevant tables, validate generated queries, execute
+                    safely, and stream results to the frontend.
                   </p>
                 </div>
                 <div className="border-l-2 border-primary pl-4">
                   <p className="text-muted-foreground text-sm">
-                    <strong>Self-Service Features:</strong> Shipped interactive pivot tables, Plotly charts, AI-generated insights, and conversation memory through Convex-backed chat sessions.
+                    <strong>Self-Service Features:</strong> Shipped interactive pivot tables, Plotly
+                    charts, AI-generated insights, and conversation memory through Convex-backed
+                    chat sessions.
                   </p>
                 </div>
                 <div>
                   <p className="text-muted-foreground text-sm flex items-start gap-2">
                     <TrendingUp className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                     <span>
-                      <strong>Achievement:</strong> Secured a Pre-Placement Offer (PPO) → Full-Time based on the direct business impact of solutions delivered.
+                      <strong>Achievement:</strong> Secured a Pre-Placement Offer (PPO) → Full-Time
+                      based on the direct business impact of solutions delivered.
                     </span>
                   </p>
                 </div>

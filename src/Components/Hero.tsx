@@ -29,17 +29,11 @@ const TypewriterText = () => {
     const current = TITLES[titleIndex];
     let timeout: ReturnType<typeof setTimeout>;
     if (!isDeleting && displayed.length < current.length) {
-      timeout = setTimeout(
-        () => setDisplayed(current.slice(0, displayed.length + 1)),
-        55,
-      );
+      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 55);
     } else if (!isDeleting && displayed.length === current.length) {
       timeout = setTimeout(() => setIsDeleting(true), 2200);
     } else if (isDeleting && displayed.length > 0) {
-      timeout = setTimeout(
-        () => setDisplayed(current.slice(0, displayed.length - 1)),
-        30,
-      );
+      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 30);
     } else {
       setIsDeleting(false);
       setTitleIndex((prev) => (prev + 1) % TITLES.length);
@@ -81,8 +75,7 @@ const Hero = () => {
           width: 600,
           height: 600,
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
           top: "-15%",
           left: "-15%",
           pointerEvents: "none",
@@ -94,8 +87,7 @@ const Hero = () => {
           width: 500,
           height: 500,
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)",
           bottom: "-10%",
           right: "-10%",
           pointerEvents: "none",
@@ -119,12 +111,7 @@ const Hero = () => {
             >
               DEEPAK GAUTAM
             </motion.h1>
-            <motion.div
-              custom={1}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-            >
+            <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible">
               <TypewriterText />
             </motion.div>
 
@@ -136,39 +123,21 @@ const Hero = () => {
               className="text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
               Building{" "}
-              <span className="font-semibold text-foreground">
-                production-grade AI systems
-              </span>
-              ,
-              <span className="font-semibold text-foreground">
-                {" "}
-                scalable loyalty platforms
-              </span>
-              , and{" "}
-              <span className="font-semibold text-foreground">
-                RAG-powered analytics{" "}
-              </span>
-              serving{" "}
-              <span className="text-primary font-medium">
-                50,000+ daily active users
-              </span>
+              <span className="font-semibold text-foreground">production-grade AI systems</span>,
+              <span className="font-semibold text-foreground"> scalable loyalty platforms</span>,
+              and <span className="font-semibold text-foreground">RAG-powered analytics </span>
+              serving <span className="text-primary font-medium">50,000+ daily active users</span>
               across the Middle East & North Africa.
               <br />
               <br />
               B.Tech in Computer Engineering from{" "}
-              <span className="text-primary font-medium">NIT Kurukshetra</span>.
-              Currently working at{" "}
-              <span className="text-primary font-medium">
-                Americana Restaurants
-              </span>
-              , where I build enterprise solutions including{" "}
-              <span className="text-accent font-medium">
-                Peet's Coffee Loyalty
-              </span>
-              , <span className="text-accent font-medium">Sales Analyst</span>,
-              and{" "}
-              <span className="text-accent font-medium">Mail Assistant</span>{" "}
-              using Generative AI, Azure, and modern cloud technologies.
+              <span className="text-primary font-medium">NIT Kurukshetra</span>. Currently working
+              at <span className="text-primary font-medium">Americana Restaurants</span>, where I
+              build enterprise solutions including{" "}
+              <span className="text-accent font-medium">Peet's Coffee Loyalty</span>,{" "}
+              <span className="text-accent font-medium">Sales Analyst</span>, and{" "}
+              <span className="text-accent font-medium">Mail Assistant</span> using Generative AI,
+              Azure, and modern cloud technologies.
             </motion.p>
           </div>
 
@@ -209,12 +178,8 @@ const Hero = () => {
                 key={stat.label}
                 className="bg-primary/5 border border-primary/10 rounded-lg px-3 py-2 text-center"
               >
-                <div className="text-lg font-bold text-primary">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-muted-foreground leading-tight">
-                  {stat.label}
-                </div>
+                <div className="text-lg font-bold text-primary">{stat.value}</div>
+                <div className="text-xs text-muted-foreground leading-tight">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -252,9 +217,7 @@ const Hero = () => {
                 <a
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    href.startsWith("http") ? "noopener noreferrer" : undefined
-                  }
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   aria-label={label}
                   className="text-muted-foreground hover:text-primary transition-colors block p-1"
                 >
@@ -289,19 +252,15 @@ const Hero = () => {
             style={{ position: "relative", zIndex: 1 }}
           >
             <div className="w-72 h-72 rounded-full bg-gradient-to-br from-primary to-accent p-1">
-              {/* WebP with JPG fallback — ~60% smaller file, faster LCP */}
-              <picture>
-                <source srcSet="/images/profile.webp" type="image/webp" />
-                <img
-                  src="/images/profile.jpg"
-                  alt="Deepak Gautam — Data Engineer"
-                  fetchPriority="high"
-                  decoding="async"
-                  width="288"
-                  height="288"
-                  className="w-full h-full rounded-full object-cover object-top"
-                />
-              </picture>
+              <img
+                src="/images/ProfilePic.png"
+                alt="Deepak Gautam — Data Engineer"
+                fetchPriority="high"
+                decoding="async"
+                width="288"
+                height="288"
+                className="w-full h-full rounded-full object-cover object-top"
+              />
             </div>
           </div>
           <div

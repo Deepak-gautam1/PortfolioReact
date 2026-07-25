@@ -20,16 +20,15 @@ const Footer = () => {
   return (
     <footer className="border-t bg-background">
       <div className="max-w-6xl mx-auto px-4 pt-14 pb-8">
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-
           {/* Brand */}
           <div className="space-y-4">
             <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               DEEPAK GAUTAM
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Data Engineer at Americana Restaurants. Building production-grade loyalty systems, RAG pipelines, and AI-powered tools.
+              Data Engineer at Americana Restaurants. Building production-grade loyalty systems, RAG
+              pipelines, and AI-powered tools.
             </p>
             <div className="flex gap-2">
               {SOCIAL.map(({ label, href, icon: Icon }) => (
@@ -95,7 +94,6 @@ const Footer = () => {
             <span>Built with React · TypeScript · Tailwind · Framer Motion · Supabase</span>
           </div>
         </div>
-
       </div>
     </footer>
   );

@@ -25,16 +25,13 @@ const AnimatedCounter = ({
   suffix?: string;
   duration?: number;
 }) => {
-  if (typeof target === "string") {
-    return <span>{target}</span>;
-  }
-
+  const isNumeric = typeof target === "number";
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
 
   useEffect(() => {
-    if (!inView) return;
+    if (!isNumeric || !inView) return;
 
     let start: number | null = null;
 
@@ -50,7 +47,11 @@ const AnimatedCounter = ({
     };
 
     requestAnimationFrame(step);
-  }, [inView, target, duration]);
+  }, [isNumeric, inView, target, duration]);
+
+  if (!isNumeric) {
+    return <span ref={ref}>{target}</span>;
+  }
 
   return (
     <span ref={ref}>
@@ -83,9 +84,7 @@ const SkillCard = ({
         className="p-6 bg-background border shadow-lg h-full"
         style={{
           transition: "box-shadow 0.3s",
-          boxShadow: hovered
-            ? "0 12px 32px -8px hsl(var(--primary) / 0.2)"
-            : undefined,
+          boxShadow: hovered ? "0 12px 32px -8px hsl(var(--primary) / 0.2)" : undefined,
         }}
       >
         <div className="flex items-center gap-3 mb-4">
@@ -216,8 +215,8 @@ const Skills = () => {
               Specialized Python Packages
             </h3>
             <p className="text-muted-foreground text-sm">
-              Pandas, NumPy, Scikit-learn, Seaborn, TensorFlow, Keras, FAISS,
-              Hugging Face Transformers, Streamlit, LangChain, Plotly, sqlparse
+              Pandas, NumPy, Scikit-learn, Seaborn, TensorFlow, Keras, FAISS, Hugging Face
+              Transformers, Streamlit, LangChain, Plotly, sqlparse
             </p>
           </Card>
         </motion.div>
@@ -251,9 +250,7 @@ const Skills = () => {
                 <div className="text-2xl font-bold text-primary mb-1">
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  {stat.label}
-                </div>
+                <div className="text-xs text-muted-foreground">{stat.label}</div>
               </Card>
             </motion.div>
           ))}

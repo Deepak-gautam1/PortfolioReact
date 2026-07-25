@@ -13,18 +13,30 @@ const NotFound = () => {
         animate={{ scale: [1, 1.2, 1], x: [0, 20, 0], y: [0, -20, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         style={{
-          position: "absolute", width: 400, height: 400,
-          borderRadius: "50%", background: "hsl(var(--primary) / 0.1)",
-          top: "-10%", left: "-10%", filter: "blur(60px)", pointerEvents: "none",
+          position: "absolute",
+          width: 400,
+          height: 400,
+          borderRadius: "50%",
+          background: "hsl(var(--primary) / 0.1)",
+          top: "-10%",
+          left: "-10%",
+          filter: "blur(60px)",
+          pointerEvents: "none",
         }}
       />
       <motion.div
         animate={{ scale: [1, 1.15, 1], x: [0, -20, 0], y: [0, 20, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         style={{
-          position: "absolute", width: 300, height: 300,
-          borderRadius: "50%", background: "hsl(var(--accent) / 0.08)",
-          bottom: "0%", right: "-5%", filter: "blur(60px)", pointerEvents: "none",
+          position: "absolute",
+          width: 300,
+          height: 300,
+          borderRadius: "50%",
+          background: "hsl(var(--accent) / 0.08)",
+          bottom: "0%",
+          right: "-5%",
+          filter: "blur(60px)",
+          pointerEvents: "none",
         }}
       />
 
@@ -73,11 +85,9 @@ const NotFound = () => {
               Back to Home
             </a>
           </Button>
-          <Button asChild variant="outline" size="lg" onClick={() => history.back()}>
-            <span style={{ cursor: "pointer" }} onClick={() => window.history.back()}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Go Back
-            </span>
+          <Button variant="outline" size="lg" onClick={() => window.history.back()}>
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Go Back
           </Button>
         </motion.div>
 
@@ -88,8 +98,10 @@ const NotFound = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-12 text-sm text-muted-foreground"
         >
-          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">DG</span>
-          {" "}· deepakgautam.dev
+          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
+            DG
+          </span>{" "}
+          · deepakgautam.dev
         </motion.div>
       </div>
     </div>

@@ -41,7 +41,8 @@ const About = () => {
           <p className="font-semibold text-foreground">Data Engineer</p>
           <p className="text-muted-foreground text-sm">Americana Restaurants — July 2025–Present</p>
           <p className="text-sm text-muted-foreground mt-2">
-            Loyalty Platforms & Generative AI Systems - KFC, Pizza Hut, Hardee's, Krispy Kreme - MENA region
+            Loyalty Platforms & Generative AI Systems - KFC, Pizza Hut, Hardee's, Krispy Kreme -
+            MENA region
           </p>
           <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block" />
@@ -57,8 +58,12 @@ const About = () => {
       content: (
         <div>
           <p className="text-foreground font-medium">Mohali, Punjab</p>
-          <p className="text-muted-foreground text-sm mt-1">Originally from West Delhi, New Delhi</p>
-          <p className="text-muted-foreground text-sm mt-2">Open to remote & hybrid opportunities</p>
+          <p className="text-muted-foreground text-sm mt-1">
+            Originally from West Delhi, New Delhi
+          </p>
+          <p className="text-muted-foreground text-sm mt-2">
+            Open to remote & hybrid opportunities
+          </p>
         </div>
       ),
     },
@@ -68,9 +73,18 @@ const About = () => {
       title: "Competitive Programming",
       content: (
         <div className="space-y-1.5">
-          <p className="text-sm"><span className="font-semibold text-foreground">LeetCode Knight</span> <span className="text-muted-foreground">· Rating 1851</span></p>
-          <p className="text-sm"><span className="font-semibold text-foreground">CodeChef 4★</span> <span className="text-muted-foreground">· Rating 1806</span></p>
-          <p className="text-sm"><span className="font-semibold text-foreground">Codeforces Specialist</span> <span className="text-muted-foreground">· Rating 1365</span></p>
+          <p className="text-sm">
+            <span className="font-semibold text-foreground">LeetCode Knight</span>{" "}
+            <span className="text-muted-foreground">· Rating 1851</span>
+          </p>
+          <p className="text-sm">
+            <span className="font-semibold text-foreground">CodeChef 4★</span>{" "}
+            <span className="text-muted-foreground">· Rating 1806</span>
+          </p>
+          <p className="text-sm">
+            <span className="font-semibold text-foreground">Codeforces Specialist</span>{" "}
+            <span className="text-muted-foreground">· Rating 1365</span>
+          </p>
           <p className="text-sm text-muted-foreground mt-1">2,500+ problems solved</p>
         </div>
       ),
@@ -80,7 +94,6 @@ const About = () => {
   return (
     <section className="py-20 px-4" id="about">
       <div className="max-w-6xl mx-auto">
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -92,11 +105,13 @@ const About = () => {
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Computer Engineering graduate from <span className="text-primary font-medium">NIT Kurukshetra</span>,
-            now building production-grade loyalty platforms, agentic analytics, and AI automation as a{" "}
+            Computer Engineering graduate from{" "}
+            <span className="text-primary font-medium">NIT Kurukshetra</span>, now building
+            production-grade loyalty platforms, agentic analytics, and AI automation as a{" "}
             <span className="text-primary font-medium">Data Engineer</span> at{" "}
-            <span className="text-primary font-medium">Americana Restaurants</span>.
-            I work across Peet's Coffee Loyalty, Sales Analyst, and Mail Assistant, combining data engineering, GenAI, and competitive problem-solving.
+            <span className="text-primary font-medium">Americana Restaurants</span>. I work across
+            Peet's Coffee Loyalty, Sales Analyst, and Mail Assistant, combining data engineering,
+            GenAI, and competitive problem-solving.
           </p>
         </motion.div>
 

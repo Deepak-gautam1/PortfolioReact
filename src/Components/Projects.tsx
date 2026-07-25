@@ -4,6 +4,7 @@ import { Card } from "@/Components/ui/card";
 import { Button } from "@/Components/ui/button";
 import { Badge } from "@/Components/ui/badge";
 import { ExternalLink, GithubIcon, ShieldCheck, Server, Star } from "lucide-react";
+import FilterPill from "@/Components/FilterPill";
 
 interface Project {
   title: string;
@@ -26,7 +27,14 @@ const projects: Project[] = [
     tags: ["Company Projects", "Data Engineering"],
     description:
       "Production backend for the Peet's Coffee loyalty membership system serving 50,000+ daily active users across Middle East & North Africa — built with C#, Azure Functions, and Zoho Creator.",
-    technologies: ["C#", "Azure Functions", "Zoho Creator", "REST APIs", "SQL Server", "Idempotency"],
+    technologies: [
+      "C#",
+      "Azure Functions",
+      "Zoho Creator",
+      "REST APIs",
+      "SQL Server",
+      "Idempotency",
+    ],
     features: [
       "Engineered tier upgrade workflows, rule enforcement, and earn–burn engine with idempotent processing and automated expiry — zero downtime at production scale.",
       "Built cross-platform validation pipeline spanning Azure services and mobile apps, reducing duplicate transaction incidents by 99%.",
@@ -39,7 +47,16 @@ const projects: Project[] = [
     tags: ["Company Projects", "AI / ML", "Data Engineering"],
     description:
       "Enterprise agentic AI analytics platform that lets business users ask sales questions in plain English and receive SQL-backed answers, charts, pivot tables, and AI-generated insights.",
-    technologies: ["Next.js", "FastAPI", "GPT-4o", "Azure OpenAI", "Azure SQL", "Convex", "Plotly", "Pandas"],
+    technologies: [
+      "Next.js",
+      "FastAPI",
+      "GPT-4o",
+      "Azure OpenAI",
+      "Azure SQL",
+      "Convex",
+      "Plotly",
+      "Pandas",
+    ],
     features: [
       "Built a natural-language-to-SQL pipeline with Schema RAG, prompt assembly, SQL validation, safe Azure SQL execution, and self-correction retry logic.",
       "Implemented streaming analytics responses with SSE, rendering AI narration, SQL blocks, data tables, Plotly charts, and Convex-backed conversation history.",
@@ -52,7 +69,14 @@ const projects: Project[] = [
     tags: ["Company Projects", "AI / ML"],
     description:
       "Internal Americana Restaurants mail assistant built to streamline repetitive mailbox workflows with AI-assisted email understanding, context extraction, and response preparation.",
-    technologies: ["Python", "Azure OpenAI", "Microsoft Graph API", "Outlook", "FastAPI", "Prompt Engineering"],
+    technologies: [
+      "Python",
+      "Azure OpenAI",
+      "Microsoft Graph API",
+      "Outlook",
+      "FastAPI",
+      "Prompt Engineering",
+    ],
     features: [
       "Designed automated email triage flows that classify requests, summarize context, and prepare concise response drafts for faster follow-up.",
       "Kept the workflow human-in-the-loop for enterprise usage, with controlled prompts and review before any customer or stakeholder communication.",
@@ -65,7 +89,15 @@ const projects: Project[] = [
     tags: ["AI / ML", "Full Stack"],
     description:
       "End-to-end automated job hunting pipeline that scrapes 7+ platforms (Indeed, Naukri, LinkedIn, Google Jobs, Lever, Greenhouse, Amazon) nightly — zero manual intervention.",
-    technologies: ["Python", "Claude AI", "MCP Protocol", "JobSpy", "Gmail API", "SQLite", "Task Scheduler"],
+    technologies: [
+      "Python",
+      "Claude AI",
+      "MCP Protocol",
+      "JobSpy",
+      "Gmail API",
+      "SQLite",
+      "Task Scheduler",
+    ],
     features: [
       "Resume-aware skill scoring engine ranks every job against a 30-skill profile using regex word-boundary matching, filtering senior roles via 47-pattern experience regex.",
       "Built two custom MCP servers (Gmail MCP + JobSpy MCP) enabling Claude to accept natural language queries over live Gmail data.",
@@ -79,7 +111,16 @@ const projects: Project[] = [
     tags: ["Full Stack"],
     description:
       "Multi-auth travel platform with real-time trip discovery, map-based clustering, and automated trip lifecycle management — 95+ Lighthouse score.",
-    technologies: ["React", "TypeScript", "Supabase", "PostgreSQL", "Tailwind", "Google OAuth", "Leaflet", "RLS"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Tailwind",
+      "Google OAuth",
+      "Leaflet",
+      "RLS",
+    ],
     features: [
       "Multi-auth (Google OAuth, OTP phone, email/password) with session persistence, protected route guards, and Row Level Security for multi-tenant isolation.",
       "Automated trip expiry via Supabase Edge Functions cron, auto-deleting expired trips and triggering cleanup across chat, notifications, and participant records.",
@@ -92,8 +133,18 @@ const projects: Project[] = [
     title: "Food Point",
     category: "Machine Learning",
     tags: ["AI / ML"],
-    description: "Personalized diet recommendation system achieving 94% accuracy using K-Nearest Neighbors with scikit-learn, NumPy, and Pandas.",
-    technologies: ["Python", "scikit-learn", "NumPy", "Pandas", "FastAPI", "Streamlit", "Docker", "KNN"],
+    description:
+      "Personalized diet recommendation system achieving 94% accuracy using K-Nearest Neighbors with scikit-learn, NumPy, and Pandas.",
+    technologies: [
+      "Python",
+      "scikit-learn",
+      "NumPy",
+      "Pandas",
+      "FastAPI",
+      "Streamlit",
+      "Docker",
+      "KNN",
+    ],
     features: [
       "94% accuracy recommendation system built with K-Nearest Neighbors.",
       "FastAPI backend + Streamlit frontend deployed with Docker.",
@@ -105,8 +156,17 @@ const projects: Project[] = [
     title: "Query PDF",
     category: "AI / NLP",
     tags: ["AI / ML"],
-    description: "AI chatbot that extracts and answers questions from PDF documents using Hugging Face models, LangChain, and FAISS vector search.",
-    technologies: ["Python", "LangChain", "FAISS", "Hugging Face", "FastAPI", "Streamlit", "Docker"],
+    description:
+      "AI chatbot that extracts and answers questions from PDF documents using Hugging Face models, LangChain, and FAISS vector search.",
+    technologies: [
+      "Python",
+      "LangChain",
+      "FAISS",
+      "Hugging Face",
+      "FastAPI",
+      "Streamlit",
+      "Docker",
+    ],
     features: [
       "Fine-tuned Hugging Face model with LangChain + FAISS for efficient document retrieval.",
       "Deployed as a Streamlit app with FastAPI backend for low-latency responses.",
@@ -118,7 +178,8 @@ const projects: Project[] = [
     title: "Stock Price Prediction",
     category: "Machine Learning",
     tags: ["AI / ML"],
-    description: "LSTM neural network that forecasts stock prices using historical time-series data with TensorFlow and Keras.",
+    description:
+      "LSTM neural network that forecasts stock prices using historical time-series data with TensorFlow and Keras.",
     technologies: ["Python", "TensorFlow", "Keras", "Pandas", "Matplotlib", "LSTM"],
     features: [
       "LSTM for time-series forecasting with normalized historical data.",
@@ -131,7 +192,8 @@ const projects: Project[] = [
     title: "PUBG Winner Prediction",
     category: "Machine Learning",
     tags: ["AI / ML"],
-    description: "Ensemble model predicting PUBG match winners from in-game statistics using XGBoost and feature engineering.",
+    description:
+      "Ensemble model predicting PUBG match winners from in-game statistics using XGBoost and feature engineering.",
     technologies: ["Python", "scikit-learn", "XGBoost", "Pandas", "Seaborn"],
     features: [
       "Extensive feature engineering on in-game player statistics.",
@@ -144,7 +206,8 @@ const projects: Project[] = [
     title: "Handwritten Digit Recognition",
     category: "Deep Learning",
     tags: ["AI / ML"],
-    description: "CNN trained on MNIST achieving 99%+ accuracy, deployed as an interactive Hugging Face Space.",
+    description:
+      "CNN trained on MNIST achieving 99%+ accuracy, deployed as an interactive Hugging Face Space.",
     technologies: ["Python", "TensorFlow", "Keras", "CNN", "MNIST"],
     features: [
       "CNN from scratch on the MNIST benchmark — 99%+ accuracy.",
@@ -157,7 +220,8 @@ const projects: Project[] = [
     title: "Shopper E-Commerce",
     category: "Full Stack · MERN",
     tags: ["Full Stack"],
-    description: "Fully responsive MERN stack shopping platform with separate customer storefront, admin panel, and REST API backend.",
+    description:
+      "Fully responsive MERN stack shopping platform with separate customer storefront, admin panel, and REST API backend.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
     features: [
       "Customer storefront with product catalog, cart, and checkout flow.",
@@ -171,7 +235,7 @@ const projects: Project[] = [
 ];
 
 const FILTERS = ["All", "Company Projects", "AI / ML", "Full Stack", "Data Engineering"] as const;
-type Filter = typeof FILTERS[number];
+type Filter = (typeof FILTERS)[number];
 
 const TiltCard = ({ project, index }: { project: Project; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -197,7 +261,10 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setIsHovered(false); }}
+      onMouseLeave={() => {
+        setTilt({ x: 0, y: 0 });
+        setIsHovered(false);
+      }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, scale: 0.97 }}
@@ -213,29 +280,48 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
       <Card
         className="p-6 bg-background border shadow-md flex flex-col h-full"
         style={{
-          position: "relative", overflow: "hidden", transition: "box-shadow 0.3s",
+          position: "relative",
+          overflow: "hidden",
+          transition: "box-shadow 0.3s",
           boxShadow: isHovered
             ? project.featured
               ? "0 20px 40px -12px hsl(var(--primary) / 0.3), 0 0 0 1px hsl(var(--primary) / 0.15)"
               : "0 16px 32px -8px hsl(var(--primary) / 0.15)"
-            : project.featured ? "0 4px 20px -4px hsl(var(--primary) / 0.12)" : undefined,
+            : project.featured
+              ? "0 4px 20px -4px hsl(var(--primary) / 0.12)"
+              : undefined,
         }}
       >
         {/* Cursor glow */}
         {isHovered && (
-          <div style={{
-            position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
-            background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, hsl(var(--primary) / 0.1) 0%, transparent 60%)`,
-          }} />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              pointerEvents: "none",
+              zIndex: 0,
+              background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, hsl(var(--primary) / 0.1) 0%, transparent 60%)`,
+            }}
+          />
         )}
 
         {/* Featured ribbon */}
         {project.featured && (
-          <div style={{
-            position: "absolute", top: 14, right: -24, transform: "rotate(45deg)",
-            background: "hsl(var(--primary))", color: "hsl(var(--primary-foreground))",
-            fontSize: "10px", fontWeight: 600, padding: "2px 28px", zIndex: 2, letterSpacing: "0.05em",
-          }}>
+          <div
+            style={{
+              position: "absolute",
+              top: 14,
+              right: -24,
+              transform: "rotate(45deg)",
+              background: "hsl(var(--primary))",
+              color: "hsl(var(--primary-foreground))",
+              fontSize: "10px",
+              fontWeight: 600,
+              padding: "2px 28px",
+              zIndex: 2,
+              letterSpacing: "0.05em",
+            }}
+          >
             FEATURED
           </div>
         )}
@@ -264,40 +350,51 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
 
           <div className="flex flex-wrap gap-1">
             {project.technologies.slice(0, 5).map((tech, i) => (
-              <Badge key={i} variant="secondary" className="text-xs">{tech}</Badge>
+              <Badge key={i} variant="secondary" className="text-xs">
+                {tech}
+              </Badge>
             ))}
             {project.technologies.length > 5 && (
-              <Badge variant="secondary" className="text-xs">+{project.technologies.length - 5}</Badge>
+              <Badge variant="secondary" className="text-xs">
+                +{project.technologies.length - 5}
+              </Badge>
             )}
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 pt-4 mt-auto" style={{ position: "relative", zIndex: 1 }}>
+        <div
+          className="flex flex-wrap gap-2 pt-4 mt-auto"
+          style={{ position: "relative", zIndex: 1 }}
+        >
           {project.github && (
             <Button asChild variant="outline" size="sm">
               <a href={project.github} target="_blank" rel="noopener noreferrer">
-                <GithubIcon className="w-4 h-4 mr-1.5" />Code
+                <GithubIcon className="w-4 h-4 mr-1.5" />
+                Code
               </a>
             </Button>
           )}
           {project.demo && (
             <Button asChild size="sm">
               <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-1.5" />Demo
+                <ExternalLink className="w-4 h-4 mr-1.5" />
+                Demo
               </a>
             </Button>
           )}
           {project.adminUrl && (
             <Button asChild variant="secondary" size="sm">
               <a href={project.adminUrl} target="_blank" rel="noopener noreferrer">
-                <ShieldCheck className="w-4 h-4 mr-1.5" />Admin
+                <ShieldCheck className="w-4 h-4 mr-1.5" />
+                Admin
               </a>
             </Button>
           )}
           {project.backendUrl && (
             <Button asChild variant="secondary" size="sm">
               <a href={project.backendUrl} target="_blank" rel="noopener noreferrer">
-                <Server className="w-4 h-4 mr-1.5" />API
+                <Server className="w-4 h-4 mr-1.5" />
+                API
               </a>
             </Button>
           )}
@@ -312,14 +409,12 @@ const Projects = () => {
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true });
 
-  const filtered = activeFilter === "All"
-    ? projects
-    : projects.filter((p) => p.tags.includes(activeFilter));
+  const filtered =
+    activeFilter === "All" ? projects : projects.filter((p) => p.tags.includes(activeFilter));
 
   return (
     <section className="py-20 px-4" id="projects">
       <div className="max-w-6xl mx-auto">
-
         {/* Heading */}
         <div className="text-center mb-10" ref={headingRef}>
           <motion.h2
@@ -348,43 +443,24 @@ const Projects = () => {
           className="flex flex-wrap justify-center gap-2 mb-10"
         >
           {FILTERS.map((filter) => {
-            const count = filter === "All" ? projects.length : projects.filter(p => p.tags.includes(filter)).length;
+            const count =
+              filter === "All"
+                ? projects.length
+                : projects.filter((p) => p.tags.includes(filter)).length;
             const isActive = activeFilter === filter;
             return (
-              <motion.button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  position: "relative",
-                  padding: "7px 18px",
-                  borderRadius: "999px",
-                  fontSize: "13px",
-                  fontWeight: isActive ? 600 : 500,
-                  border: isActive ? "none" : "1px solid hsl(var(--border))",
-                  background: isActive ? "hsl(var(--primary))" : "hsl(var(--background))",
-                  color: isActive ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  boxShadow: isActive ? "0 4px 14px hsl(var(--primary) / 0.35)" : undefined,
-                }}
-              >
+              <FilterPill key={filter} active={isActive} onClick={() => setActiveFilter(filter)}>
                 {filter}
-                <span style={{
-                  fontSize: "11px",
-                  padding: "1px 6px",
-                  borderRadius: "999px",
-                  background: isActive ? "hsl(var(--primary-foreground) / 0.2)" : "hsl(var(--muted))",
-                  color: isActive ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))",
-                  fontWeight: 600,
-                }}>
+                <span
+                  className={`rounded-full px-1.5 py-px text-[11px] font-semibold ${
+                    isActive
+                      ? "bg-primary-foreground/20 text-primary-foreground"
+                      : "bg-muted text-muted-foreground"
+                  }`}
+                >
                   {count}
                 </span>
-              </motion.button>
+              </FilterPill>
             );
           })}
         </motion.div>
@@ -404,7 +480,11 @@ const Projects = () => {
 
         {/* Empty state */}
         {filtered.length === 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16 text-muted-foreground">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16 text-muted-foreground"
+          >
             No projects in this category yet.
           </motion.div>
         )}
