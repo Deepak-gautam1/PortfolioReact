@@ -12,7 +12,7 @@ const NAV_LINKS = [
 
 const SOCIAL = [
   { label: "GitHub", href: "https://github.com/Deepak-gautam1", icon: GithubIcon },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/deepak-a77b93222/", icon: LinkedinIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/deepak-gautam-a77b93222/", icon: LinkedinIcon },
   { label: "Email", href: "mailto:deepakgautam2647@gmail.com", icon: Mail },
 ];
 

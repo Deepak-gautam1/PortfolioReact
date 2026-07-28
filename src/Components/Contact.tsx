@@ -34,7 +34,7 @@ const CONTACT_INFO = [
 
 const SOCIALS = [
   { icon: GithubIcon, label: "GitHub", href: "https://github.com/Deepak-gautam1" },
-  { icon: LinkedinIcon, label: "LinkedIn", href: "https://www.linkedin.com/in/deepak-a77b93222/" },
+  { icon: LinkedinIcon, label: "LinkedIn", href: "https://www.linkedin.com/in/deepak-gautam-a77b93222/" },
   { icon: Mail, label: "Email", href: "mailto:deepakgautam2647@gmail.com" },
 ];
 

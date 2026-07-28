@@ -5,7 +5,7 @@
 **Data Engineer · Loyalty Systems · RAG Pipelines · AI Developer**
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-portfolio--react--nine--orpin.vercel.app-6366f1?style=for-the-badge)](https://portfolio-react-nine-orpin.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Deepak_Gautam-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deepak-a77b93222/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Deepak_Gautam-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deepak-gautam-a77b93222/)
 [![GitHub](https://img.shields.io/badge/GitHub-Deepak--gautam1-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Deepak-gautam1)
 [![LeetCode](https://img.shields.io/badge/LeetCode-Knight_1805-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/u/Leevi_01/)
 [![CodeChef](https://img.shields.io/badge/CodeChef-4★_1806-5B4638?style=for-the-badge&logo=codechef&logoColor=white)](https://www.codechef.com/users/leevii)

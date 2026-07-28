@@ -203,7 +203,7 @@ const Hero = () => {
                 label: "Phone",
               },
               {
-                href: "https://www.linkedin.com/in/deepak-a77b93222/",
+                href: "https://www.linkedin.com/in/deepak-gautam-a77b93222/",
                 icon: <LinkedinIcon className="w-5 h-5" />,
                 label: "LinkedIn",
               },
