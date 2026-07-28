@@ -4,6 +4,7 @@ import { Button } from "@/Components/ui/button";
 import { Download, GithubIcon, LinkedinIcon, Mail, Phone } from "lucide-react";
 import ParticleBackground from "@/Components/ParticleBackground";
 import MagneticButton from "@/Components/MagneticButton";
+import { getPhoneHref } from "@/lib/contact";
 
 const TITLES = [
   "AI & Data Engineer @ Americana",
@@ -198,7 +199,7 @@ const Hero = () => {
                 label: "Email",
               },
               {
-                href: "tel:9599171623",
+                href: getPhoneHref(),
                 icon: <Phone className="w-5 h-5" />,
                 label: "Phone",
               },

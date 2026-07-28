@@ -231,7 +231,7 @@ const Skills = () => {
           {[
             { label: "DSA Problems", value: 2500, suffix: "+" },
             { label: "Contest Rank (CodeChef)", value: 31, suffix: "" },
-            { label: "Amazon ML — Top", value: 5000, suffix: " selected" },
+            { label: "Amazon ML School 2024", value: "Top 0.055%", suffix: "" },
             {
               label: "AI-Powered",
               value: "Travel Platform",

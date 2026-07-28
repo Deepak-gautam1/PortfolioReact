@@ -6,7 +6,6 @@ import FilterPill from "@/Components/FilterPill";
 import { mapCalendarToWeeks, type ContributionCalendar } from "@/lib/githubContributions";
 
 const USERNAME = "Deepak-gautam1";
-const GITHUB_API = "https://api.github.com";
 
 interface GHUser {
   public_repos: number;
@@ -52,19 +51,19 @@ const useContributions = (year: number) => {
 };
 
 // ── GitHub REST data ───────────────────────────────────────────
+// Proxied through /api/github-stats (a Vercel serverless function) so
+// requests are token-authenticated server-side instead of hitting GitHub's
+// public 60 req/hr per-IP limit directly from the client.
 const useGitHubData = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["github-user-repos", USERNAME],
     queryFn: async () => {
-      const [user, repos] = await Promise.all([
-        fetch(`${GITHUB_API}/users/${USERNAME}`).then((r) => r.json()),
-        fetch(`${GITHUB_API}/users/${USERNAME}/repos?per_page=100&sort=updated`).then((r) =>
-          r.json(),
-        ),
-      ]);
+      const res = await fetch("/api/github-stats");
+      if (!res.ok) throw new Error(`GitHub stats API error: ${res.status}`);
+      const { user, repos } = (await res.json()) as { user: GHUser; repos: GHRepo[] };
       return {
-        user: user as GHUser,
-        repos: Array.isArray(repos) ? (repos as GHRepo[]).filter((repo) => !repo.fork) : [],
+        user,
+        repos: Array.isArray(repos) ? repos.filter((repo) => !repo.fork) : [],
       };
     },
     staleTime: 60 * 60 * 1000,

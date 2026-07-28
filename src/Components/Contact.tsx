@@ -18,6 +18,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import MagneticButton from "@/Components/MagneticButton";
+import { getPhoneDisplay, getPhoneHref } from "@/lib/contact";
 
 type ContactFormData = { name: string; email: string; subject: string; message: string };
 
@@ -28,8 +29,8 @@ const CONTACT_INFO = [
     value: "deepakgautam2647@gmail.com",
     href: "mailto:deepakgautam2647@gmail.com",
   },
-  { icon: Phone, label: "Phone", value: "+91 9599171623", href: "tel:+919599171623" },
-  { icon: MapPin, label: "Location", value: "New Delhi · Open to remote", href: null },
+  { icon: Phone, label: "Phone", value: getPhoneDisplay(), href: getPhoneHref() },
+  { icon: MapPin, label: "Location", value: "Mohali, Punjab · Open to remote", href: null },
 ];
 
 const SOCIALS = [
@@ -223,7 +224,7 @@ const Contact = () => {
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            placeholder="Deepak Gautam"
+                            placeholder="John Doe"
                             required
                           />
                         </div>

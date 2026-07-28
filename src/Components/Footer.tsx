@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, Mail, ArrowUpRight, Code2 } from "lucide-react";
+import { getPhoneDisplay } from "@/lib/contact";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -71,7 +72,7 @@ const Footer = () => {
             <h4 className="text-sm font-semibold mb-4 text-foreground">Get In Touch</h4>
             <div className="space-y-3 text-sm text-muted-foreground">
               <p>📧 deepakgautam2647@gmail.com</p>
-              <p>📞 +91 9599171623</p>
+              <p>📞 {getPhoneDisplay()}</p>
               <p>📍 Mohali, Punjab (Open to remote)</p>
               <div className="pt-2">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium border border-accent/20">

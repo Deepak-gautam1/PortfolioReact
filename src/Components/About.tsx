@@ -75,7 +75,7 @@ const About = () => {
         <div className="space-y-1.5">
           <p className="text-sm">
             <span className="font-semibold text-foreground">LeetCode Knight</span>{" "}
-            <span className="text-muted-foreground">· Rating 1851</span>
+            <span className="text-muted-foreground">· Rating 1805</span>
           </p>
           <p className="text-sm">
             <span className="font-semibold text-foreground">CodeChef 4★</span>{" "}
