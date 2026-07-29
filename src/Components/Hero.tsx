@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/Components/ui/button";
 import { Download, GithubIcon, LinkedinIcon, Mail, Phone } from "lucide-react";
-import ParticleBackground from "@/Components/ParticleBackground";
+import ShaderGridBackground from "@/Components/ShaderGridBackground";
 import MagneticButton from "@/Components/MagneticButton";
 import { getPhoneHref } from "@/lib/contact";
 import profile from "@/data/profile.json";
@@ -89,7 +89,7 @@ const Hero = () => {
         }}
       />
 
-      <ParticleBackground />
+      <ShaderGridBackground />
 
       <div
         className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
