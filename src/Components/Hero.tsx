@@ -43,9 +43,14 @@ const TypewriterText = () => {
   }, [displayed, isDeleting, titleIndex]);
 
   return (
-    <h2 className="text-2xl lg:text-3xl font-semibold text-foreground min-h-[2.5rem]">
+    <h2 className="inline-flex items-center gap-2 min-h-[2.75rem] px-4 py-2 rounded-lg border border-border bg-card/80 font-mono text-lg lg:text-xl text-foreground">
+      <span className="text-primary" aria-hidden="true">
+        {">"}
+      </span>
       {displayed}
-      <span className="animate-pulse text-primary">|</span>
+      <span className="animate-pulse text-primary" aria-hidden="true">
+        _
+      </span>
     </h2>
   );
 };
@@ -112,6 +117,17 @@ const Hero = () => {
             >
               DEEPAK GAUTAM
             </motion.h1>
+            <motion.div
+              custom={0.6}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="h-1 w-24 lg:w-32 rounded-full"
+              style={{
+                background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-glow)))",
+                boxShadow: "0 0 20px hsl(var(--primary) / 0.55)",
+              }}
+            />
             <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible">
               <TypewriterText />
             </motion.div>
@@ -127,7 +143,7 @@ const Hero = () => {
               <span className="font-semibold text-foreground">production-grade AI systems</span>,
               <span className="font-semibold text-foreground"> scalable loyalty platforms</span>,
               and <span className="font-semibold text-foreground">RAG-powered analytics </span>
-              serving <span className="text-primary font-medium">50,000+ daily active users</span>
+              serving <span className="text-primary font-medium">50,000+ daily active users</span>{" "}
               across the Middle East & North Africa.
               <br />
               <br />
@@ -231,47 +247,51 @@ const Hero = () => {
 
         {/* Avatar */}
         <motion.div
-          className="relative flex justify-center"
+          className="flex justify-center"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
         >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            style={{
-              position: "absolute",
-              inset: "-8px",
-              borderRadius: "50%",
-              background:
-                "conic-gradient(from 0deg, hsl(var(--primary) / 0.45), hsl(var(--accent) / 0.45), transparent, hsl(var(--primary) / 0.45))",
-              zIndex: 0,
-            }}
-          />
-          <div
-            className="w-80 h-80 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center border border-white/20"
-            style={{ position: "relative", zIndex: 1 }}
-          >
-            <div className="w-72 h-72 rounded-full bg-gradient-to-br from-primary to-accent p-1">
-              <img
-                src="/images/ProfilePic.png"
-                alt="Deepak Gautam — Data Engineer"
-                fetchPriority="high"
-                decoding="async"
-                width="288"
-                height="288"
-                className="w-full h-full rounded-full object-cover object-top"
-              />
+          {/* Sized wrapper so the rotating ring and accent blobs anchor to the
+              avatar rather than stretching across the whole grid column. */}
+          <div className="relative w-80 h-80">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              style={{
+                position: "absolute",
+                inset: "-8px",
+                borderRadius: "50%",
+                background:
+                  "conic-gradient(from 0deg, hsl(var(--primary) / 0.55), hsl(var(--accent) / 0.55), transparent, hsl(var(--primary) / 0.55))",
+                zIndex: 0,
+              }}
+            />
+            <div
+              className="w-80 h-80 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center border border-border/60"
+              style={{ position: "relative", zIndex: 1 }}
+            >
+              <div className="w-72 h-72 rounded-full bg-gradient-to-br from-primary to-accent p-1">
+                <img
+                  src="/images/ProfilePic.png"
+                  alt="Deepak Gautam — Data Engineer"
+                  fetchPriority="high"
+                  decoding="async"
+                  width="288"
+                  height="288"
+                  className="w-full h-full rounded-full object-cover object-top"
+                />
+              </div>
             </div>
+            <div
+              className="absolute -top-4 -right-4 w-20 h-20 bg-accent/15 rounded-full"
+              style={{ zIndex: 0 }}
+            />
+            <div
+              className="absolute -bottom-6 -left-6 w-28 h-28 bg-primary/15 rounded-full"
+              style={{ zIndex: 0 }}
+            />
           </div>
-          <div
-            className="absolute -top-4 -right-4 w-20 h-20 bg-accent/15 rounded-full"
-            style={{ zIndex: 0 }}
-          />
-          <div
-            className="absolute -bottom-6 -left-6 w-28 h-28 bg-primary/15 rounded-full"
-            style={{ zIndex: 0 }}
-          />
         </motion.div>
       </div>
     </section>

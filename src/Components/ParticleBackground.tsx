@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 interface Particle {
   x: number;
@@ -10,10 +11,21 @@ interface Particle {
   color: string;
 }
 
+// Reads the live theme tokens (as raw "H S% L%" triples, so alpha can be
+// composed per-draw via `hsl(${triple} / ${alpha})`) instead of hardcoding
+// hexes, so particles stay in the current primary/accent palette instead of
+// drifting from whatever colors were hardcoded at the time this was written.
+const readParticleTokens = () => {
+  const css = getComputedStyle(document.documentElement);
+  const raw = (name: string) => css.getPropertyValue(name).trim();
+  return [raw("--primary"), raw("--accent"), raw("--primary-glow")];
+};
+
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // Only mount on non-mobile — particles destroy mobile Lighthouse score
   const [isMobile, setIsMobile] = useState(true);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     setIsMobile(window.matchMedia("(max-width: 768px)").matches);
@@ -33,8 +45,8 @@ const ParticleBackground = () => {
     const particles: Particle[] = [];
     const PARTICLE_COUNT = 35; // was 65 — reduces O(n²) from 4225 → 595 checks/frame
 
-    const isDark = document.documentElement.classList.contains("dark");
-    const colors = isDark ? ["#3b82f6", "#22c55e", "#60a5fa"] : ["#2563eb", "#16a34a", "#3b82f6"];
+    const tokens = readParticleTokens();
+    const lineToken = tokens[0];
 
     const resize = () => {
       canvas.width = canvas.offsetWidth;
@@ -48,7 +60,7 @@ const ParticleBackground = () => {
       vy: (Math.random() - 0.5) * 0.3,
       radius: Math.random() * 1.5 + 0.5,
       alpha: Math.random() * 0.4 + 0.1,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: tokens[Math.floor(Math.random() * tokens.length)],
     });
 
     resize();
@@ -69,7 +81,7 @@ const ParticleBackground = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 90) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(96,165,250,${0.1 * (1 - dist / 90)})`;
+            ctx.strokeStyle = `hsl(${lineToken} / ${0.1 * (1 - dist / 90)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -81,11 +93,7 @@ const ParticleBackground = () => {
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle =
-          p.color +
-          Math.round(p.alpha * 255)
-            .toString(16)
-            .padStart(2, "0");
+        ctx.fillStyle = `hsl(${p.color} / ${p.alpha})`;
         ctx.fill();
         p.x += p.vx;
         p.y += p.vy;
@@ -104,7 +112,7 @@ const ParticleBackground = () => {
       cancelAnimationFrame(animFrame);
       ro.disconnect();
     };
-  }, [isMobile]);
+  }, [isMobile, resolvedTheme]);
 
   if (isMobile) return null;
 

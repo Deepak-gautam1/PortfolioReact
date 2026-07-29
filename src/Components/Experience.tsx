@@ -7,7 +7,7 @@ const Experience = () => {
     <section className="py-20 px-4 bg-muted" id="experience">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
             Experience
           </h2>
           <p className="text-lg text-muted-foreground">

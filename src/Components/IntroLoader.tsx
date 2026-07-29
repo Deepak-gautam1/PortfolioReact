@@ -57,6 +57,7 @@ const IntroLoader = ({ onComplete }: { onComplete: () => void }) => {
                 x: { duration: 0.5, ease: "easeOut" },
                 scale: { duration: 0.5, ease: "easeIn" },
               }}
+              className="font-display"
               style={{
                 fontSize: "64px",
                 fontWeight: 700,
@@ -79,6 +80,7 @@ const IntroLoader = ({ onComplete }: { onComplete: () => void }) => {
                 x: { duration: 0.5, ease: "easeOut" },
                 scale: { duration: 0.5, ease: "easeIn" },
               }}
+              className="font-display"
               style={{
                 fontSize: "64px",
                 fontWeight: 700,

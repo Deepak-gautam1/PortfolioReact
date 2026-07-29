@@ -48,7 +48,7 @@ const NotFound = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div
-            className="text-[10rem] font-bold leading-none bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent select-none"
+            className="font-display text-[10rem] font-bold leading-none bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent select-none"
             style={{ lineHeight: 1 }}
           >
             404
@@ -98,7 +98,7 @@ const NotFound = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-12 text-sm text-muted-foreground"
         >
-          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
+          <span className="font-display bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent font-bold">
             DG
           </span>{" "}
           · deepakgautam.dev

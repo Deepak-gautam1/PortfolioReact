@@ -80,7 +80,7 @@ const Navigation = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: isScrolled ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent cursor-pointer"
+              className="text-2xl font-display font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent cursor-pointer"
               onClick={() => window.scrollTo({ top: 0 })}
             >
               DG
@@ -224,7 +224,7 @@ const Navigation = () => {
             }}
             whileHover={{
               scale: 1.1,
-              boxShadow: "0 6px 24px rgba(59, 130, 246, 0.55)",
+              boxShadow: "0 6px 24px hsl(var(--primary) / 0.55)",
             }}
             whileTap={{ scale: 0.95 }}
             aria-label="Back to top"

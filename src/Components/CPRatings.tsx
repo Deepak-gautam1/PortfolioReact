@@ -63,13 +63,16 @@ interface Platform {
   rating: number;
   maxRating: number;
   rank: string;
-  rankColor: string;
-  color: string;
-  bgColor: string;
+  /** Theme palette variable this card is keyed to, e.g. "--primary". Kept as a
+      variable name (not a literal) so both light and dark themes resolve it. */
+  colorVar: string;
   problems?: string;
   badge: string;
   url: string;
 }
+
+const tone = (colorVar: string, alpha?: number) =>
+  alpha === undefined ? `hsl(var(${colorVar}))` : `hsl(var(${colorVar}) / ${alpha})`;
 
 const PlatformCard = ({ platform, index }: { platform: Platform; index: number }) => {
   const [hovered, setHovered] = useState(false);
@@ -90,12 +93,12 @@ const PlatformCard = ({ platform, index }: { platform: Platform; index: number }
         background: "hsl(var(--background))",
         textDecoration: "none",
         cursor: "pointer",
-        border: `1px solid ${hovered ? platform.color + "55" : "hsl(var(--border))"}`,
+        border: `1px solid ${hovered ? tone(platform.colorVar, 0.35) : "hsl(var(--border))"}`,
         borderRadius: "16px",
         padding: "24px",
         transition: "border-color 0.3s, box-shadow 0.3s",
         boxShadow: hovered
-          ? `0 16px 40px -12px ${platform.color}40`
+          ? `0 16px 40px -12px ${tone(platform.colorVar, 0.25)}`
           : "0 2px 8px hsl(var(--foreground) / 0.06)",
       }}
     >
@@ -108,7 +111,10 @@ const PlatformCard = ({ platform, index }: { platform: Platform; index: number }
         }}
       >
         <div>
-          <div style={{ fontSize: "18px", fontWeight: 700, color: "hsl(var(--foreground))" }}>
+          <div
+            className="font-display"
+            style={{ fontSize: "18px", fontWeight: 700, color: "hsl(var(--foreground))" }}
+          >
             {platform.name}
           </div>
           <div
@@ -121,10 +127,10 @@ const PlatformCard = ({ platform, index }: { platform: Platform; index: number }
           style={{
             padding: "4px 12px",
             borderRadius: "999px",
-            background: platform.color + "18",
+            background: tone(platform.colorVar, 0.12),
             fontSize: "12px",
             fontWeight: 700,
-            color: platform.color,
+            color: tone(platform.colorVar),
           }}
         >
           {platform.badge}
@@ -137,7 +143,7 @@ const PlatformCard = ({ platform, index }: { platform: Platform; index: number }
             maxRating={platform.maxRating}
             size={100}
             strokeWidth={7}
-            color={platform.color}
+            color={tone(platform.colorVar)}
             delay={index * 120}
           />
           <div
@@ -151,7 +157,12 @@ const PlatformCard = ({ platform, index }: { platform: Platform; index: number }
             }}
           >
             <span
-              style={{ fontSize: "20px", fontWeight: 700, color: platform.color, lineHeight: 1 }}
+              style={{
+                fontSize: "20px",
+                fontWeight: 700,
+                color: tone(platform.colorVar),
+                lineHeight: 1,
+              }}
             >
               {platform.rating}
             </span>
@@ -175,7 +186,7 @@ const PlatformCard = ({ platform, index }: { platform: Platform; index: number }
             >
               Rank
             </div>
-            <div style={{ fontSize: "16px", fontWeight: 700, color: platform.rankColor }}>
+            <div style={{ fontSize: "16px", fontWeight: 700, color: tone(platform.colorVar) }}>
               {platform.rank}
             </div>
           </div>
@@ -211,9 +222,7 @@ const CPRatings = () => {
       rating: 1805,
       maxRating: 2400,
       rank: "Knight",
-      rankColor: "#fbbf24",
-      color: "#f59e0b",
-      bgColor: "#fef3c710",
+      colorVar: "--accent",
       badge: "Knight",
       problems: "800+",
       url: "https://leetcode.com/u/Leevi_01/",
@@ -224,9 +233,7 @@ const CPRatings = () => {
       rating: 1806,
       maxRating: 2500,
       rank: "4★ Coder",
-      rankColor: "#3b82f6",
-      color: "#3b82f6",
-      bgColor: "#3b82f610",
+      colorVar: "--tertiary",
       badge: "4 ★★★★",
       problems: "500+",
       url: "https://www.codechef.com/users/leevii",
@@ -237,9 +244,7 @@ const CPRatings = () => {
       rating: 1365,
       maxRating: 2400,
       rank: "Specialist",
-      rankColor: "#22c55e",
-      color: "#22c55e",
-      bgColor: "#22c55e10",
+      colorVar: "--primary",
       badge: "Specialist",
       problems: "1200+",
       url: "https://codeforces.com/profile/delhiiboy_2.0",

@@ -180,7 +180,7 @@ const Skills = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+            className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent"
           >
             Skills & Achievements
           </motion.h2>
@@ -226,17 +226,13 @@ const Skills = () => {
           <CPRatings />
         </div>
 
-        {/* ── Stats row ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        {/* ── Stats row (bento grid) ── */}
+        <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 mb-16">
           {[
-            { label: "DSA Problems", value: 2500, suffix: "+" },
+            { label: "DSA Problems", value: 2500, suffix: "+", featured: true },
             { label: "Contest Rank (CodeChef)", value: 31, suffix: "" },
             { label: "Amazon ML School 2024", value: "Top 0.055%", suffix: "" },
-            {
-              label: "AI-Powered",
-              value: "Travel Platform",
-              suffix: "",
-            },
+            { label: "AI-Powered", value: "Travel Platform", suffix: "", wide: true },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -245,12 +241,31 @@ const Skills = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
               whileHover={{ y: -4 }}
+              className={
+                stat.featured
+                  ? "col-span-2 md:col-span-2 md:row-span-2"
+                  : stat.wide
+                    ? "col-span-2"
+                    : ""
+              }
             >
-              <Card className="p-4 text-center bg-background border shadow-md">
-                <div className="text-2xl font-bold text-primary mb-1">
+              <Card
+                className={`h-full text-center bg-background border transition-shadow duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-8px_hsl(var(--primary)/0.45)] ${
+                  stat.featured
+                    ? "p-8 flex flex-col items-center justify-center shadow-md"
+                    : "p-4 shadow-md"
+                }`}
+              >
+                <div
+                  className={`font-bold text-primary mb-1 ${stat.featured ? "text-5xl" : "text-2xl"}`}
+                >
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-xs text-muted-foreground">{stat.label}</div>
+                <div
+                  className={`text-muted-foreground ${stat.featured ? "text-sm" : "text-xs"}`}
+                >
+                  {stat.label}
+                </div>
               </Card>
             </motion.div>
           ))}
