@@ -89,7 +89,16 @@ const useGitHubData = () => {
   };
 };
 
-const LEVEL_COLORS = ["hsl(var(--muted))", "#0e4429", "#006d32", "#26a641", "#39d353"];
+// Ramped off --primary (not GitHub's literal green scale) so contrast against
+// the card stays monotonic — i.e. "more contributions" reads as "more
+// prominent" — in both the light (dark teal) and dark (bright cyan) themes.
+const LEVEL_COLORS = [
+  "hsl(var(--muted))",
+  "hsl(var(--primary) / 0.3)",
+  "hsl(var(--primary) / 0.55)",
+  "hsl(var(--primary) / 0.8)",
+  "hsl(var(--primary))",
+];
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -336,7 +345,7 @@ const GitHubStats = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
             GitHub Activity
           </h2>
           <p className="text-muted-foreground text-lg">

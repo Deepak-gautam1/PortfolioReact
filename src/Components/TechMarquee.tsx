@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 
 // ── Inline SVG paths from simple-icons.org — no install needed ──
-const ICONS: Record<string, { path: string; color: string }> = {
+// A few official brand colors are near-black and disappear against the
+// graphite dark background; those three get a lighter `darkColor` variant.
+const ICONS: Record<string, { path: string; color: string; darkColor?: string }> = {
   React: {
     color: "#61DAFB",
     path: "M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.353.803-1.474 3.892-.418 7.518C2.585 9.88 1.698 11.992 1.698 13.5c0 1.5.887 3.635 3.863 4.557-1.048 3.59-.928 6.664.418 7.461.322.185.694.278 1.106.278 1.345 0 3.107-.96 4.887-2.622 1.78 1.654 3.542 2.602 4.888 2.602.41 0 .783-.093 1.106-.278 1.353-.803 1.474-3.892.418-7.518 2.976-.924 3.862-3.055 3.862-4.557 0-1.5-.887-3.635-3.862-4.557 1.057-3.626.936-6.714-.418-7.518-.322-.185-.694-.278-1.106-.278zm-.433 7.708a7.3 7.3 0 0 1 .498.344c1.903 1.408 2.885 3.13 2.885 4.434 0 1.302-.982 3.024-2.885 4.433a7.3 7.3 0 0 1-.498.344c-.197-.676-.434-1.39-.706-2.125a7.313 7.313 0 0 0 .706-2.652 7.313 7.313 0 0 0-.706-2.653c.272-.735.51-1.449.706-2.125zm-13.567 0c.197.676.434 1.39.706 2.125a7.313 7.313 0 0 0-.706 2.652 7.313 7.313 0 0 0 .706 2.653c-.272.735-.51 1.449-.706 2.125a7.3 7.3 0 0 1-.498-.344C.982 16.525 0 14.803 0 13.5c0-1.302.982-3.024 2.885-4.433a7.3 7.3 0 0 1 .498-.344zm11.122 9.13c.294.83.54 1.636.718 2.397-.88.37-1.845.558-2.815.558-.97 0-1.934-.188-2.815-.558.178-.761.424-1.568.718-2.397a9.55 9.55 0 0 0 2.097.237 9.55 9.55 0 0 0 2.097-.237zm-4.194-8.26a9.55 9.55 0 0 0-2.097.237c-.294-.83-.54-1.636-.718-2.397.88-.37 1.845-.558 2.815-.558.97 0 1.934.188 2.815.558-.178.761-.424 1.568-.718 2.397a9.55 9.55 0 0 0-2.097-.237z",
@@ -16,6 +19,7 @@ const ICONS: Record<string, { path: string; color: string }> = {
   },
   "C#": {
     color: "#512BD4",
+    darkColor: "#856BE1",
     path: "M1.194 7.543v8.913c0 1.103.588 2.122 1.544 2.674l7.718 4.456c.953.55 2.13.55 3.083 0l7.718-4.456a3.087 3.087 0 0 0 1.544-2.674V7.543a3.087 3.087 0 0 0-1.544-2.674L13.54.413a3.087 3.087 0 0 0-3.083 0L2.738 4.869a3.087 3.087 0 0 0-1.544 2.674zM12 5.548a6.452 6.452 0 0 1 5.532 9.748l-1.586-1.588a4.318 4.318 0 1 0 0-4.416l1.588-1.587A6.43 6.43 0 0 1 12 5.548zm2.817 6.452h-.816v.816h-.817v-.816h-.817v-.817h.817v-.816h.817v.816h.816zm2.452 0h-.816v.816h-.817v-.816h-.816v-.817h.816v-.816h.817v.816h.816z",
   },
   Azure: {
@@ -65,6 +69,7 @@ const ICONS: Record<string, { path: string; color: string }> = {
   },
   LangChain: {
     color: "#1C3C3C",
+    darkColor: "#7ECECE",
     path: "M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5l6 3.464v6.928L12 18.357l-6-3.465V7.964L12 4.5zm0 2.31L7.5 9.196v5.608L12 17.19l4.5-2.386V9.196L12 6.81z",
   },
   "SQL Server": {
@@ -89,6 +94,7 @@ const ICONS: Record<string, { path: string; color: string }> = {
   },
   Pandas: {
     color: "#150458",
+    darkColor: "#896DF8",
     path: "M16.922 0h2.623v18.104h-2.623zm-4.126 12.94h2.623v2.57h-2.623zm0-7.037h2.623v5.446h-2.623zm0 11.197h2.623v5.446h-2.623zM4.456 5.896h2.622V24H4.455zm4.213 2.559h2.623v2.57H8.67zm0 4.151h2.623v5.447H8.67zm0-11.187h2.623v5.446H8.67Z",
   },
   "Microsoft Graph": {
@@ -108,6 +114,7 @@ const ICONS: Record<string, { path: string; color: string }> = {
 interface Tech {
   name: string;
   color: string;
+  darkColor?: string;
   path: string;
 }
 
@@ -140,58 +147,64 @@ const TECH_STACK: Tech[] = [
 ].map((name) => ({
   name,
   color: ICONS[name]?.color ?? "#888",
+  darkColor: ICONS[name]?.darkColor,
   path: ICONS[name]?.path ?? "",
 }));
 
 const DOUBLED = [...TECH_STACK, ...TECH_STACK];
 
-const TechItem = ({ tech }: { tech: Tech }) => (
-  <div
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "9px",
-      padding: "8px 18px",
-      borderRadius: "999px",
-      border: "0.5px solid hsl(var(--border))",
-      background: "hsl(var(--background))",
-      whiteSpace: "nowrap",
-      flexShrink: 0,
-      transition: "border-color 0.2s, box-shadow 0.2s",
-    }}
-    onMouseEnter={(e) => {
-      const el = e.currentTarget as HTMLElement;
-      el.style.borderColor = tech.color + "66";
-      el.style.boxShadow = `0 0 12px ${tech.color}22`;
-    }}
-    onMouseLeave={(e) => {
-      const el = e.currentTarget as HTMLElement;
-      el.style.borderColor = "";
-      el.style.boxShadow = "";
-    }}
-  >
-    {/* Brand SVG icon */}
-    <svg
-      viewBox="0 0 24 24"
-      width="16"
-      height="16"
-      style={{ flexShrink: 0 }}
-      fill={tech.color}
-      aria-hidden="true"
-    >
-      <path d={tech.path} />
-    </svg>
-    <span
+const TechItem = ({ tech }: { tech: Tech }) => {
+  const { resolvedTheme } = useTheme();
+  const displayColor = resolvedTheme === "dark" && tech.darkColor ? tech.darkColor : tech.color;
+
+  return (
+    <div
       style={{
-        fontSize: "13px",
-        fontWeight: 500,
-        color: "hsl(var(--foreground))",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "9px",
+        padding: "8px 18px",
+        borderRadius: "999px",
+        border: "0.5px solid hsl(var(--border))",
+        background: "hsl(var(--background))",
+        whiteSpace: "nowrap",
+        flexShrink: 0,
+        transition: "border-color 0.2s, box-shadow 0.2s",
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = displayColor + "66";
+        el.style.boxShadow = `0 0 12px ${displayColor}22`;
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = "";
+        el.style.boxShadow = "";
       }}
     >
-      {tech.name}
-    </span>
-  </div>
-);
+      {/* Brand SVG icon */}
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        style={{ flexShrink: 0 }}
+        fill={displayColor}
+        aria-hidden="true"
+      >
+        <path d={tech.path} />
+      </svg>
+      <span
+        style={{
+          fontSize: "13px",
+          fontWeight: 500,
+          color: "hsl(var(--foreground))",
+        }}
+      >
+        {tech.name}
+      </span>
+    </div>
+  );
+};
 
 const FADE_STYLE = (dir: "left" | "right") => ({
   position: "absolute" as const,
@@ -213,7 +226,7 @@ const TechMarquee = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+          className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent"
         >
           Tech Stack
         </motion.h2>

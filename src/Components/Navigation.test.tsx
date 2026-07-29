@@ -9,7 +9,7 @@ describe("Navigation", () => {
     render(
       <MemoryRouter>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navigation />
+          <Navigation chatOpen={false} onToggleChat={() => {}} />
         </ThemeProvider>
       </MemoryRouter>,
     );

@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/Components/ui/button";
-import { Menu, X, ArrowUp } from "lucide-react";
+import { Menu, X, ArrowUp, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/Components/ThemeToggle";
+
+type NavigationProps = {
+  chatOpen: boolean;
+  onToggleChat: () => void;
+};
 
 const navItems = [
   { name: "Home", href: "#", id: "" },
@@ -46,7 +51,7 @@ const useActiveSection = () => {
   return active;
 };
 
-const Navigation = () => {
+const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -80,7 +85,7 @@ const Navigation = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: isScrolled ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent cursor-pointer"
+              className="text-2xl font-display font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent cursor-pointer"
               onClick={() => window.scrollTo({ top: 0 })}
             >
               DG
@@ -129,6 +134,17 @@ const Navigation = () => {
                   </a>
                 );
               })}
+              <button
+                type="button"
+                onClick={onToggleChat}
+                aria-label={chatOpen ? "Close AI assistant" : "Ask AI about Deepak"}
+                aria-expanded={chatOpen}
+                style={{ marginLeft: "8px" }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium hover:bg-primary/15 transition-colors"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                Ask AI
+              </button>
               <div style={{ marginLeft: "8px" }}>
                 <ThemeToggle />
               </div>
@@ -224,7 +240,7 @@ const Navigation = () => {
             }}
             whileHover={{
               scale: 1.1,
-              boxShadow: "0 6px 24px rgba(59, 130, 246, 0.55)",
+              boxShadow: "0 6px 24px hsl(var(--primary) / 0.55)",
             }}
             whileTap={{ scale: 0.95 }}
             aria-label="Back to top"

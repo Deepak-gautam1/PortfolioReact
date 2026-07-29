@@ -4,39 +4,43 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 200 23% 97%;
+    --foreground: 212 36% 9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 212 36% 9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 212 36% 9%;
 
-    --primary: 217 91% 60%;
+    --primary: 193 82% 31%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 217 91% 70%;
+    --primary-glow: 188 86% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 200 20% 94%;
+    --secondary-foreground: 212 36% 9%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 200 20% 94%;
+    --muted-foreground: 210 12% 40%;
 
-    --accent: 142 76% 36%;
+    --accent: 26 90% 37%;
     --accent-foreground: 0 0% 100%;
+
+    /* Third categorical hue, for the 3 competitive-programming platform cards. */
+    --tertiary: 262 60% 45%;
+    --tertiary-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 60%;
+    --border: 206 14% 90%;
+    --input: 206 14% 90%;
+    --ring: 193 82% 31%;
 
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(142 76% 36%) 100%);
-    --gradient-hero-title: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(190 95% 55%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --gradient-hero-title: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(200 23% 97%) 100%);
 
     --shadow-glow: 0 20px 40px -12px hsl(var(--primary) / 0.25);
     --shadow-card: 0 10px 30px -10px hsl(var(--foreground) / 0.1);
@@ -54,46 +58,62 @@
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 210 20% 95%;
+    --background: 213 29% 6%;
+    --foreground: 210 28% 93%;
 
-    --card: 224 71% 8%;
-    --card-foreground: 210 20% 95%;
+    --card: 212 31% 10%;
+    --card-foreground: 210 28% 93%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 213 29% 6%;
+    --popover-foreground: 210 28% 93%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 20% 98%;
+    --primary: 188 86% 53%;
+    --primary-foreground: 213 29% 6%;
+    --primary-glow: 188 90% 72%;
 
     --secondary: 215 28% 17%;
     --secondary-foreground: 210 20% 98%;
 
     --muted: 215 28% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted-foreground: 209 12% 59%;
 
-    --accent: 142 90% 45%;
-    --accent-foreground: 224 71% 4%;
+    --accent: 37 91% 55%;
+    --accent-foreground: 213 29% 6%;
+
+    --tertiary: 262 85% 72%;
+    --tertiary-foreground: 213 29% 6%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 20% 98%;
 
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
-    --ring: 217 91% 60%;
+    --border: 210 24% 15%;
+    --input: 210 24% 15%;
+    --ring: 188 86% 53%;
+  }
+
+  * {
+    @apply border-border;
   }
 
   html {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   body {
+    @apply font-sans antialiased bg-background text-foreground;
     line-height: 1.7;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
   }
 
   @media (max-width: 768px) {
     html {
-      font-size: 15px;
+      font-size: 17px;
     }
   }
 }

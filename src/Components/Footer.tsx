@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, Mail, ArrowUpRight, Code2 } from "lucide-react";
 import { getPhoneDisplay } from "@/lib/contact";
+import profile from "@/data/profile.json";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -12,9 +13,9 @@ const NAV_LINKS = [
 ];
 
 const SOCIAL = [
-  { label: "GitHub", href: "https://github.com/Deepak-gautam1", icon: GithubIcon },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/deepak-gautam-a77b93222/", icon: LinkedinIcon },
-  { label: "Email", href: "mailto:deepakgautam2647@gmail.com", icon: Mail },
+  { label: "GitHub", href: profile.contact.github, icon: GithubIcon },
+  { label: "LinkedIn", href: profile.contact.linkedin, icon: LinkedinIcon },
+  { label: "Email", href: `mailto:${profile.contact.email}`, icon: Mail },
 ];
 
 const Footer = () => {
@@ -24,7 +25,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <div className="text-2xl font-display font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
               DEEPAK GAUTAM
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
@@ -71,9 +72,9 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground">Get In Touch</h4>
             <div className="space-y-3 text-sm text-muted-foreground">
-              <p>📧 deepakgautam2647@gmail.com</p>
+              <p>📧 {profile.contact.email}</p>
               <p>📞 {getPhoneDisplay()}</p>
-              <p>📍 Mohali, Punjab (Open to remote)</p>
+              <p>📍 {profile.location.city} (Open to remote)</p>
               <div className="pt-2">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-medium border border-accent/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block" />
@@ -95,6 +96,18 @@ const Footer = () => {
             <span>Built with React · TypeScript · Tailwind · Framer Motion · Supabase</span>
           </div>
         </div>
+
+        <p className="text-center text-[11px] text-muted-foreground mt-3">
+          <a
+            href="https://www.flaticon.com/free-icons/chatbot"
+            title="chatbot icons"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition-colors"
+          >
+            Chatbot icons created by littleicon - Flaticon
+          </a>
+        </p>
       </div>
     </footer>
   );

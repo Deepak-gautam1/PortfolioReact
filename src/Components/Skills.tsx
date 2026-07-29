@@ -5,15 +5,17 @@ import { Badge } from "@/Components/ui/badge";
 import { Code, Database, Brain, Trophy } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/Components/ui/dialog";
 import CPRatings from "@/Components/CPRatings";
+import profile from "@/data/profile.json";
 
-const certifications = [
-  { name: "Introduction to C++", link: "/certs/intro-to-cpp.pdf" },
-  { name: "DSA in C++", link: "/certs/Data-structure.pdf" },
-  { name: "Advanced Machine Learning", link: "/certs/AdvMachineLearning.pdf" },
-  { name: "Deep Learning", link: "/certs/DeepLearning.pdf" },
-  { name: "TensorFlow", link: "/certs/Tensorflow.pdf" },
-  { name: "RAG Certification", link: "/certs/RagCertification.pdf" },
-];
+const certifications = profile.certifications;
+
+// Icons aren't data — keyed onto the shared category titles by hand.
+const CATEGORY_ICONS: Record<string, React.ElementType> = {
+  Languages: Code,
+  "Cloud & Data": Database,
+  "Frameworks & AI": Brain,
+  Concepts: Trophy,
+};
 
 // ── Animated Counter ──────────────────────────────────────────
 const AnimatedCounter = ({
@@ -118,55 +120,11 @@ const SkillCard = ({
 
 // ── Main ──────────────────────────────────────────────────────
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Languages",
-      icon: Code,
-      skills: ["C/C++", "Python", "C#", "JavaScript", "TypeScript", "SQL"],
-    },
-    {
-      title: "Cloud & Data",
-      icon: Database,
-      skills: [
-        "Azure",
-        "Azure OpenAI",
-        "Azure Functions",
-        "SQL Server",
-        "Azure SQL",
-        "Convex",
-        "Supabase",
-        "Docker",
-      ],
-    },
-    {
-      title: "Frameworks & AI",
-      icon: Brain,
-      skills: [
-        "React",
-        "Next.js",
-        "Node.js",
-        "FastAPI",
-        "LangChain",
-        "TensorFlow",
-        "Plotly",
-        "Microsoft Graph",
-      ],
-    },
-    {
-      title: "Concepts",
-      icon: Trophy,
-      skills: [
-        "Agentic AI",
-        "RAG Pipelines",
-        "NLP-to-SQL",
-        "SSE Streaming",
-        "SQL Guardrails",
-        "System Design",
-        "REST APIs",
-        "Prompt Engineering",
-      ],
-    },
-  ];
+  const skillCategories = profile.skills.categories.map((cat) => ({
+    title: cat.title,
+    icon: CATEGORY_ICONS[cat.title],
+    skills: cat.items,
+  }));
 
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true });
@@ -180,7 +138,7 @@ const Skills = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+            className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent"
           >
             Skills & Achievements
           </motion.h2>
@@ -214,10 +172,7 @@ const Skills = () => {
               <Brain className="w-5 h-5 text-accent" />
               Specialized Python Packages
             </h3>
-            <p className="text-muted-foreground text-sm">
-              Pandas, NumPy, Scikit-learn, Seaborn, TensorFlow, Keras, FAISS, Hugging Face
-              Transformers, Streamlit, LangChain, Plotly, sqlparse
-            </p>
+            <p className="text-muted-foreground text-sm">{profile.skills.packages}</p>
           </Card>
         </motion.div>
 
@@ -226,18 +181,9 @@ const Skills = () => {
           <CPRatings />
         </div>
 
-        {/* ── Stats row ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {[
-            { label: "DSA Problems", value: 2500, suffix: "+" },
-            { label: "Contest Rank (CodeChef)", value: 31, suffix: "" },
-            { label: "Amazon ML School 2024", value: "Top 0.055%", suffix: "" },
-            {
-              label: "AI-Powered",
-              value: "Travel Platform",
-              suffix: "",
-            },
-          ].map((stat, i) => (
+        {/* ── Stats row (bento grid) ── */}
+        <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 mb-16">
+          {profile.skillsHighlights.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -245,12 +191,31 @@ const Skills = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
               whileHover={{ y: -4 }}
+              className={
+                stat.featured
+                  ? "col-span-2 md:col-span-2 md:row-span-2"
+                  : stat.wide
+                    ? "col-span-2"
+                    : ""
+              }
             >
-              <Card className="p-4 text-center bg-background border shadow-md">
-                <div className="text-2xl font-bold text-primary mb-1">
+              <Card
+                className={`h-full text-center bg-background border transition-shadow duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-8px_hsl(var(--primary)/0.45)] ${
+                  stat.featured
+                    ? "p-8 flex flex-col items-center justify-center shadow-md"
+                    : "p-4 shadow-md"
+                }`}
+              >
+                <div
+                  className={`font-bold text-primary mb-1 ${stat.featured ? "text-5xl" : "text-2xl"}`}
+                >
                   <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-xs text-muted-foreground">{stat.label}</div>
+                <div
+                  className={`text-muted-foreground ${stat.featured ? "text-sm" : "text-xs"}`}
+                >
+                  {stat.label}
+                </div>
               </Card>
             </motion.div>
           ))}

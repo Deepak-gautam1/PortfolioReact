@@ -1,13 +1,14 @@
 import { Card } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
 import { Calendar, MapPin, Building, TrendingUp, Zap } from "lucide-react";
+import profile from "@/data/profile.json";
 
 const Experience = () => {
   return (
     <section className="py-20 px-4 bg-muted" id="experience">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
             Experience
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -20,9 +21,9 @@ const Experience = () => {
           <div className="flex items-center gap-4 mb-6">
             <Building className="w-8 h-8 text-primary" />
             <div>
-              <h3 className="text-2xl font-semibold">Americana Restaurants</h3>
+              <h3 className="text-2xl font-semibold">{profile.currentRole.company}</h3>
               <p className="text-sm text-muted-foreground">
-                KFC · Pizza Hut · Hardee's · TGI Fridays · Krispy Kreme — Middle East & North Africa
+                {profile.currentRole.brands.join(" · ")} — {profile.currentRole.region}
               </p>
             </div>
           </div>
@@ -32,19 +33,21 @@ const Experience = () => {
             <div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
                 <div>
-                  <h4 className="text-xl font-semibold text-primary">Data Engineer (Full-Time)</h4>
+                  <h4 className="text-xl font-semibold text-primary">
+                    {profile.currentRole.title} ({profile.currentRole.type})
+                  </h4>
                   <p className="text-sm text-muted-foreground font-medium">
-                    Loyalty Platforms & Generative AI Systems
+                    {profile.currentRole.focus}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mt-1 sm:mt-0">
                   <Calendar className="w-4 h-4" />
-                  <span>July 2025 – Present</span>
+                  <span>{profile.currentRole.period}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground text-sm mb-4">
                 <MapPin className="w-4 h-4" />
-                <span>Mohali, Punjab</span>
+                <span>{profile.location.city}</span>
               </div>
 
               <div className="bg-accent/5 border border-accent/15 rounded-lg px-4 py-3 mb-4 flex items-center gap-3">
@@ -143,17 +146,21 @@ const Experience = () => {
             <div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
                 <div>
-                  <h4 className="text-xl font-semibold text-primary">Data Engineer (Intern)</h4>
-                  <p className="text-sm text-muted-foreground font-medium">Generative AI</p>
+                  <h4 className="text-xl font-semibold text-primary">
+                    {profile.priorRole.title} ({profile.priorRole.type})
+                  </h4>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    {profile.priorRole.focus}
+                  </p>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mt-1 sm:mt-0">
                   <Calendar className="w-4 h-4" />
-                  <span>Jan 2025 – June 2025</span>
+                  <span>{profile.priorRole.period}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground text-sm mb-4">
                 <MapPin className="w-4 h-4" />
-                <span>Mohali, Punjab</span>
+                <span>{profile.location.city}</span>
               </div>
 
               <div className="bg-accent/5 border border-accent/15 rounded-lg px-4 py-3 mb-4 flex items-center gap-3">
@@ -202,8 +209,7 @@ const Experience = () => {
                   <p className="text-muted-foreground text-sm flex items-start gap-2">
                     <TrendingUp className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                     <span>
-                      <strong>Achievement:</strong> Secured a Pre-Placement Offer (PPO) → Full-Time
-                      based on the direct business impact of solutions delivered.
+                      <strong>Achievement:</strong> {profile.priorRole.outcome}
                     </span>
                   </p>
                 </div>

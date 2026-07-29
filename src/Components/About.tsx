@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/Components/ui/card";
 import { GraduationCap, MapPin, Briefcase, Code2 } from "lucide-react";
+import profile from "@/data/profile.json";
 
 const About = () => {
   const tags = [
@@ -19,16 +20,15 @@ const About = () => {
       title: "Education",
       content: (
         <div className="space-y-4">
-          <div>
-            <p className="font-semibold text-foreground">NIT Kurukshetra</p>
-            <p className="text-muted-foreground text-sm">B.Tech — Computer Engineering</p>
-            <p className="text-sm text-muted-foreground">CGPA: 8.14 / 10 · Graduated May 2025</p>
-          </div>
-          <div className="border-t border-border pt-3">
-            <p className="font-semibold text-foreground">School of Excellence, Dwarka</p>
-            <p className="text-muted-foreground text-sm">CBSE Class XII</p>
-            <p className="text-sm text-muted-foreground">95.2% · 2019–2020</p>
-          </div>
+          {profile.education.map((edu, i) => (
+            <div key={edu.school} className={i > 0 ? "border-t border-border pt-3" : undefined}>
+              <p className="font-semibold text-foreground">{edu.school}</p>
+              <p className="text-muted-foreground text-sm">{edu.degree}</p>
+              <p className="text-sm text-muted-foreground">
+                {edu.detail} · {edu.period}
+              </p>
+            </div>
+          ))}
         </div>
       ),
     },
@@ -38,15 +38,17 @@ const About = () => {
       title: "Current Role",
       content: (
         <div>
-          <p className="font-semibold text-foreground">Data Engineer</p>
-          <p className="text-muted-foreground text-sm">Americana Restaurants — July 2025–Present</p>
+          <p className="font-semibold text-foreground">{profile.currentRole.title}</p>
+          <p className="text-muted-foreground text-sm">
+            {profile.currentRole.company} — {profile.currentRole.period}
+          </p>
           <p className="text-sm text-muted-foreground mt-2">
-            Loyalty Platforms & Generative AI Systems - KFC, Pizza Hut, Hardee's, Krispy Kreme -
-            MENA region
+            {profile.currentRole.focus} - {profile.currentRole.brands.join(", ")} -{" "}
+            {profile.currentRole.region}
           </p>
           <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse inline-block" />
-            <span className="text-xs font-medium text-accent">Full-time</span>
+            <span className="text-xs font-medium text-accent">{profile.currentRole.type}</span>
           </div>
         </div>
       ),
@@ -57,13 +59,11 @@ const About = () => {
       title: "Location",
       content: (
         <div>
-          <p className="text-foreground font-medium">Mohali, Punjab</p>
+          <p className="text-foreground font-medium">{profile.location.city}</p>
           <p className="text-muted-foreground text-sm mt-1">
-            Originally from West Delhi, New Delhi
+            Originally from {profile.location.origin}
           </p>
-          <p className="text-muted-foreground text-sm mt-2">
-            Open to remote & hybrid opportunities
-          </p>
+          <p className="text-muted-foreground text-sm mt-2">{profile.location.note}</p>
         </div>
       ),
     },
@@ -73,19 +73,17 @@ const About = () => {
       title: "Competitive Programming",
       content: (
         <div className="space-y-1.5">
-          <p className="text-sm">
-            <span className="font-semibold text-foreground">LeetCode Knight</span>{" "}
-            <span className="text-muted-foreground">· Rating 1805</span>
+          {profile.competitiveProgramming.platforms.map((p) => (
+            <p key={p.name} className="text-sm">
+              <span className="font-semibold text-foreground">
+                {p.name} {p.rank}
+              </span>{" "}
+              <span className="text-muted-foreground">· Rating {p.rating}</span>
+            </p>
+          ))}
+          <p className="text-sm text-muted-foreground mt-1">
+            {profile.competitiveProgramming.totalProblems} problems solved
           </p>
-          <p className="text-sm">
-            <span className="font-semibold text-foreground">CodeChef 4★</span>{" "}
-            <span className="text-muted-foreground">· Rating 1806</span>
-          </p>
-          <p className="text-sm">
-            <span className="font-semibold text-foreground">Codeforces Specialist</span>{" "}
-            <span className="text-muted-foreground">· Rating 1365</span>
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">2,500+ problems solved</p>
         </div>
       ),
     },
@@ -101,7 +99,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
