@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/Components/ui/button";
-import { Menu, X, ArrowUp } from "lucide-react";
+import { Menu, X, ArrowUp, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/Components/ThemeToggle";
+
+type NavigationProps = {
+  chatOpen: boolean;
+  onToggleChat: () => void;
+};
 
 const navItems = [
   { name: "Home", href: "#", id: "" },
@@ -46,7 +51,7 @@ const useActiveSection = () => {
   return active;
 };
 
-const Navigation = () => {
+const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -129,6 +134,17 @@ const Navigation = () => {
                   </a>
                 );
               })}
+              <button
+                type="button"
+                onClick={onToggleChat}
+                aria-label={chatOpen ? "Close AI assistant" : "Ask AI about Deepak"}
+                aria-expanded={chatOpen}
+                style={{ marginLeft: "8px" }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium hover:bg-primary/15 transition-colors"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                Ask AI
+              </button>
               <div style={{ marginLeft: "8px" }}>
                 <ThemeToggle />
               </div>

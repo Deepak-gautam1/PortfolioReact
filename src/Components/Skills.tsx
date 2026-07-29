@@ -5,15 +5,17 @@ import { Badge } from "@/Components/ui/badge";
 import { Code, Database, Brain, Trophy } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/Components/ui/dialog";
 import CPRatings from "@/Components/CPRatings";
+import profile from "@/data/profile.json";
 
-const certifications = [
-  { name: "Introduction to C++", link: "/certs/intro-to-cpp.pdf" },
-  { name: "DSA in C++", link: "/certs/Data-structure.pdf" },
-  { name: "Advanced Machine Learning", link: "/certs/AdvMachineLearning.pdf" },
-  { name: "Deep Learning", link: "/certs/DeepLearning.pdf" },
-  { name: "TensorFlow", link: "/certs/Tensorflow.pdf" },
-  { name: "RAG Certification", link: "/certs/RagCertification.pdf" },
-];
+const certifications = profile.certifications;
+
+// Icons aren't data — keyed onto the shared category titles by hand.
+const CATEGORY_ICONS: Record<string, React.ElementType> = {
+  Languages: Code,
+  "Cloud & Data": Database,
+  "Frameworks & AI": Brain,
+  Concepts: Trophy,
+};
 
 // ── Animated Counter ──────────────────────────────────────────
 const AnimatedCounter = ({
@@ -118,55 +120,11 @@ const SkillCard = ({
 
 // ── Main ──────────────────────────────────────────────────────
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Languages",
-      icon: Code,
-      skills: ["C/C++", "Python", "C#", "JavaScript", "TypeScript", "SQL"],
-    },
-    {
-      title: "Cloud & Data",
-      icon: Database,
-      skills: [
-        "Azure",
-        "Azure OpenAI",
-        "Azure Functions",
-        "SQL Server",
-        "Azure SQL",
-        "Convex",
-        "Supabase",
-        "Docker",
-      ],
-    },
-    {
-      title: "Frameworks & AI",
-      icon: Brain,
-      skills: [
-        "React",
-        "Next.js",
-        "Node.js",
-        "FastAPI",
-        "LangChain",
-        "TensorFlow",
-        "Plotly",
-        "Microsoft Graph",
-      ],
-    },
-    {
-      title: "Concepts",
-      icon: Trophy,
-      skills: [
-        "Agentic AI",
-        "RAG Pipelines",
-        "NLP-to-SQL",
-        "SSE Streaming",
-        "SQL Guardrails",
-        "System Design",
-        "REST APIs",
-        "Prompt Engineering",
-      ],
-    },
-  ];
+  const skillCategories = profile.skills.categories.map((cat) => ({
+    title: cat.title,
+    icon: CATEGORY_ICONS[cat.title],
+    skills: cat.items,
+  }));
 
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true });
@@ -214,10 +172,7 @@ const Skills = () => {
               <Brain className="w-5 h-5 text-accent" />
               Specialized Python Packages
             </h3>
-            <p className="text-muted-foreground text-sm">
-              Pandas, NumPy, Scikit-learn, Seaborn, TensorFlow, Keras, FAISS, Hugging Face
-              Transformers, Streamlit, LangChain, Plotly, sqlparse
-            </p>
+            <p className="text-muted-foreground text-sm">{profile.skills.packages}</p>
           </Card>
         </motion.div>
 
@@ -228,12 +183,7 @@ const Skills = () => {
 
         {/* ── Stats row (bento grid) ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 mb-16">
-          {[
-            { label: "DSA Problems", value: 2500, suffix: "+", featured: true },
-            { label: "Contest Rank (CodeChef)", value: 31, suffix: "" },
-            { label: "Amazon ML School 2024", value: "Top 0.055%", suffix: "" },
-            { label: "AI-Powered", value: "Travel Platform", suffix: "", wide: true },
-          ].map((stat, i) => (
+          {profile.skillsHighlights.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, scale: 0.9 }}

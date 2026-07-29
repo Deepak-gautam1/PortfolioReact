@@ -6,6 +6,7 @@ import ScrollProgress from "@/Components/ScrollProgress";
 import CustomCursor from "@/Components/CustomCursor";
 import IntroLoader from "@/Components/IntroLoader";
 import SmoothScroll from "@/Components/SmoothScroll";
+import ChatWidget from "@/Components/ChatWidget";
 
 // Below-the-fold sections — split out of the main bundle so the initial
 // load only pays for Hero + Navigation; these stream in as the user scrolls.
@@ -23,6 +24,7 @@ const alreadySeen = typeof window !== "undefined" && sessionStorage.getItem(INTR
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(alreadySeen);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const handleIntroComplete = () => {
     sessionStorage.setItem(INTRO_KEY, "1");
@@ -59,7 +61,7 @@ const Index = () => {
         <SmoothScroll />
         <ScrollProgress />
         <CustomCursor />
-        <Navigation />
+        <Navigation chatOpen={chatOpen} onToggleChat={() => setChatOpen((o) => !o)} />
 
         <main id="main-content">
           <Hero />
@@ -83,6 +85,8 @@ const Index = () => {
         <Suspense fallback={null}>
           <Footer />
         </Suspense>
+
+        <ChatWidget open={chatOpen} onOpenChange={setChatOpen} />
       </div>
     </>
   );

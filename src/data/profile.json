@@ -1,0 +1,281 @@
+{
+  "name": "Deepak Gautam",
+  "roleTitles": [
+    "AI & Data Engineer @ Americana",
+    "Production AI Systems Builder",
+    "RAG & Agentic AI Engineer",
+    "Full Stack Developer",
+    "Competitive Programmer"
+  ],
+  "location": {
+    "city": "Mohali, Punjab",
+    "origin": "West Delhi, New Delhi",
+    "note": "Open to remote & hybrid roles"
+  },
+  "contact": {
+    "email": "deepakgautam2647@gmail.com",
+    "github": "https://github.com/Deepak-gautam1",
+    "linkedin": "https://www.linkedin.com/in/deepak-gautam-a77b93222/"
+  },
+  "resumeUrl": "/Deepak_Resume.pdf",
+  "education": [
+    {
+      "school": "NIT Kurukshetra",
+      "degree": "B.Tech — Computer Engineering",
+      "detail": "CGPA: 8.14 / 10",
+      "period": "Graduated May 2025"
+    },
+    {
+      "school": "School of Excellence, Dwarka",
+      "degree": "CBSE Class XII",
+      "detail": "95.2%",
+      "period": "2019–2020"
+    }
+  ],
+  "currentRole": {
+    "title": "Data Engineer",
+    "type": "Full-Time",
+    "company": "Americana Restaurants",
+    "period": "July 2025 – Present",
+    "focus": "Loyalty Platforms & Generative AI Systems",
+    "brands": ["KFC", "Pizza Hut", "Hardee's", "TGI Fridays", "Krispy Kreme"],
+    "region": "Middle East & North Africa"
+  },
+  "priorRole": {
+    "title": "Data Engineer",
+    "type": "Intern",
+    "company": "Americana Restaurants",
+    "period": "Jan 2025 – June 2025",
+    "focus": "Generative AI",
+    "outcome": "Secured a Pre-Placement Offer (PPO) → Full-Time based on the direct business impact of solutions delivered."
+  },
+  "competitiveProgramming": {
+    "totalProblems": "2,500+",
+    "platforms": [
+      {
+        "name": "LeetCode",
+        "handle": "@Leevi_01",
+        "rating": 1805,
+        "maxRating": 2400,
+        "rank": "Knight",
+        "problems": "800+",
+        "url": "https://leetcode.com/u/Leevi_01/",
+        "colorVar": "--accent"
+      },
+      {
+        "name": "CodeChef",
+        "handle": "@leevii",
+        "rating": 1806,
+        "maxRating": 2500,
+        "rank": "4★ Coder",
+        "problems": "500+",
+        "url": "https://www.codechef.com/users/leevii",
+        "colorVar": "--tertiary"
+      },
+      {
+        "name": "Codeforces",
+        "handle": "@delhiiboy_2.0",
+        "rating": 1365,
+        "maxRating": 2400,
+        "rank": "Specialist",
+        "problems": "1200+",
+        "url": "https://codeforces.com/profile/delhiiboy_2.0",
+        "colorVar": "--primary"
+      }
+    ]
+  },
+  "achievements": [
+    {
+      "title": "Amazon ML School 2024",
+      "applicantPool": "90,000+ applicants",
+      "context": "for the prestigious Machine Learning mentorship program",
+      "badge": "Top 0.055%"
+    }
+  ],
+  "certifications": [
+    { "name": "Introduction to C++", "link": "/certs/intro-to-cpp.pdf" },
+    { "name": "DSA in C++", "link": "/certs/Data-structure.pdf" },
+    { "name": "Advanced Machine Learning", "link": "/certs/AdvMachineLearning.pdf" },
+    { "name": "Deep Learning", "link": "/certs/DeepLearning.pdf" },
+    { "name": "TensorFlow", "link": "/certs/Tensorflow.pdf" },
+    { "name": "RAG Certification", "link": "/certs/RagCertification.pdf" }
+  ],
+  "skills": {
+    "categories": [
+      {
+        "title": "Languages",
+        "items": ["C/C++", "Python", "C#", "JavaScript", "TypeScript", "SQL"]
+      },
+      {
+        "title": "Cloud & Data",
+        "items": ["Azure", "Azure OpenAI", "Azure Functions", "SQL Server", "Azure SQL", "Convex", "Supabase", "Docker"]
+      },
+      {
+        "title": "Frameworks & AI",
+        "items": ["React", "Next.js", "Node.js", "FastAPI", "LangChain", "TensorFlow", "Plotly", "Microsoft Graph"]
+      },
+      {
+        "title": "Concepts",
+        "items": ["Agentic AI", "RAG Pipelines", "NLP-to-SQL", "SSE Streaming", "SQL Guardrails", "System Design", "REST APIs", "Prompt Engineering"]
+      }
+    ],
+    "packages": "Pandas, NumPy, Scikit-learn, Seaborn, TensorFlow, Keras, FAISS, Hugging Face Transformers, Streamlit, LangChain, Plotly, sqlparse"
+  },
+  "heroStats": [
+    { "value": "3", "label": "Company AI & Data Projects" },
+    { "value": "50K+", "label": "Users Served by Systems" },
+    { "value": "4", "label": "Production AI Systems" },
+    { "value": "2500+", "label": "DSA Problems" }
+  ],
+  "skillsHighlights": [
+    { "label": "DSA Problems", "value": 2500, "suffix": "+", "featured": true },
+    { "label": "Contest Rank (CodeChef)", "value": 31, "suffix": "" },
+    { "label": "Amazon ML School 2024", "value": "Top 0.055%", "suffix": "" },
+    { "label": "AI-Powered", "value": "Travel Platform", "suffix": "", "wide": true }
+  ],
+  "projects": [
+    {
+      "title": "Peet's Coffee Loyalty Platform",
+      "category": "Production · Americana Restaurants",
+      "tags": ["Company Projects", "Data Engineering"],
+      "description": "Production backend for the Peet's Coffee loyalty membership system serving 50,000+ daily active users across Middle East & North Africa — built with C#, Azure Functions, and Zoho Creator.",
+      "technologies": ["C#", "Azure Functions", "Zoho Creator", "REST APIs", "SQL Server", "Idempotency"],
+      "features": [
+        "Engineered tier upgrade workflows, rule enforcement, and earn–burn engine with idempotent processing and automated expiry — zero downtime at production scale.",
+        "Built cross-platform validation pipeline spanning Azure services and mobile apps, reducing duplicate transaction incidents by 99%."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Sales Analyst",
+      "category": "Agentic AI - Americana Restaurants",
+      "tags": ["Company Projects", "AI / ML", "Data Engineering"],
+      "description": "Enterprise agentic AI analytics platform that lets business users ask sales questions in plain English and receive SQL-backed answers, charts, pivot tables, and AI-generated insights.",
+      "technologies": ["Next.js", "FastAPI", "GPT-4o", "Azure OpenAI", "Azure SQL", "Convex", "Plotly", "Pandas"],
+      "features": [
+        "Built a natural-language-to-SQL pipeline with Schema RAG, prompt assembly, SQL validation, safe Azure SQL execution, and self-correction retry logic.",
+        "Implemented streaming analytics responses with SSE, rendering AI narration, SQL blocks, data tables, Plotly charts, and Convex-backed conversation history."
+      ],
+      "featured": true
+    },
+    {
+      "title": "Mail Assistant",
+      "category": "AI Automation · Americana Restaurants",
+      "tags": ["Company Projects", "AI / ML"],
+      "description": "Internal Americana Restaurants mail assistant built to streamline repetitive mailbox workflows with AI-assisted email understanding, context extraction, and response preparation.",
+      "technologies": ["Python", "Azure OpenAI", "Microsoft Graph API", "Outlook", "FastAPI", "Prompt Engineering"],
+      "features": [
+        "Designed automated email triage flows that classify requests, summarize context, and prepare concise response drafts for faster follow-up.",
+        "Kept the workflow human-in-the-loop for enterprise usage, with controlled prompts and review before any customer or stakeholder communication."
+      ],
+      "featured": true
+    },
+    {
+      "title": "JobPilot – Automated Job Hunting Pipeline",
+      "category": "AI Automation · MCP Protocol",
+      "tags": ["AI / ML", "Full Stack"],
+      "description": "End-to-end automated job hunting pipeline that scrapes 7+ platforms (Indeed, Naukri, LinkedIn, Google Jobs, Lever, Greenhouse, Amazon) nightly — zero manual intervention.",
+      "technologies": ["Python", "Claude AI", "MCP Protocol", "JobSpy", "Gmail API", "SQLite", "Task Scheduler"],
+      "features": [
+        "Resume-aware skill scoring engine ranks every job against a 30-skill profile using regex word-boundary matching, filtering senior roles via 47-pattern experience regex.",
+        "Built two custom MCP servers (Gmail MCP + JobSpy MCP) enabling Claude to accept natural language queries over live Gmail data."
+      ],
+      "github": "https://github.com/Deepak-gautam1",
+      "featured": true
+    },
+    {
+      "title": "Safar Squad – Travel Companion Platform",
+      "category": "Full Stack · React + Supabase",
+      "tags": ["Full Stack"],
+      "description": "Multi-auth travel platform with real-time trip discovery, map-based clustering, and automated trip lifecycle management — 95+ Lighthouse score.",
+      "technologies": ["React", "TypeScript", "Supabase", "PostgreSQL", "Tailwind", "Google OAuth", "Leaflet", "RLS"],
+      "features": [
+        "Multi-auth (Google OAuth, OTP phone, email/password) with session persistence, protected route guards, and Row Level Security for multi-tenant isolation.",
+        "Automated trip expiry via Supabase Edge Functions cron, auto-deleting expired trips and triggering cleanup across chat, notifications, and participant records."
+      ],
+      "github": "https://github.com/Deepak-gautam1/BunnyTraveler",
+      "demo": "https://www.safarsquad.in/",
+      "featured": true
+    },
+    {
+      "title": "Food Point",
+      "category": "Machine Learning",
+      "tags": ["AI / ML"],
+      "description": "Personalized diet recommendation system achieving 94% accuracy using K-Nearest Neighbors with scikit-learn, NumPy, and Pandas.",
+      "technologies": ["Python", "scikit-learn", "NumPy", "Pandas", "FastAPI", "Streamlit", "Docker", "KNN"],
+      "features": [
+        "94% accuracy recommendation system built with K-Nearest Neighbors.",
+        "FastAPI backend + Streamlit frontend deployed with Docker."
+      ],
+      "github": "https://github.com/Deepak-gautam1/Food-Point",
+      "demo": "https://diet-foodrecommendation.streamlit.app/"
+    },
+    {
+      "title": "Query PDF",
+      "category": "AI / NLP",
+      "tags": ["AI / ML"],
+      "description": "AI chatbot that extracts and answers questions from PDF documents using Hugging Face models, LangChain, and FAISS vector search.",
+      "technologies": ["Python", "LangChain", "FAISS", "Hugging Face", "FastAPI", "Streamlit", "Docker"],
+      "features": [
+        "Fine-tuned Hugging Face model with LangChain + FAISS for efficient document retrieval.",
+        "Deployed as a Streamlit app with FastAPI backend for low-latency responses."
+      ],
+      "github": "https://github.com/Deepak-gautam1/QueryPDF",
+      "demo": "https://querypdf-12.streamlit.app/"
+    },
+    {
+      "title": "Stock Price Prediction",
+      "category": "Machine Learning",
+      "tags": ["AI / ML"],
+      "description": "LSTM neural network that forecasts stock prices using historical time-series data with TensorFlow and Keras.",
+      "technologies": ["Python", "TensorFlow", "Keras", "Pandas", "Matplotlib", "LSTM"],
+      "features": [
+        "LSTM for time-series forecasting with normalized historical data.",
+        "Live Streamlit dashboard visualizing predicted vs. actual prices."
+      ],
+      "github": "https://github.com/Deepak-gautam1/Stock_Price_Predication",
+      "demo": "https://stockpricepredication.streamlit.app/"
+    },
+    {
+      "title": "PUBG Winner Prediction",
+      "category": "Machine Learning",
+      "tags": ["AI / ML"],
+      "description": "Ensemble model predicting PUBG match winners from in-game statistics using XGBoost and feature engineering.",
+      "technologies": ["Python", "scikit-learn", "XGBoost", "Pandas", "Seaborn"],
+      "features": [
+        "Extensive feature engineering on in-game player statistics.",
+        "XGBoost ensemble achieving high predictive accuracy."
+      ],
+      "github": "https://github.com/Deepak-gautam1/PUBG-Predication",
+      "demo": "https://pubg-winner.streamlit.app/"
+    },
+    {
+      "title": "Handwritten Digit Recognition",
+      "category": "Deep Learning",
+      "tags": ["AI / ML"],
+      "description": "CNN trained on MNIST achieving 99%+ accuracy, deployed as an interactive Hugging Face Space.",
+      "technologies": ["Python", "TensorFlow", "Keras", "CNN", "MNIST"],
+      "features": [
+        "CNN from scratch on the MNIST benchmark — 99%+ accuracy.",
+        "Deployed to Hugging Face Spaces as a live interactive demo."
+      ],
+      "github": "https://github.com/Deepak-gautam1/Digit_Reconginzer",
+      "demo": "https://huggingface.co/spaces/AiLover26/digit-recognizer"
+    },
+    {
+      "title": "Shopper E-Commerce",
+      "category": "Full Stack · MERN",
+      "tags": ["Full Stack"],
+      "description": "Fully responsive MERN stack shopping platform with separate customer storefront, admin panel, and REST API backend.",
+      "technologies": ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
+      "features": [
+        "Customer storefront with product catalog, cart, and checkout flow.",
+        "Separate secure admin panel for managing products, orders, and users."
+      ],
+      "github": "https://github.com/Deepak-gautam1/Ecommerce_site",
+      "demo": "https://ecommerce-site-zndy.onrender.com/",
+      "adminUrl": "https://ecommerce-site-admin.onrender.com/",
+      "backendUrl": "https://ecommerce-site-backend-drv9.onrender.com/"
+    }
+  ]
+}

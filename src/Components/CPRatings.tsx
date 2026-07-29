@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import profile from "@/data/profile.json";
 
 const RatingRing = ({
   rating,
@@ -214,43 +215,20 @@ const PlatformCard = ({ platform, index }: { platform: Platform; index: number }
   );
 };
 
-const CPRatings = () => {
-  const platforms: Platform[] = [
-    {
-      name: "LeetCode",
-      handle: "@Leevi_01",
-      rating: 1805,
-      maxRating: 2400,
-      rank: "Knight",
-      colorVar: "--accent",
-      badge: "Knight",
-      problems: "800+",
-      url: "https://leetcode.com/u/Leevi_01/",
-    },
-    {
-      name: "CodeChef",
-      handle: "@leevii",
-      rating: 1806,
-      maxRating: 2500,
-      rank: "4★ Coder",
-      colorVar: "--tertiary",
-      badge: "4 ★★★★",
-      problems: "500+",
-      url: "https://www.codechef.com/users/leevii",
-    },
-    {
-      name: "Codeforces",
-      handle: "@delhiiboy_2.0",
-      rating: 1365,
-      maxRating: 2400,
-      rank: "Specialist",
-      colorVar: "--primary",
-      badge: "Specialist",
-      problems: "1200+",
-      url: "https://codeforces.com/profile/delhiiboy_2.0",
-    },
-  ];
+// Badge text has its own display quirks (e.g. CodeChef spells out the stars)
+// that don't belong in the shared data, so it's kept as a small local lookup.
+const BADGES: Record<string, string> = {
+  LeetCode: "Knight",
+  CodeChef: "4 ★★★★",
+  Codeforces: "Specialist",
+};
 
+const platforms: Platform[] = profile.competitiveProgramming.platforms.map((p) => ({
+  ...p,
+  badge: BADGES[p.name] ?? p.rank,
+}));
+
+const CPRatings = () => {
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true });
 
@@ -275,7 +253,8 @@ const CPRatings = () => {
           marginBottom: "28px",
         }}
       >
-        2,500+ problems solved · Top ratings across all major platforms
+        {profile.competitiveProgramming.totalProblems} problems solved · Top ratings across all
+        major platforms
       </motion.p>
 
       <div
@@ -311,13 +290,16 @@ const CPRatings = () => {
         <div style={{ fontSize: "36px", lineHeight: 1 }}>🏆</div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: "16px", fontWeight: 700, color: "hsl(var(--foreground))" }}>
-            Amazon ML School 2024 — Selected
+            {profile.achievements[0].title} — Selected
           </div>
           <div
             style={{ fontSize: "14px", color: "hsl(var(--muted-foreground))", marginTop: "4px" }}
           >
-            Chosen from <strong style={{ color: "hsl(var(--primary))" }}>90,000+ applicants</strong>{" "}
-            for the prestigious Machine Learning mentorship program
+            Chosen from{" "}
+            <strong style={{ color: "hsl(var(--primary))" }}>
+              {profile.achievements[0].applicantPool}
+            </strong>{" "}
+            {profile.achievements[0].context}
           </div>
         </div>
         <div
@@ -331,7 +313,7 @@ const CPRatings = () => {
             whiteSpace: "nowrap",
           }}
         >
-          Top 0.055%
+          {profile.achievements[0].badge}
         </div>
       </motion.div>
     </div>

@@ -5,21 +5,10 @@ import { Download, GithubIcon, LinkedinIcon, Mail, Phone } from "lucide-react";
 import ParticleBackground from "@/Components/ParticleBackground";
 import MagneticButton from "@/Components/MagneticButton";
 import { getPhoneHref } from "@/lib/contact";
+import profile from "@/data/profile.json";
 
-const TITLES = [
-  "AI & Data Engineer @ Americana",
-  "Production AI Systems Builder",
-  "RAG & Agentic AI Engineer",
-  "Full Stack Developer",
-  "Competitive Programmer",
-];
-
-const STATS = [
-  { value: "3", label: "Company AI & Data Projects" },
-  { value: "50K+", label: "Users Served by Systems" },
-  { value: "4", label: "Production AI Systems" },
-  { value: "2500+", label: "DSA Problems" },
-];
+const TITLES = profile.roleTitles;
+const STATS = profile.heroStats;
 
 const TypewriterText = () => {
   const [titleIndex, setTitleIndex] = useState(0);
@@ -167,7 +156,7 @@ const Hero = () => {
           >
             <MagneticButton>
               <Button asChild size="lg" className="group">
-                <a href="/Deepak_Resume.pdf" download="Deepak-Resume.pdf">
+                <a href={profile.resumeUrl} download="Deepak-Resume.pdf">
                   <Download className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                   Download Resume
                 </a>
@@ -210,7 +199,7 @@ const Hero = () => {
           >
             {[
               {
-                href: "mailto:deepakgautam2647@gmail.com",
+                href: `mailto:${profile.contact.email}`,
                 icon: <Mail className="w-5 h-5" />,
                 label: "Email",
               },
@@ -220,12 +209,12 @@ const Hero = () => {
                 label: "Phone",
               },
               {
-                href: "https://www.linkedin.com/in/deepak-gautam-a77b93222/",
+                href: profile.contact.linkedin,
                 icon: <LinkedinIcon className="w-5 h-5" />,
                 label: "LinkedIn",
               },
               {
-                href: "https://github.com/Deepak-gautam1",
+                href: profile.contact.github,
                 icon: <GithubIcon className="w-5 h-5" />,
                 label: "GitHub",
               },

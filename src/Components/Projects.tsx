@@ -5,6 +5,7 @@ import { Button } from "@/Components/ui/button";
 import { Badge } from "@/Components/ui/badge";
 import { ExternalLink, GithubIcon, ShieldCheck, Server, Star } from "lucide-react";
 import FilterPill from "@/Components/FilterPill";
+import profile from "@/data/profile.json";
 
 interface Project {
   title: string;
@@ -20,219 +21,7 @@ interface Project {
   featured?: boolean;
 }
 
-const projects: Project[] = [
-  {
-    title: "Peet's Coffee Loyalty Platform",
-    category: "Production · Americana Restaurants",
-    tags: ["Company Projects", "Data Engineering"],
-    description:
-      "Production backend for the Peet's Coffee loyalty membership system serving 50,000+ daily active users across Middle East & North Africa — built with C#, Azure Functions, and Zoho Creator.",
-    technologies: [
-      "C#",
-      "Azure Functions",
-      "Zoho Creator",
-      "REST APIs",
-      "SQL Server",
-      "Idempotency",
-    ],
-    features: [
-      "Engineered tier upgrade workflows, rule enforcement, and earn–burn engine with idempotent processing and automated expiry — zero downtime at production scale.",
-      "Built cross-platform validation pipeline spanning Azure services and mobile apps, reducing duplicate transaction incidents by 99%.",
-    ],
-    featured: true,
-  },
-  {
-    title: "Sales Analyst",
-    category: "Agentic AI - Americana Restaurants",
-    tags: ["Company Projects", "AI / ML", "Data Engineering"],
-    description:
-      "Enterprise agentic AI analytics platform that lets business users ask sales questions in plain English and receive SQL-backed answers, charts, pivot tables, and AI-generated insights.",
-    technologies: [
-      "Next.js",
-      "FastAPI",
-      "GPT-4o",
-      "Azure OpenAI",
-      "Azure SQL",
-      "Convex",
-      "Plotly",
-      "Pandas",
-    ],
-    features: [
-      "Built a natural-language-to-SQL pipeline with Schema RAG, prompt assembly, SQL validation, safe Azure SQL execution, and self-correction retry logic.",
-      "Implemented streaming analytics responses with SSE, rendering AI narration, SQL blocks, data tables, Plotly charts, and Convex-backed conversation history.",
-    ],
-    featured: true,
-  },
-  {
-    title: "Mail Assistant",
-    category: "AI Automation · Americana Restaurants",
-    tags: ["Company Projects", "AI / ML"],
-    description:
-      "Internal Americana Restaurants mail assistant built to streamline repetitive mailbox workflows with AI-assisted email understanding, context extraction, and response preparation.",
-    technologies: [
-      "Python",
-      "Azure OpenAI",
-      "Microsoft Graph API",
-      "Outlook",
-      "FastAPI",
-      "Prompt Engineering",
-    ],
-    features: [
-      "Designed automated email triage flows that classify requests, summarize context, and prepare concise response drafts for faster follow-up.",
-      "Kept the workflow human-in-the-loop for enterprise usage, with controlled prompts and review before any customer or stakeholder communication.",
-    ],
-    featured: true,
-  },
-  {
-    title: "JobPilot – Automated Job Hunting Pipeline",
-    category: "AI Automation · MCP Protocol",
-    tags: ["AI / ML", "Full Stack"],
-    description:
-      "End-to-end automated job hunting pipeline that scrapes 7+ platforms (Indeed, Naukri, LinkedIn, Google Jobs, Lever, Greenhouse, Amazon) nightly — zero manual intervention.",
-    technologies: [
-      "Python",
-      "Claude AI",
-      "MCP Protocol",
-      "JobSpy",
-      "Gmail API",
-      "SQLite",
-      "Task Scheduler",
-    ],
-    features: [
-      "Resume-aware skill scoring engine ranks every job against a 30-skill profile using regex word-boundary matching, filtering senior roles via 47-pattern experience regex.",
-      "Built two custom MCP servers (Gmail MCP + JobSpy MCP) enabling Claude to accept natural language queries over live Gmail data.",
-    ],
-    github: "https://github.com/Deepak-gautam1",
-    featured: true,
-  },
-  {
-    title: "Safar Squad – Travel Companion Platform",
-    category: "Full Stack · React + Supabase",
-    tags: ["Full Stack"],
-    description:
-      "Multi-auth travel platform with real-time trip discovery, map-based clustering, and automated trip lifecycle management — 95+ Lighthouse score.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Supabase",
-      "PostgreSQL",
-      "Tailwind",
-      "Google OAuth",
-      "Leaflet",
-      "RLS",
-    ],
-    features: [
-      "Multi-auth (Google OAuth, OTP phone, email/password) with session persistence, protected route guards, and Row Level Security for multi-tenant isolation.",
-      "Automated trip expiry via Supabase Edge Functions cron, auto-deleting expired trips and triggering cleanup across chat, notifications, and participant records.",
-    ],
-    github: "https://github.com/Deepak-gautam1/BunnyTraveler",
-    demo: "https://www.safarsquad.in/",
-    featured: true,
-  },
-  {
-    title: "Food Point",
-    category: "Machine Learning",
-    tags: ["AI / ML"],
-    description:
-      "Personalized diet recommendation system achieving 94% accuracy using K-Nearest Neighbors with scikit-learn, NumPy, and Pandas.",
-    technologies: [
-      "Python",
-      "scikit-learn",
-      "NumPy",
-      "Pandas",
-      "FastAPI",
-      "Streamlit",
-      "Docker",
-      "KNN",
-    ],
-    features: [
-      "94% accuracy recommendation system built with K-Nearest Neighbors.",
-      "FastAPI backend + Streamlit frontend deployed with Docker.",
-    ],
-    github: "https://github.com/Deepak-gautam1/Food-Point",
-    demo: "https://diet-foodrecommendation.streamlit.app/",
-  },
-  {
-    title: "Query PDF",
-    category: "AI / NLP",
-    tags: ["AI / ML"],
-    description:
-      "AI chatbot that extracts and answers questions from PDF documents using Hugging Face models, LangChain, and FAISS vector search.",
-    technologies: [
-      "Python",
-      "LangChain",
-      "FAISS",
-      "Hugging Face",
-      "FastAPI",
-      "Streamlit",
-      "Docker",
-    ],
-    features: [
-      "Fine-tuned Hugging Face model with LangChain + FAISS for efficient document retrieval.",
-      "Deployed as a Streamlit app with FastAPI backend for low-latency responses.",
-    ],
-    github: "https://github.com/Deepak-gautam1/QueryPDF",
-    demo: "https://querypdf-12.streamlit.app/",
-  },
-  {
-    title: "Stock Price Prediction",
-    category: "Machine Learning",
-    tags: ["AI / ML"],
-    description:
-      "LSTM neural network that forecasts stock prices using historical time-series data with TensorFlow and Keras.",
-    technologies: ["Python", "TensorFlow", "Keras", "Pandas", "Matplotlib", "LSTM"],
-    features: [
-      "LSTM for time-series forecasting with normalized historical data.",
-      "Live Streamlit dashboard visualizing predicted vs. actual prices.",
-    ],
-    github: "https://github.com/Deepak-gautam1/Stock_Price_Predication",
-    demo: "https://stockpricepredication.streamlit.app/",
-  },
-  {
-    title: "PUBG Winner Prediction",
-    category: "Machine Learning",
-    tags: ["AI / ML"],
-    description:
-      "Ensemble model predicting PUBG match winners from in-game statistics using XGBoost and feature engineering.",
-    technologies: ["Python", "scikit-learn", "XGBoost", "Pandas", "Seaborn"],
-    features: [
-      "Extensive feature engineering on in-game player statistics.",
-      "XGBoost ensemble achieving high predictive accuracy.",
-    ],
-    github: "https://github.com/Deepak-gautam1/PUBG-Predication",
-    demo: "https://pubg-winner.streamlit.app/",
-  },
-  {
-    title: "Handwritten Digit Recognition",
-    category: "Deep Learning",
-    tags: ["AI / ML"],
-    description:
-      "CNN trained on MNIST achieving 99%+ accuracy, deployed as an interactive Hugging Face Space.",
-    technologies: ["Python", "TensorFlow", "Keras", "CNN", "MNIST"],
-    features: [
-      "CNN from scratch on the MNIST benchmark — 99%+ accuracy.",
-      "Deployed to Hugging Face Spaces as a live interactive demo.",
-    ],
-    github: "https://github.com/Deepak-gautam1/Digit_Reconginzer",
-    demo: "https://huggingface.co/spaces/AiLover26/digit-recognizer",
-  },
-  {
-    title: "Shopper E-Commerce",
-    category: "Full Stack · MERN",
-    tags: ["Full Stack"],
-    description:
-      "Fully responsive MERN stack shopping platform with separate customer storefront, admin panel, and REST API backend.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
-    features: [
-      "Customer storefront with product catalog, cart, and checkout flow.",
-      "Separate secure admin panel for managing products, orders, and users.",
-    ],
-    github: "https://github.com/Deepak-gautam1/Ecommerce_site",
-    demo: "https://ecommerce-site-zndy.onrender.com/",
-    adminUrl: "https://ecommerce-site-admin.onrender.com/",
-    backendUrl: "https://ecommerce-site-backend-drv9.onrender.com/",
-  },
-];
+const projects: Project[] = profile.projects;
 
 const FILTERS = ["All", "Company Projects", "AI / ML", "Full Stack", "Data Engineering"] as const;
 type Filter = (typeof FILTERS)[number];
@@ -256,9 +45,91 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
     setGlowPos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
 
+  const header = (
+    <div>
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        <Badge variant="outline">{project.category}</Badge>
+        {project.featured && <Star className="w-3.5 h-3.5 text-primary fill-primary" />}
+      </div>
+      <h3 className={project.featured ? "text-2xl font-bold mb-2" : "text-xl font-bold mb-2"}>
+        {project.title}
+      </h3>
+      <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
+    </div>
+  );
+
+  const highlights = (
+    <div className="space-y-2">
+      <h4 className="font-semibold text-sm">Key Highlights</h4>
+      <ul className="space-y-1.5">
+        {project.features.map((f, i) => (
+          <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
+            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0" />
+            {f}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
+  const techBadges = (
+    <div className="flex flex-wrap gap-1">
+      {(project.featured ? project.technologies : project.technologies.slice(0, 5)).map(
+        (tech, i) => (
+          <Badge key={i} variant="secondary" className="text-xs">
+            {tech}
+          </Badge>
+        ),
+      )}
+      {!project.featured && project.technologies.length > 5 && (
+        <Badge variant="secondary" className="text-xs">
+          +{project.technologies.length - 5}
+        </Badge>
+      )}
+    </div>
+  );
+
+  const actionButtons = (
+    <div className="flex flex-wrap gap-2 pt-4" style={{ position: "relative", zIndex: 1 }}>
+      {project.github && (
+        <Button asChild variant="outline" size="sm">
+          <a href={project.github} target="_blank" rel="noopener noreferrer">
+            <GithubIcon className="w-4 h-4 mr-1.5" />
+            Code
+          </a>
+        </Button>
+      )}
+      {project.demo && (
+        <Button asChild size="sm">
+          <a href={project.demo} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="w-4 h-4 mr-1.5" />
+            Demo
+          </a>
+        </Button>
+      )}
+      {project.adminUrl && (
+        <Button asChild variant="secondary" size="sm">
+          <a href={project.adminUrl} target="_blank" rel="noopener noreferrer">
+            <ShieldCheck className="w-4 h-4 mr-1.5" />
+            Admin
+          </a>
+        </Button>
+      )}
+      {project.backendUrl && (
+        <Button asChild variant="secondary" size="sm">
+          <a href={project.backendUrl} target="_blank" rel="noopener noreferrer">
+            <Server className="w-4 h-4 mr-1.5" />
+            API
+          </a>
+        </Button>
+      )}
+    </div>
+  );
+
   return (
     <motion.div
       ref={cardRef}
+      layout
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
@@ -269,6 +140,7 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, scale: 0.97 }}
       transition={{ duration: 0.4, delay: (index % 3) * 0.07 }}
+      className={project.featured ? "md:col-span-2" : undefined}
       style={{
         perspective: 1000,
         transformStyle: "preserve-3d",
@@ -326,79 +198,30 @@ const TiltCard = ({ project, index }: { project: Project; index: number }) => {
           </div>
         )}
 
-        <div className="flex-grow space-y-4" style={{ position: "relative", zIndex: 1 }}>
-          <div>
-            <div className="flex items-center gap-2 mb-3 flex-wrap">
-              <Badge variant="outline">{project.category}</Badge>
-              {project.featured && <Star className="w-3.5 h-3.5 text-primary fill-primary" />}
+        {project.featured ? (
+          <div
+            className="flex-grow lg:grid lg:grid-cols-5 lg:gap-8"
+            style={{ position: "relative", zIndex: 1 }}
+          >
+            <div className="lg:col-span-3 space-y-4">
+              {header}
+              {highlights}
             </div>
-            <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
+            <div className="lg:col-span-2 flex flex-col gap-4 mt-4 lg:mt-0">
+              {techBadges}
+              {actionButtons}
+            </div>
           </div>
-
-          <div className="space-y-2">
-            <h4 className="font-semibold text-sm">Key Highlights</h4>
-            <ul className="space-y-1.5">
-              {project.features.map((f, i) => (
-                <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex flex-wrap gap-1">
-            {project.technologies.slice(0, 5).map((tech, i) => (
-              <Badge key={i} variant="secondary" className="text-xs">
-                {tech}
-              </Badge>
-            ))}
-            {project.technologies.length > 5 && (
-              <Badge variant="secondary" className="text-xs">
-                +{project.technologies.length - 5}
-              </Badge>
-            )}
-          </div>
-        </div>
-
-        <div
-          className="flex flex-wrap gap-2 pt-4 mt-auto"
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          {project.github && (
-            <Button asChild variant="outline" size="sm">
-              <a href={project.github} target="_blank" rel="noopener noreferrer">
-                <GithubIcon className="w-4 h-4 mr-1.5" />
-                Code
-              </a>
-            </Button>
-          )}
-          {project.demo && (
-            <Button asChild size="sm">
-              <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-1.5" />
-                Demo
-              </a>
-            </Button>
-          )}
-          {project.adminUrl && (
-            <Button asChild variant="secondary" size="sm">
-              <a href={project.adminUrl} target="_blank" rel="noopener noreferrer">
-                <ShieldCheck className="w-4 h-4 mr-1.5" />
-                Admin
-              </a>
-            </Button>
-          )}
-          {project.backendUrl && (
-            <Button asChild variant="secondary" size="sm">
-              <a href={project.backendUrl} target="_blank" rel="noopener noreferrer">
-                <Server className="w-4 h-4 mr-1.5" />
-                API
-              </a>
-            </Button>
-          )}
-        </div>
+        ) : (
+          <>
+            <div className="flex-grow space-y-4" style={{ position: "relative", zIndex: 1 }}>
+              {header}
+              {highlights}
+              {techBadges}
+            </div>
+            {actionButtons}
+          </>
+        )}
       </Card>
     </motion.div>
   );
@@ -468,7 +291,7 @@ const Projects = () => {
         {/* Cards grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 grid-flow-row-dense items-start"
           style={{ perspective: "1200px" }}
         >
           <AnimatePresence mode="popLayout">
