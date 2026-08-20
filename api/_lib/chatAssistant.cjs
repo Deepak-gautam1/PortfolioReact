@@ -4,7 +4,7 @@
 
 const profile = require("../../src/data/profile.json");
 
-const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GROQ_MODEL = "openai/gpt-oss-120b";
 const MAX_MESSAGE_LENGTH = 500;
 const MAX_HISTORY_TURNS = 6; // user+assistant pairs kept, bounds token usage per request
 const MAX_REPLY_TOKENS = 400;
