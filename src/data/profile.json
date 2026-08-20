@@ -198,6 +198,20 @@
       "featured": true
     },
     {
+      "title": "archprep – Interview Prep Study Bot",
+      "category": "Full Stack · RAG Platform",
+      "tags": ["AI / ML", "Full Stack"],
+      "description": "Personal RAG-powered interview prep platform covering System Design, Object-Oriented Design, SQL, and Machine Learning — System Design chat is grounded in Alex Xu's books, personal notes, and open-source system-design repos.",
+      "technologies": ["Next.js", "FastAPI", "ChromaDB", "Groq", "Gemini", "LangChain", "KaTeX", "PostgreSQL"],
+      "features": [
+        "Book-grounded System Design RAG chat with Study/Quiz/Deep Dive modes, source + page citations, and similarity scores over Alex Xu's books, notes, and GitHub repos.",
+        "Per-topic AI Tutor (Socratic Interview + free-form Ask modes) across 46 OOD, 40 SQL, and 70 ML theory topics, with code-review practice and KaTeX-rendered math answers."
+      ],
+      "github": "https://github.com/Deepak-gautam1/SystemDesign",
+      "demo": "https://system-design-swart.vercel.app/",
+      "featured": true
+    },
+    {
       "title": "Food Point",
       "category": "Machine Learning",
       "tags": ["AI / ML"],
