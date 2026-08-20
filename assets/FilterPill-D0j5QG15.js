@@ -1,4 +1,4 @@
-import{c as t}from"./index-N3bGUhTz.js";import{j as o,m as s}from"./vendor-framer-Bu2lFwAk.js";/**
+import{c as t}from"./index-DRpQkxKj.js";import{j as o,m as s}from"./vendor-framer-Bu2lFwAk.js";/**
  * @license lucide-react v0.525.0 - ISC
  *
  * This source code is licensed under the ISC license.
