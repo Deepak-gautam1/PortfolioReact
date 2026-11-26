@@ -20,33 +20,48 @@ const navItems = [
   { name: "Contact", href: "#contact", id: "contact" },
 ];
 
+// A section counts as active once its top scrolls above this line (px from the
+// viewport top) — just below the 64px bar, where tab clicks land a section.
+const ACTIVATION_LINE = 160;
+
+// Sections are lazy-loaded and mount after the nav, so they're looked up on
+// every update rather than once on mount.
 const useActiveSection = () => {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const sectionIds = navItems.map((i) => i.id).filter(Boolean);
-    const observers: IntersectionObserver[] = [];
+    const ids = navItems.map((i) => i.id).filter(Boolean);
+    let frame = 0;
 
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
+    const update = () => {
+      frame = 0;
+      const sections = ids
+        .map((id) => document.getElementById(id))
+        .filter((el): el is HTMLElement => el !== null);
+      let current = "";
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top <= ACTIVATION_LINE) current = el.id;
+      }
+      // At the very bottom the last section may be too short to reach the line.
+      const atBottom =
+        window.scrollY > 0 &&
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom && sections.length > 0) current = sections[sections.length - 1].id;
+      setActive(current);
     };
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const observer = new IntersectionObserver(callback, {
-        rootMargin: "-20% 0px -70% 0px",
-        threshold: 0,
-      });
-      observer.observe(el);
-      observers.push(observer);
-    });
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
 
-    return () => observers.forEach((o) => o.disconnect());
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   return active;
