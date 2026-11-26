@@ -15,6 +15,7 @@ const navItems = [
   { name: "Experience", href: "#experience", id: "experience" },
   { name: "Projects", href: "#projects", id: "projects" },
   { name: "Skills", href: "#skills", id: "skills" },
+  { name: "Certifications", href: "#certifications", id: "certifications" },
   { name: "GitHub", href: "#github", id: "github" },
   { name: "Contact", href: "#contact", id: "contact" },
 ];
@@ -91,8 +92,8 @@ const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
               DG
             </motion.div>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center space-x-1">
+            {/* Desktop nav — xl+ only; narrower, the tabs collide with the hero heading */}
+            <div className="hidden xl:flex items-center space-x-1">
               {navItems.map((item) => {
                 const active = isNavItemActive(item);
                 return (
@@ -154,7 +155,7 @@ const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
             </div>
 
             {/* Mobile toggle */}
-            <div className="md:hidden">
+            <div className="xl:hidden">
               <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </Button>
@@ -169,7 +170,7 @@ const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border"
+                className="xl:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border"
               >
                 <div className="px-4 py-6 space-y-1">
                   {navItems.map((item) => {

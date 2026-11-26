@@ -3,11 +3,8 @@ import { motion, useInView } from "framer-motion";
 import { Card } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
 import { Code, Database, Brain, Trophy } from "lucide-react";
-import { Dialog, DialogContent, DialogTrigger } from "@/Components/ui/dialog";
 import CPRatings from "@/Components/CPRatings";
 import profile from "@/data/profile.json";
-
-const certifications = profile.certifications;
 
 // Icons aren't data — keyed onto the shared category titles by hand.
 const CATEGORY_ICONS: Record<string, React.ElementType> = {
@@ -129,8 +126,9 @@ const Skills = () => {
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true });
 
+  // No bottom padding: the Certifications section directly below supplies it.
   return (
-    <section className="py-20 px-4 bg-muted/50" id="skills">
+    <section className="pt-20 px-4 bg-muted/50" id="skills">
       <div className="max-w-6xl mx-auto">
         {/* ── Heading ── */}
         <div className="text-center mb-16" ref={headingRef}>
@@ -182,7 +180,7 @@ const Skills = () => {
         </div>
 
         {/* ── Stats row (bento grid) ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4">
           {profile.skillsHighlights.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -220,49 +218,6 @@ const Skills = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* ── Certifications ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <Card className="p-6 bg-gradient-to-r from-primary/10 to-accent/10 border-0">
-            <h3 className="text-xl font-semibold mb-4">Certifications</h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {certifications.map((cert, i) => (
-                <Dialog key={cert.name}>
-                  <DialogTrigger asChild>
-                    <motion.div
-                      whileHover={{ scale: 1.08, y: -2 }}
-                      whileTap={{ scale: 0.96 }}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.07 }}
-                    >
-                      <Badge
-                        variant="outline"
-                        className="cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors py-1.5 px-3"
-                      >
-                        {cert.name}
-                      </Badge>
-                    </motion.div>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[80vw] h-[90vh] p-2">
-                    <iframe
-                      src={cert.link}
-                      className="w-full h-full rounded-md border"
-                      title={`${cert.name} Certificate`}
-                    />
-                  </DialogContent>
-                </Dialog>
-              ))}
-            </div>
-          </Card>
-        </motion.div>
       </div>
     </section>
   );

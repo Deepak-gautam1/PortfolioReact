@@ -15,8 +15,10 @@ describe("Navigation", () => {
     );
 
     expect(screen.getByText("DG")).toBeInTheDocument();
-    ["Home", "About", "Experience", "Projects", "Skills", "Contact"].forEach((name) => {
-      expect(screen.getAllByText(name).length).toBeGreaterThan(0);
-    });
+    ["Home", "About", "Experience", "Projects", "Skills", "Certifications", "Contact"].forEach(
+      (name) => {
+        expect(screen.getAllByText(name).length).toBeGreaterThan(0);
+      },
+    );
   });
 });

@@ -107,7 +107,8 @@ const ChatWidget = ({ open, onOpenChange }: ChatWidgetProps) => {
         aria-expanded={open}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="md:hidden fixed bottom-7 left-7 z-[9998] w-14 h-14 rounded-full flex items-center justify-center border-none cursor-pointer"
+        // Below xl the nav bar's "Ask AI" button is hidden, so this launcher stands in.
+        className="xl:hidden fixed bottom-7 left-7 z-[9998] w-14 h-14 rounded-full flex items-center justify-center border-none cursor-pointer"
         style={{
           background: "hsl(var(--primary))",
           color: "hsl(var(--primary-foreground))",
@@ -128,7 +129,7 @@ const ChatWidget = ({ open, onOpenChange }: ChatWidgetProps) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="fixed z-[9998] flex flex-col overflow-hidden rounded-2xl bottom-[92px] left-7 w-[min(380px,calc(100vw-40px))] h-[min(520px,calc(100vh-160px))] md:bottom-auto md:left-auto md:top-20 md:right-6 md:w-[380px] md:h-[min(560px,calc(100vh-140px))]"
+            className="fixed z-[9998] flex flex-col overflow-hidden rounded-2xl bottom-[92px] left-7 w-[min(380px,calc(100vw-40px))] h-[min(520px,calc(100vh-160px))] xl:bottom-auto xl:left-auto xl:top-20 xl:right-6 xl:w-[380px] xl:h-[min(560px,calc(100vh-140px))]"
             style={{
               background: "hsl(var(--card))",
               border: "1px solid hsl(var(--border))",

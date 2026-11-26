@@ -177,7 +177,8 @@ src/
 │   ├── TechMarquee.tsx       # Infinite scroll with SVG brand logos
 │   ├── Experience.tsx        # Work history with project banners
 │   ├── Projects.tsx          # Filter tabs + 3D tilt cards
-│   ├── Skills.tsx            # Skill cards + certifications
+│   ├── Skills.tsx            # Skill cards + CP ratings + stats
+│   ├── Certifications.tsx    # Certificate badges + PDF viewer
 │   ├── CPRatings.tsx         # Animated rating rings
 │   ├── GitHubStats.tsx       # Live GitHub API integration
 │   ├── Contact.tsx           # Supabase form + success state
