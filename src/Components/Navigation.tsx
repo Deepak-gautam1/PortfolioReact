@@ -15,37 +15,53 @@ const navItems = [
   { name: "Experience", href: "#experience", id: "experience" },
   { name: "Projects", href: "#projects", id: "projects" },
   { name: "Skills", href: "#skills", id: "skills" },
+  { name: "Certifications", href: "#certifications", id: "certifications" },
   { name: "GitHub", href: "#github", id: "github" },
   { name: "Contact", href: "#contact", id: "contact" },
 ];
 
+// A section counts as active once its top scrolls above this line (px from the
+// viewport top) — just below the 64px bar, where tab clicks land a section.
+const ACTIVATION_LINE = 160;
+
+// Sections are lazy-loaded and mount after the nav, so they're looked up on
+// every update rather than once on mount.
 const useActiveSection = () => {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const sectionIds = navItems.map((i) => i.id).filter(Boolean);
-    const observers: IntersectionObserver[] = [];
+    const ids = navItems.map((i) => i.id).filter(Boolean);
+    let frame = 0;
 
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
+    const update = () => {
+      frame = 0;
+      const sections = ids
+        .map((id) => document.getElementById(id))
+        .filter((el): el is HTMLElement => el !== null);
+      let current = "";
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top <= ACTIVATION_LINE) current = el.id;
+      }
+      // At the very bottom the last section may be too short to reach the line.
+      const atBottom =
+        window.scrollY > 0 &&
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom && sections.length > 0) current = sections[sections.length - 1].id;
+      setActive(current);
     };
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const observer = new IntersectionObserver(callback, {
-        rootMargin: "-20% 0px -70% 0px",
-        threshold: 0,
-      });
-      observer.observe(el);
-      observers.push(observer);
-    });
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
 
-    return () => observers.forEach((o) => o.disconnect());
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   return active;
@@ -91,8 +107,8 @@ const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
               DG
             </motion.div>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center space-x-1">
+            {/* Desktop nav — xl+ only; narrower, the tabs collide with the hero heading */}
+            <div className="hidden xl:flex items-center space-x-1">
               {navItems.map((item) => {
                 const active = isNavItemActive(item);
                 return (
@@ -154,7 +170,7 @@ const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
             </div>
 
             {/* Mobile toggle */}
-            <div className="md:hidden">
+            <div className="xl:hidden">
               <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </Button>
@@ -169,7 +185,7 @@ const Navigation = ({ chatOpen, onToggleChat }: NavigationProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border"
+                className="xl:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border"
               >
                 <div className="px-4 py-6 space-y-1">
                   {navItems.map((item) => {

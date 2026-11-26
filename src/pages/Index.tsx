@@ -15,6 +15,7 @@ const Experience = lazy(() => import("@/Components/Experience"));
 const TechMarquee = lazy(() => import("@/Components/TechMarquee"));
 const Projects = lazy(() => import("@/Components/Projects"));
 const Skills = lazy(() => import("@/Components/Skills"));
+const Certifications = lazy(() => import("@/Components/Certifications"));
 const GitHubStats = lazy(() => import("@/Components/GitHubStats"));
 const Contact = lazy(() => import("@/Components/Contact"));
 const Footer = lazy(() => import("@/Components/Footer"));
@@ -75,6 +76,7 @@ const Index = () => {
             <TechMarquee />
             <Projects />
             <Skills />
+            <Certifications />
             <GitHubStats />
             <SectionWrapper>
               <Contact />
