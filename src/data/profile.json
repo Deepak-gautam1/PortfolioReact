@@ -98,7 +98,8 @@
     { "name": "Advanced Machine Learning", "link": "/certs/AdvMachineLearning.pdf" },
     { "name": "Deep Learning", "link": "/certs/DeepLearning.pdf" },
     { "name": "TensorFlow", "link": "/certs/Tensorflow.pdf" },
-    { "name": "RAG Certification", "link": "/certs/RagCertification.pdf" }
+    { "name": "RAG Certification", "link": "/certs/RagCertification.pdf" },
+    { "name": "Agentic AI", "link": "/certs/AgenticAI.pdf" }
   ],
   "skills": {
     "categories": [
